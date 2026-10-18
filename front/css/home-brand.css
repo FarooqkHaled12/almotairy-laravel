@@ -1,0 +1,98 @@
+/* The homepage uses the navy, soft blue and white of the supplied brand reference. */
+:root {
+    --primary-color: #1e2a44;
+    --secondary-color: #68788b;
+    --accent-color: #5bc0be;
+    --text-dark: #1e2a44;
+    --text-light: #68788b;
+    --light-bg: #f7f8fa;
+}
+
+body { color: var(--text-dark); }
+html[lang="ar"] body { font-family: 'Tajawal', Tahoma, sans-serif; }
+html[lang="en"] body { font-family: 'Montserrat', 'Segoe UI', sans-serif; }
+button, input, select, textarea { font-family: inherit; }
+.header { background: rgba(27, 41, 68, .36); }
+.header.header-scrolled { background: #1e2a44; }
+.hero { background-color: #526f82; }
+.hero-overlay { background: linear-gradient(180deg, rgba(35, 56, 81, .64), rgba(60, 94, 114, .34) 55%, rgba(22, 36, 52, .32)); }
+.hero-link { background: #5bc0be; border-color: #5bc0be; color: #1e2a44; }
+.hero-link:hover, .hero-link:focus-visible { background: #afc8df; color: #1e2a44; }
+.hero-browse { box-shadow: 0 10px 30px rgba(27, 41, 68, .16); }
+
+.section-title { color: #1e2a44; font-weight: 600; line-height: 1.2; }
+.section-subtitle { color: #68788b; }
+.btn-primary { background: #1e2a44; }
+.btn-primary:hover, .btn-primary:focus-visible { background: #68788b; color: #fff; }
+
+.about { background: #fff; }
+.about-img-wrapper { border-radius: 8px; box-shadow: 0 12px 35px rgba(27, 41, 68, .12); }
+.experience-badge { background: #1e2a44; }
+.experience-badge span, .about-features i { color: #afc8df; }
+
+.featured-properties .section-title, .featured-properties .card-details h3,
+.featured-properties .price, .featured-properties .btn-card, .featured-view-all { color: #1e2a44; }
+.featured-properties .filter-btn.active, .featured-properties .filter-btn:hover { background: #1e2a44; border-color: #1e2a44; }
+.developments { background: #afc8df; color: #1e2a44; }
+.development-feature, .development-card { background: #1e2a44; }
+
+.services { background: #fff; }
+.service-box { border-color: #dbe5eb; border-radius: 8px; background: #fff; }
+.service-box .icon { color: #68788b; }
+.service-box h3 { color: #1e2a44; }
+.service-box:hover { box-shadow: 0 12px 30px rgba(27, 41, 68, .1); }
+/* Line icons follow the supplied brand guide; social brand icons remain unchanged. */
+.services .icon i.fa-hand-holding-dollar,
+.services .icon i.fa-file-contract,
+.services .icon i.fa-paint-roller,
+.services .icon i.fa-key {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background: #1e2a44;
+    mask: var(--brand-icon) center / contain no-repeat;
+    -webkit-mask: var(--brand-icon) center / contain no-repeat;
+}
+.services .icon i.fa-hand-holding-dollar::before,
+.services .icon i.fa-file-contract::before,
+.services .icon i.fa-paint-roller::before,
+.services .icon i.fa-key::before { content: none; }
+.services .icon i.fa-hand-holding-dollar { --brand-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 20h18M5 20v-6m5 6V9m5 11v-8m5 8V4'/%3E%3C/svg%3E"); }
+.services .icon i.fa-file-contract { --brand-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 4 6v6c0 4.5 3.2 7.4 8 9 4.8-1.6 8-4.5 8-9V6z'/%3E%3C/svg%3E"); }
+.services .icon i.fa-paint-roller { --brand-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9 7 4h10l3 5-8 11zM4 9h16'/%3E%3C/svg%3E"); }
+.services .icon i.fa-key { --brand-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 11 9-8 9 8M5 10v10h5v-6h4v6h5V10'/%3E%3C/svg%3E"); }
+.featured-properties .location i.fa-location-dot,
+.developments .fa-location-dot {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: currentColor;
+    vertical-align: -.1em;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 11-8 11s-8-6-8-11a8 8 0 1 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 11-8 11s-8-6-8-11a8 8 0 1 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.featured-properties .location i.fa-location-dot::before, .developments .fa-location-dot::before { content: none; }
+.developments { position: relative; overflow: hidden; }
+.developments::before { content: ''; position: absolute; inset-inline-end: 0; top: 0; width: min(34%, 380px); height: 170px; background: rgba(30, 42, 68, .045); clip-path: polygon(0 100%, 18% 70%, 18% 30%, 34% 8%, 34% 100%, 46% 100%, 46% 23%, 65% 42%, 65% 100%, 76% 100%, 76% 55%, 91% 70%, 91% 100%); pointer-events: none; }
+.developments > .container { position: relative; }
+.faq { background: #f7f8fa; }
+.faq .faq-item { border: 1px solid #dbe6ec; box-shadow: none; }
+.faq .faq-question h3 { color: #1e2a44; }
+.faq .faq-question i { color: #68788b; }
+.contact { background: #1e2a44; }
+.contact .section-title { color: #fff; }
+.contact .info-item i { color: #c6dce6; margin-inline-start: 0; margin-inline-end: 15px; }
+.contact .social-links a { margin-inline-start: 0; margin-inline-end: 10px; }
+.contact .social-links a:hover { background: #b9d1dd; }
+.contact-form-box { box-shadow: 0 14px 35px rgba(10, 20, 38, .16); }
+.contact .form-control:focus-visible { outline: 2px solid #789bab; outline-offset: 2px; }
+.footer { background: #1e2a44; }
+.footer-logo span, .footer-col a:hover { color: #afc8df; }
+.newsletter-form button { background: #5bc0be; color: #1e2a44; }
+
+@media (max-width: 768px) {
+    .header .nav-list { background: #1e2a44; }
+    .about .col-image, .about .col-text, .contact-info, .contact-form-box { min-width: 0; flex-basis: 100%; }
+    .contact-form-box { padding: 24px; }
+    .section-title { font-size: 2rem; }
+}

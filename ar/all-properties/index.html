@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        جميع العقارات | المطيري للعقارات
+    </title>
+    <meta name="description"
+          content="تصفح جميع العقارات المتاحة مع فلترة حسب المناطق وأنواع العقارات.">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/front/css/style.css">
+    <link rel="stylesheet" href="/front/css/all-properties.css">
+</head>
+<body>
+
+<header class="header" id="header">
+    <nav class="navbar container">
+        <a href="/ar/" class="logo">
+            <img src="/front/img/logo.png" alt="شعار المطيري للعقارات">
+        </a>
+
+        <!-- زر الموبايل -->
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="nav-list" aria-expanded="false" aria-label="فتح القائمة" data-open-label="فتح القائمة" data-close-label="إغلاق القائمة">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <!-- القوائم -->
+        <ul class="nav-list" id="nav-list">
+            <li class="mobile-nav-heading" aria-hidden="true">
+                <span>المطيري للعقارات</span>
+                <small>القائمة الرئيسية</small>
+            </li>
+                            <li><a href="/ar/" class="">الرئيسية</a></li>
+                <li><a href="/ar/about-us" class="">من نحن</a></li>
+                <li><a href="/ar/all-properties" class="active">العقارات</a></li>
+                <li><a href="/ar/contact" class="btn-contact ">تواصل معنا</a></li>
+            
+            <!-- زر تغيير اللغة -->
+            <li class="lang-switch">
+                                    <a href="/en/all-properties">English</a>
+                            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section class="page-hero properties-hero">
+    <div class="page-hero-overlay"></div>
+    <div class="container">
+        <div class="page-hero-content">
+            <h1>جميع العقارات المتاحة</h1>
+            <p class="breadcrumb">
+                <a href="/ar/">
+                    الرئيسية
+                </a>
+                /
+                <span>جميع العقارات</span>
+            </p>
+            <p class="hero-text">
+                اختر من مجموعة متنوعة من العقارات في أفضل المناطق، مع إمكانية فلترة بسيطة حسب المنطقة ونوع العقار.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="properties-main section-padding">
+    <div class="container-full">
+        <div class="properties-layout">
+
+            
+            <aside class="properties-sidebar" id="propertiesSidebar">
+                <div class="sidebar-header">
+                    <h3>التصنيفات</h3>
+                    <button class="sidebar-close" id="closeSidebar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="filter-section">
+                    <h4>المناطق</h4>
+                    <ul class="filter-list">
+                        
+                        <li>
+                            <button class="filter-btn active" data-category="all">
+                                <i class="fa-solid fa-border-all"></i>
+                                <span>جميع العقارات</span>
+                                <span class="count">10</span>
+                            </button>
+                        </li>
+
+                        
+                                                                                <li>
+                                <button class="filter-btn" data-category="cat-1">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span>الجيزة</span>
+                                    <span class="count">5</span>
+                                </button>
+                            </li>
+                                                                                <li>
+                                <button class="filter-btn" data-category="cat-2">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span>القاهرة</span>
+                                    <span class="count">5</span>
+                                </button>
+                            </li>
+                                                                                <li>
+                                <button class="filter-btn" data-category="cat-3">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span>اعمال قيدة التطوير</span>
+                                    <span class="count">0</span>
+                                </button>
+                            </li>
+                                            </ul>
+                </div>
+            </aside>
+
+            
+            <div class="properties-content">
+                <button class="mobile-filter-btn" id="openSidebar">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>التصنيفات</span>
+                </button>
+
+                <div class="properties-results-header">
+                    <h3>
+                        عرض
+                        <span id="resultCount">10</span>
+                        عقار
+                    </h3>
+                </div>
+
+                <div class="properties-grid">
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1767128820_1_hVja18.jpg" alt="ابراج حسن محمد الهرم">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>ابراج حسن محمد الهرم</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الهرم
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/16"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1767127759_1_F20TUO.jpg" alt="ابراج حسن محمد الهرم">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>ابراج حسن محمد الهرم</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الهرم
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/15"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1767126463_1_PpxzND.jpg" alt="ابراج حسن محمد الهرم">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>ابراج حسن محمد الهرم</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الهرم
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/14"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1766932648_1_RhkUH0.jpg" alt="شمس الاصيل">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>شمس الاصيل</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> محور كمال عامر
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/13"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1766874440_1_SV7cZ0.jpg" alt="المجد">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>المجد</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> البيني هرم
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/12"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1766866725_1_I4PgnK.jpeg" alt="146 i">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>146 i</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الحي الخامس
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/11"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1766863143_1_ihWugC.jpg" alt="271B">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>271B</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الأركيد
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/10"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1766863499_1_9rznEM.jpg" alt="123B">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>123B</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الاركيد
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/9"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1766860455_1_1XiXh9.jpg" alt="50k">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>50k</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الحي التالت
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/8"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    عرض
+                                </span>
+                                <img src="/storage/properties/1766860833_1_tIuO9t.jpg" alt="149A">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>149A</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> الحي الخامس
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/ar/property-details/7"
+                                       class="btn-card">
+                                        تفاصيل أكثر
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                    </div>
+
+                <div class="no-results" id="noResults" style="display:none;">
+                    <i class="fa-solid fa-search"></i>
+                    <h3>لا توجد عقارات تطابق اختيارك</h3>
+                    <p>
+                        جرب تغيير التصنيف أو تواصل معنا مباشرة.
+                    </p>
+                    <a href="/ar/contact" class="btn btn-primary">
+                        تواصل معنا
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                                    <h3 class="footer-logo">المطيري<span>.للعقارات</span></h3>
+                    <p>
+                        نسعى لتقديم تجربة عقارية استثنائية مبنية على الثقة والشفافية.
+                        نوفر لك أفضل الفرص في الهرم والتجمع الخامس.
+                    </p>
+                            </div>
+
+            <div class="footer-col">
+                                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="/ar/">الرئيسية</a></li>
+                        <li><a href="/ar/about-us">من نحن</a></li>
+                        <li><a href="/ar/all-properties">العقارات</a></li>
+                        <li><a href="/ar/contact">اتصل بنا</a></li>
+                    </ul>
+                            </div>
+
+            <div class="footer-col">
+                                    <h3>مناطق الخدمة</h3>
+                    <ul>
+                        <li><a href="/ar/">شارع الهرم</a></li>
+                        <li><a href="/ar/">المريوطية</a></li>
+                        <li><a href="/ar/">حدائق الأهرام</a></li>
+                        <li><a href="/ar/">التجمع الخامس</a></li>
+                        <li><a href="/ar/">بيت الوطن</a></li>
+                    </ul>
+                            </div>
+
+            <div class="footer-col">
+                                    <h3>النشرة البريدية</h3>
+                    <p>اشترك ليصلك أحدث العروض العقارية فور نزولها.</p>
+                    <p class="preview-notice">نموذج التواصل غير متاح في نسخة المعاينة.</p>
+                            </div>
+        </div>
+
+        <div class="footer-bottom">
+                            <p>جميع الحقوق محفوظة &copy; 2026 - المهندس محمود المطيري.</p>
+                <p>تم التصميم بحب <i class="fa-solid fa-heart text-red-600"></i></p>
+                    </div>
+    </div>
+</footer>
+
+<script src="/front/js/script.js"></script>
+<script src="/front/js/all-properties.js"></script>
+
+<script>
+// فلترة العقارات حسب التصنيف (نفس فكرة الهوم بيج لكن على مستوى الصفحة)
+document.addEventListener('DOMContentLoaded', function () {
+    const filterBtns  = document.querySelectorAll('.filter-btn');
+    const cards       = document.querySelectorAll('.property-card');
+    const resultCount = document.getElementById('resultCount');
+    const noResults   = document.getElementById('noResults');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.getAttribute('data-category');
+
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let visible = 0;
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'block';
+                    visible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            resultCount.textContent = visible;
+
+            if (visible === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        All Properties | Almotairy Real Estate
+    </title>
+    <meta name="description"
+          content="Browse all available properties with filters by areas and types.">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/front/css/style.css">
+    <link rel="stylesheet" href="/front/css/all-properties.css">
+</head>
+<body>
+
+<header class="header" id="header">
+    <nav class="navbar container">
+        <a href="/en/" class="logo">
+            <img src="/front/img/logo.png" alt="Al-Motairy Real Estate Logo">
+        </a>
+
+        <!-- زر الموبايل -->
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="nav-list" aria-expanded="false" aria-label="Open menu" data-open-label="Open menu" data-close-label="Close menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <!-- القوائم -->
+        <ul class="nav-list" id="nav-list">
+            <li class="mobile-nav-heading" aria-hidden="true">
+                <span>Al-Motairy Real Estate</span>
+                <small>Main menu</small>
+            </li>
+                            <li><a href="/en/" class="">Home</a></li>
+                <li><a href="/en/about-us" class="">About</a></li>
+                <li><a href="/en/all-properties" class="active">Properties</a></li>
+                <li><a href="/en/contact" class="btn-contact ">Contact</a></li>
+            
+            <!-- زر تغيير اللغة -->
+            <li class="lang-switch">
+                                    <a href="/ar/all-properties">العربية</a>
+                            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section class="page-hero properties-hero">
+    <div class="page-hero-overlay"></div>
+    <div class="container">
+        <div class="page-hero-content">
+            <h1>All available properties</h1>
+            <p class="breadcrumb">
+                <a href="/en/">
+                    Home
+                </a>
+                /
+                <span>All properties</span>
+            </p>
+            <p class="hero-text">
+                Choose from a wide range of properties in prime areas, with easy filters by area and property type.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="properties-main section-padding">
+    <div class="container-full">
+        <div class="properties-layout">
+
+            
+            <aside class="properties-sidebar" id="propertiesSidebar">
+                <div class="sidebar-header">
+                    <h3>Categories</h3>
+                    <button class="sidebar-close" id="closeSidebar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="filter-section">
+                    <h4>Areas</h4>
+                    <ul class="filter-list">
+                        
+                        <li>
+                            <button class="filter-btn active" data-category="all">
+                                <i class="fa-solid fa-border-all"></i>
+                                <span>All properties</span>
+                                <span class="count">10</span>
+                            </button>
+                        </li>
+
+                        
+                                                                                <li>
+                                <button class="filter-btn" data-category="cat-1">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span>Giza</span>
+                                    <span class="count">5</span>
+                                </button>
+                            </li>
+                                                                                <li>
+                                <button class="filter-btn" data-category="cat-2">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span>Cairo</span>
+                                    <span class="count">5</span>
+                                </button>
+                            </li>
+                                                                                <li>
+                                <button class="filter-btn" data-category="cat-3">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span>Insulation works</span>
+                                    <span class="count">0</span>
+                                </button>
+                            </li>
+                                            </ul>
+                </div>
+            </aside>
+
+            
+            <div class="properties-content">
+                <button class="mobile-filter-btn" id="openSidebar">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Filters</span>
+                </button>
+
+                <div class="properties-results-header">
+                    <h3>
+                        Showing
+                        <span id="resultCount">10</span>
+                        properties
+                    </h3>
+                </div>
+
+                <div class="properties-grid">
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1767128820_1_hVja18.jpg" alt="hassan mohammed  towers haram">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>hassan mohammed  towers haram</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> haram
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/16"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1767127759_1_F20TUO.jpg" alt="hassan mohammed  towers haram">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>hassan mohammed  towers haram</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> haram
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/15"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1767126463_1_PpxzND.jpg" alt="hassan mohammed  towers haram">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>hassan mohammed  towers haram</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> haram
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/14"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1766932648_1_RhkUH0.jpg" alt="Shams Al-Aseel">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>Shams Al-Aseel</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> Kamal Amer Axis
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/13"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/01153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-1" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1766874440_1_SV7cZ0.jpg" alt="glory">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>glory</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> giza byramids
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/12"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1766866725_1_I4PgnK.jpeg" alt="146 i">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>146 i</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> Fifth Settlement
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/11"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1766863143_1_ihWugC.jpg" alt="271B">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>271B</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> Al Orchid
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/10"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1766863499_1_9rznEM.jpg" alt="123B">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>123B</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> Al Orchid
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/9"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1766860455_1_1XiXh9.jpg" alt="50k">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>50k</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> Third District
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/8"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="property-card" data-category="cat-2" data-type="apartment">
+                            <div class="card-image">
+                                <span class="badge sale">
+                                    Offer
+                                </span>
+                                <img src="/storage/properties/1766860833_1_tIuO9t.jpg" alt="149A">
+                                                            </div>
+                            <div class="card-details">
+                                                                <h3>149A</h3>
+                                <ul class="facilities">
+                                                                            <li>
+                                            <i class="fa-solid fa-ruler-combined"></i> Fifth Settlement
+                                        </li>
+                                                                                                                <li>
+                                            <i class="fa-solid fa-check"></i> 
+                                        </li>
+                                                                    </ul>
+                                <div class="card-footer">
+                                    <a href="/en/property-details/7"
+                                       class="btn-card">
+                                        More details
+                                    </a>
+                                                                            <a href="https://wa.me/201153160016" class="btn-whatsapp" target="_blank">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                    </div>
+
+                <div class="no-results" id="noResults" style="display:none;">
+                    <i class="fa-solid fa-search"></i>
+                    <h3>No properties match your filter</h3>
+                    <p>
+                        Try changing the filter or contact us directly.
+                    </p>
+                    <a href="/en/contact" class="btn btn-primary">
+                        Contact us
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                                    <h3 class="footer-logo">Khalid<span>.Real Estate</span></h3>
+                    <p>
+                        We strive to provide an exceptional real estate experience based on trust and transparency,
+                        offering the best opportunities in El‑Haram and Fifth Settlement.
+                    </p>
+                            </div>
+
+            <div class="footer-col">
+                                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/en/">Home</a></li>
+                        <li><a href="/en/about-us">About Us</a></li>
+                        <li><a href="/en/all-properties">Properties</a></li>
+                        <li><a href="/en/contact">Contact Us</a></li>
+                    </ul>
+                            </div>
+
+            <div class="footer-col">
+                                    <h3>Service Areas</h3>
+                    <ul>
+                        <li><a href="/en/">El‑Haram Street</a></li>
+                        <li><a href="/en/">Maryotia</a></li>
+                        <li><a href="/en/">Hadayek Al‑Ahram</a></li>
+                        <li><a href="/en/">Fifth Settlement</a></li>
+                        <li><a href="/en/">Beit Al‑Watan</a></li>
+                    </ul>
+                            </div>
+
+            <div class="footer-col">
+                                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive the latest real estate offers as soon as they are available.</p>
+                    <p class="preview-notice">Contact forms are unavailable in this preview.</p>
+                            </div>
+        </div>
+
+        <div class="footer-bottom">
+                            <p>All rights reserved &copy; 2026 - Eng. Mahmoud Al‑Mutairi.</p>
+                <p>Designed with love <i class="fa-solid fa-heart text-red-600"></i></p>
+                    </div>
+    </div>
+</footer>
+
+<script src="/front/js/script.js"></script>
+<script src="/front/js/all-properties.js"></script>
+
+<script>
+// فلترة العقارات حسب التصنيف (نفس فكرة الهوم بيج لكن على مستوى الصفحة)
+document.addEventListener('DOMContentLoaded', function () {
+    const filterBtns  = document.querySelectorAll('.filter-btn');
+    const cards       = document.querySelectorAll('.property-card');
+    const resultCount = document.getElementById('resultCount');
+    const noResults   = document.getElementById('noResults');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.getAttribute('data-category');
+
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let visible = 0;
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'block';
+                    visible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            resultCount.textContent = visible;
+
+            if (visible === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

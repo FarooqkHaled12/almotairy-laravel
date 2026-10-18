@@ -1,0 +1,23 @@
+.home-partner { background: #1e2a44; color: #f7f8fa; padding: 90px 0 105px; }
+.home-partner-heading { max-width: 760px; margin-bottom: 65px; }
+.home-partner-eyebrow { display: block; margin-bottom: 18px; color: #afc8df; font-size: .8rem; font-weight: 700; letter-spacing: .1em; }
+.home-partner-heading h2 { font-size: clamp(2.2rem, 4.5vw, 4rem); line-height: 1.18; font-weight: 500; }
+.home-partner-layout { display: grid; grid-template-columns: minmax(0, .95fr) repeat(2, minmax(0, 1fr)); align-items: start; gap: 28px; }
+.home-partner-services { padding: 30px 26px; border: 1px solid rgba(175, 200, 223, .3); border-radius: 16px; background: rgba(247, 248, 250, .04); }
+.home-partner-services > h3 { font-size: 1.05rem; margin-bottom: 28px; }
+.home-partner-services ul { border-inline-start: 1px solid rgba(175, 200, 223, .45); }
+.home-partner-services li { position: relative; padding: 0 0 26px; padding-inline-start: 20px; }
+.home-partner-services li:last-child { padding-bottom: 0; }
+.home-partner-services li::before { content: ''; position: absolute; inset-inline-start: -4px; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: #afc8df; }
+.home-partner-services h4 { font-size: .9rem; line-height: 1.5; }
+.home-partner-services li div, .home-partner-property p, .home-partner-description { margin-top: 8px; color: #bfccd7; font-size: .82rem; line-height: 1.7; }
+.home-partner-image { display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 16px; background: #68788b; }
+.home-partner-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.home-partner-image:hover img { transform: scale(1.03); }
+.home-partner-property h3 { font-size: 1.1rem; line-height: 1.4; margin-top: 18px; overflow-wrap: anywhere; }
+.home-partner-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; color: #f7f8fa; font-size: .85rem; font-weight: 700; }
+.home-partner-link:hover, .home-partner-link:focus-visible { color: #5bc0be; }
+@media (max-width: 900px) { .home-partner-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); } .home-partner-services { grid-column: 1 / -1; } }
+/* Mobile and tablet layouts are inferred from the desktop screenshot. */
+@media (max-width: 600px) { .home-partner { padding: 60px 0; } .home-partner-heading { margin-bottom: 35px; } .home-partner-layout { grid-template-columns: 1fr; } .home-partner-services { grid-column: auto; } .home-partner-image { aspect-ratio: 5 / 4; } }
+@media (prefers-reduced-motion: reduce) { .home-partner-image img { transition: none; } }
