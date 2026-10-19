@@ -27,7 +27,7 @@
 @include('front.layouts.footer')
 
 {{-- Global Scripts --}}
-<script src="{{ asset('front/js/script.js') }}"></script>
+<script src="{{ asset('front/js/script.js') }}?v={{ file_exists(public_path('front/js/script.js')) ? filemtime(public_path('front/js/script.js')) : '1' }}"></script>
 
 @stack('scripts')
 
