@@ -16,7 +16,7 @@
 
     @stack('styles')
 </head>
-<body>
+<body class="@yield('body-class')">
 
 @include('front.layouts.header')
 

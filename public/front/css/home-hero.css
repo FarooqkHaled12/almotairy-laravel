@@ -179,3 +179,12 @@
     .hero-title { font-size: clamp(2.2rem, 9vw, 3.1rem); }
     .hero-browse { align-items: stretch; flex-direction: column; gap: 12px; padding: 20px; }
 }
+
+/* Homepage navigation sits over a brighter hero image. */
+body.home-page #header.header { background: linear-gradient(to bottom, rgba(12, 34, 50, .56), rgba(12, 34, 50, .12)); box-shadow: none; }
+body.home-page #header.header.header-scrolled { background: rgba(20, 42, 61, .96); box-shadow: 0 4px 18px rgba(10, 34, 53, .16); }
+.home-page .hero { isolation: isolate; }
+.home-page .hero::before { content: ''; position: absolute; inset: 0; z-index: 0; background-image: inherit; background-size: cover; background-position: center; filter: brightness(1.2) saturate(1.04); pointer-events: none; }
+.home-page .hero-overlay { z-index: 1; background: linear-gradient(180deg, rgba(20, 44, 61, .25) 0%, rgba(26, 52, 67, .13) 48%, rgba(17, 40, 54, .25) 100%); }
+.home-page .hero-copy { text-shadow: 0 2px 16px rgba(12, 35, 50, .65); }
+@media (prefers-reduced-motion: reduce) { .home-page .hero::before { transition: none; } }
