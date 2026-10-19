@@ -48,7 +48,11 @@
                 @endforeach
             </div>
         {{-- شبكة العقارات --}}
-        <div class="properties-grid">
+        <div class="featured-slider-controls" role="group" aria-label="{{ $lang == 'ar' ? '?????? ??? ????????' : 'Browse properties' }}" hidden>
+            <button type="button" class="featured-slider-prev" aria-controls="featured-properties-track" aria-label="{{ $lang == 'ar' ? '???????? ???????' : 'Previous properties' }}"><span aria-hidden="true">{{ $lang == 'ar' ? '?' : '?' }}</span></button>
+            <button type="button" class="featured-slider-next" aria-controls="featured-properties-track" aria-label="{{ $lang == 'ar' ? '???????? ???????' : 'Next properties' }}"><span aria-hidden="true">{{ $lang == 'ar' ? '?' : '?' }}</span></button>
+        </div>
+        <div class="properties-grid" id="featured-properties-track" tabindex="0" aria-label="{{ $lang == 'ar' ? '???????? ???????' : 'Featured properties' }}">
             @forelse($properties as $property)
                 @php
                     $title      = $lang == 'ar' ? $property->name_ar : $property->name_en;
@@ -123,27 +127,57 @@
 </section>
 
 <script>
-// فلترة على الواجهة فقط حسب data-category
 document.addEventListener('DOMContentLoaded', function () {
-    const buttons = document.querySelectorAll('.filter-btn');
-    const cards   = document.querySelectorAll('.property-card');
+    const section = document.querySelector('.featured-properties');
+    if (!section) return;
+    const track = section.querySelector('.properties-grid');
+    const controls = section.querySelector('.featured-slider-controls');
+    const previous = controls.querySelector('.featured-slider-prev');
+    const next = controls.querySelector('.featured-slider-next');
+    const cards = [...track.querySelectorAll('.property-card')];
+    const filters = [...section.querySelectorAll('.filter-btn')];
+    const rtl = getComputedStyle(track).direction === 'rtl';
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            cards.forEach(card => {
-                const cat = card.getAttribute('data-category');
-                if (filter === 'all' || cat === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
+    function updateControls() {
+        const max = Math.max(0, track.scrollWidth - track.clientWidth);
+        const position = Math.abs(track.scrollLeft);
+        previous.disabled = position <= 1;
+        next.disabled = position >= max - 1;
+    }
+    function move(direction) {
+        const card = cards.find(item => !item.hidden);
+        if (!card) return;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        track.scrollBy({ left: (rtl ? -1 : 1) * direction * (card.getBoundingClientRect().width + gap), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    }
+    controls.hidden = false;
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    track.addEventListener('scroll', updateControls, { passive: true });
+    window.addEventListener('resize', updateControls);
+    filters.forEach(button => button.addEventListener('click', () => {
+        filters.forEach(item => { item.classList.remove('active'); item.setAttribute('aria-pressed', 'false'); });
+        button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
+        cards.forEach(card => { card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter; });
+        track.scrollLeft = 0;
+        updateControls();
+    }));
+    filters.forEach(button => button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false'));
+    let startX = 0, startScroll = 0, dragging = false, moved = false;
+    track.addEventListener('pointerdown', event => {
+        if (event.pointerType !== 'mouse' || event.button !== 0) return;
+        startX = event.clientX; startScroll = track.scrollLeft; dragging = true; moved = false;
     });
+    window.addEventListener('pointermove', event => {
+        if (!dragging) return;
+        const delta = event.clientX - startX;
+        if (Math.abs(delta) > 5) moved = true;
+        if (moved) { track.scrollLeft = startScroll - delta; track.classList.add('is-dragging'); }
+    });
+    window.addEventListener('pointerup', () => { dragging = false; track.classList.remove('is-dragging'); });
+    track.addEventListener('click', event => { if (moved) { event.preventDefault(); event.stopPropagation(); moved = false; } }, true);
+    updateControls();
 });
 </script>

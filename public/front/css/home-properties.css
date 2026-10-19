@@ -161,3 +161,23 @@
 }
 @media (max-width: 380px) { .featured-properties .properties-grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .featured-properties .card-image img { transition: none; } }
+
+/* Horizontally scrollable featured properties. */
+.featured-properties .featured-slider-controls { display: flex; justify-content: flex-end; gap: 10px; margin: 0 0 20px; min-height: 40px; }
+.featured-properties .featured-slider-controls[hidden] { display: none; }
+.featured-slider-controls button { display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid #a7bbc6; border-radius: 50%; background: #fff; color: #18324b; font-size: 1.15rem; cursor: pointer; }
+.featured-slider-controls button:hover:not(:disabled) { background: #18324b; color: #fff; }
+.featured-slider-controls button:disabled { opacity: .4; cursor: default; }
+.featured-properties .properties-grid { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 72px) / 4); overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x pan-y; }
+.featured-properties .properties-grid::-webkit-scrollbar { display: none; }
+.featured-properties .properties-grid.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.featured-properties .property-card { min-width: 0; scroll-snap-align: start; }
+.featured-properties .property-card[hidden] { display: none !important; }
+.featured-properties .card-image img { -webkit-user-drag: none; user-select: none; }
+@media (max-width: 1100px) { .featured-properties .properties-grid { grid-auto-columns: calc((100% - 48px) / 3); } }
+@media (max-width: 800px) { .featured-properties .properties-grid { grid-auto-columns: calc((100% - 20px) / 2); } }
+@media (max-width: 600px) {
+    .featured-properties .featured-slider-controls { margin: 0 0 18px; }
+    .featured-properties .properties-grid { grid-auto-columns: 78%; }
+}
+@media (max-width: 380px) { .featured-properties .properties-grid { grid-template-columns: none; grid-auto-columns: 85%; } }

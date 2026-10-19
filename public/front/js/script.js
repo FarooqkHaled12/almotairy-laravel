@@ -53,32 +53,6 @@ window.addEventListener('scroll', () => {
 });
 
 // =======================
-// Filter Properties
-// =======================
-const filterButtons   = document.querySelectorAll('.filter-btn');
-const propertyCards   = document.querySelectorAll('.property-card');
-
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // active button style
-    filterButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const filterValue = btn.getAttribute('data-filter');
-
-    propertyCards.forEach(card => {
-      const category = card.getAttribute('data-category');
-
-      if (filterValue === 'all' || filterValue === category) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  });
-});
-
-// =======================
 // Modals Open / Close
 // =======================
 // دوال عامة عشان تستدعيها من الـ HTML زي ما عامل
