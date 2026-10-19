@@ -6,7 +6,7 @@
 <header class="header" id="header">
     <nav class="navbar container">
         <a href="{{ route('front.home') }}" class="logo">
-            <img src="{{ asset('front/img/logo.png') }}" alt="{{ $lang === 'ar' ? 'شعار المطيري للعقارات' : 'Al-Motairy Real Estate Logo' }}">
+            <img src="{{ asset('front/img/logo1.png') }}" alt="{{ $lang === 'ar' ? 'شعار المطيري للعقارات' : 'Al-Motairy Real Estate Logo' }}">
         </a>
 
         <!-- زر الموبايل -->
