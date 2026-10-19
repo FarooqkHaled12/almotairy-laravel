@@ -64,13 +64,13 @@
                 <div class="property-card" data-category="{{ $catClass }}">
                     <div class="card-image">
                         @if($image)
-                            <img src="{{ $image }}" alt="{{ $title }}" loading="lazy">
+                            <a class="featured-image-link" href="{{ route('front.property.details', $property->id) }}" aria-label="{{ $lang == 'ar' ? '?????? ??????' : 'View property' }}: {{ $title }}"><img src="{{ $image }}" alt="{{ $title }}" loading="lazy"></a>
                         @endif
                         @if($categoryName)<span class="featured-category">{{ $categoryName }}</span>@endif
                     </div>
                     <div class="card-details">
                         <div class="featured-card-heading">
-                            <h3>{{ $title }}</h3>
+                            <h3><a href="{{ route('front.property.details', $property->id) }}">{{ $title }}</a></h3>
                         @if($property->payment_system_ar || $property->payment_system_en)
                             <div class="price">
                                 {{ $lang == 'ar' ? $property->payment_system_ar : $property->payment_system_en }}
