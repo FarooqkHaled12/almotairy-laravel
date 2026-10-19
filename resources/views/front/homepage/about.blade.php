@@ -24,7 +24,7 @@
                     @if($desc)<div class="home-about-description">{!! $desc !!}</div>@endif
 
                     @if($homeStats->isNotEmpty())
-                        <div class="home-about-stats" aria-label="{{ $lang == 'ar' ? '???????? ???????' : 'Almotairy in numbers' }}">
+                        <div class="home-about-stats" aria-label="{{ $lang == 'ar' ? 'المطيري بالأرقام' : 'Almotairy in numbers' }}">
                             @foreach($homeStats as $stat)
                                 <div class="home-about-stat"><strong>{{ $stat->number }}</strong><span>{{ $lang == 'ar' ? $stat->title_ar : $stat->title_en }}</span></div>
                             @endforeach

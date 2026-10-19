@@ -48,11 +48,11 @@
                 @endforeach
             </div>
         {{-- شبكة العقارات --}}
-        <div class="featured-slider-controls" role="group" aria-label="{{ $lang == 'ar' ? '?????? ??? ????????' : 'Browse properties' }}" hidden>
-            <button type="button" class="featured-slider-prev" aria-controls="featured-properties-track" aria-label="{{ $lang == 'ar' ? '???????? ???????' : 'Previous properties' }}"><span aria-hidden="true">{{ $lang == 'ar' ? '?' : '?' }}</span></button>
-            <button type="button" class="featured-slider-next" aria-controls="featured-properties-track" aria-label="{{ $lang == 'ar' ? '???????? ???????' : 'Next properties' }}"><span aria-hidden="true">{{ $lang == 'ar' ? '?' : '?' }}</span></button>
+        <div class="featured-slider-controls" role="group" aria-label="{{ $lang == 'ar' ? 'تصفح العقارات' : 'Browse properties' }}" hidden>
+            <button type="button" class="featured-slider-prev" aria-controls="featured-properties-track" aria-label="{{ $lang == 'ar' ? 'العقارات السابقة' : 'Previous properties' }}"><i class="fa-solid {{ $lang == 'ar' ? 'fa-arrow-right' : 'fa-arrow-left' }}" aria-hidden="true"></i></button>
+            <button type="button" class="featured-slider-next" aria-controls="featured-properties-track" aria-label="{{ $lang == 'ar' ? 'العقارات التالية' : 'Next properties' }}"><i class="fa-solid {{ $lang == 'ar' ? 'fa-arrow-left' : 'fa-arrow-right' }}" aria-hidden="true"></i></button>
         </div>
-        <div class="properties-grid" id="featured-properties-track" tabindex="0" aria-label="{{ $lang == 'ar' ? '???????? ???????' : 'Featured properties' }}">
+        <div class="properties-grid" id="featured-properties-track" tabindex="0" aria-label="{{ $lang == 'ar' ? 'العقارات المميزة' : 'Featured properties' }}">
             @forelse($properties as $property)
                 @php
                     $title      = $lang == 'ar' ? $property->name_ar : $property->name_en;
@@ -68,7 +68,7 @@
                 <div class="property-card" data-category="{{ $catClass }}">
                     <div class="card-image">
                         @if($image)
-                            <a class="featured-image-link" href="{{ route('front.property.details', $property->id) }}" aria-label="{{ $lang == 'ar' ? '?????? ??????' : 'View property' }}: {{ $title }}"><img src="{{ $image }}" alt="{{ $title }}" loading="lazy"></a>
+                            <a class="featured-image-link" href="{{ route('front.property.details', $property->id) }}" aria-label="{{ $lang == 'ar' ? 'عرض تفاصيل العقار' : 'View property' }}: {{ $title }}"><img src="{{ $image }}" alt="{{ $title }}" loading="lazy"></a>
                         @endif
                         @if($categoryName)<span class="featured-category">{{ $categoryName }}</span>@endif
                     </div>

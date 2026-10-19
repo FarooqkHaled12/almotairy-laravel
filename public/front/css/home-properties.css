@@ -132,9 +132,10 @@
 .featured-properties .featured-category { top: 15px; inset-inline-start: 15px; border-radius: 4px; padding: 7px 11px; background: rgba(255,255,255,.95); }
 .featured-properties .card-details { flex: 1; min-height: 0; padding: 20px 0 22px; color: #fff; }
 .featured-properties .featured-card-heading { display: block; }
-.featured-properties .card-details h3 { color: #fff; font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
-.featured-properties .card-details h3 a { color: inherit; text-decoration: none; }
-.featured-properties .card-details h3 a:hover { color: #89d6d2; }
+.featured-properties .card-details h3,
+.featured-properties .card-details h3 a { color: #fff; text-decoration: none; }
+.featured-properties .card-details h3 a:hover,
+.featured-properties .card-details h3 a:focus-visible { color: #89d6d2; }
 .featured-properties .price { display: inline-block; margin-top: 8px; color: #9fd5d2; text-align: start; }
 .featured-properties .location { color: #c5d3da; font-size: .82rem; }
 .featured-properties .location i { color: #78c9c6; }

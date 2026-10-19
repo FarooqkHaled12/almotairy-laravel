@@ -30,8 +30,7 @@ button, input, select, textarea { font-family: inherit; }
 .experience-badge { background: #1e2a44; }
 .experience-badge span, .about-features i { color: #afc8df; }
 
-.featured-properties .section-title, .featured-properties .card-details h3,
-.featured-properties .price, .featured-properties .btn-card, .featured-view-all { color: #1e2a44; }
+.featured-properties .section-title, .featured-view-all { color: #1e2a44; }
 .featured-properties .filter-btn.active, .featured-properties .filter-btn:hover { background: #1e2a44; border-color: #1e2a44; }
 .developments { background: #afc8df; color: #1e2a44; }
 .development-feature, .development-card { background: #1e2a44; }
