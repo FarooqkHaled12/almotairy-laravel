@@ -91,3 +91,21 @@
         </div>
     </div>
 </footer>
+
+@php
+    $floatingContact = \App\Models\ContactInfo::first();
+    $floatingWhatsapp = preg_replace('/[^0-9]/', '', $floatingContact?->whatsapp ?? '');
+    if (preg_match('/^01[0125][0-9]{8}$/', $floatingWhatsapp)) {
+        $floatingWhatsapp = '20'.substr($floatingWhatsapp, 1);
+    }
+@endphp
+@if($floatingContact && ($floatingContact->facebook || $floatingWhatsapp))
+    <div class="site-social-float" role="navigation" aria-label="{{ $lang === 'ar' ? 'روابط التواصل الاجتماعي' : 'Social media links' }}">
+        @if($floatingContact->facebook)
+            <a class="site-social-float__link site-social-float__link--facebook" href="{{ $floatingContact->facebook }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $lang === 'ar' ? 'تابعنا على فيسبوك' : 'Follow us on Facebook' }}"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        @endif
+        @if($floatingWhatsapp)
+            <a class="site-social-float__link site-social-float__link--whatsapp" href="https://wa.me/{{ $floatingWhatsapp }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $lang === 'ar' ? 'تواصل معنا عبر واتساب' : 'Contact us on WhatsApp' }}"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        @endif
+    </div>
+@endif

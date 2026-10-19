@@ -18,20 +18,34 @@
             $desc       = $lang == 'ar' ? $hero->description_ar : $hero->description_en;
         @endphp
 
-        <h1 class="hero-title">
-            {!! $title !!}
-            <br>
-            <span>{{ $h1_word_1 }}</span>
-        </h1>
+        <div class="hero-copy">
+            <h1 class="hero-title">
+                {!! $title !!}
+                @if($h1_word_1 && trim(strip_tags($title ?? '')) !== trim($h1_word_1))
+                    <br><span>{{ $h1_word_1 }}</span>
+                @endif
+            </h1>
 
-        @if($subtitle)
-            <p class="hero-subtitle">{{ $subtitle }}</p>
-        @endif
+            @if($subtitle)
+                <p class="hero-subtitle">{{ $subtitle }}</p>
+            @endif
 
-        @if($desc)
-            <p class="hero-description">{{ $desc }}</p>
-        @endif
+            @if($desc)
+                <p class="hero-description">{{ $desc }}</p>
+            @endif
 
+        </div>
+
+        <div class="hero-browse-wrap">
+            <a class="hero-browse-tab" href="#properties">{{ $lang == 'ar' ? 'التصنيفات' : 'Categories' }}</a>
+            <div class="hero-browse">
+                <div class="hero-browse-copy">
+                    <strong>{{ $lang == 'ar' ? 'العقارات المتاحة' : 'Available properties' }}</strong>
+                    <span>{{ $lang == 'ar' ? 'تصفح العقارات والتصنيفات المتاحة' : 'Browse available properties and categories' }}</span>
+                </div>
+                <a class="hero-link" href="{{ route('front.properties') }}">{{ $lang == 'ar' ? 'عرض كل العقارات' : 'View all properties' }}</a>
+            </div>
+        </div>
     </div>
 </section>
 @endif

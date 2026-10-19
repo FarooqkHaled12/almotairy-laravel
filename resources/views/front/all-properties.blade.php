@@ -1,250 +1,193 @@
 @php
     use App\Models\Property;
     use App\Models\PropertyCategory;
-
-    $lang = session('locale','ar');
-
-    // التصنيفات
+    $lang = session('locale', 'ar');
     $categories = PropertyCategory::orderBy('id')->get();
-
-    // كل العقارات مع التصنيف
     $properties = Property::with('category')->latest()->get();
+    $heroImage = $properties->first(fn ($property) => $property->image_1);
+    $listingContact = \App\Models\ContactInfo::first();
 @endphp
-
 <!DOCTYPE html>
-<html lang="{{ $lang }}" dir="{{ $lang == 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="{{ $lang }}" dir="{{ $lang === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        {{ $lang == 'ar' ? 'جميع العقارات | المطيري للعقارات' : 'All Properties | Almotairy Real Estate' }}
-    </title>
-    <meta name="description"
-          content="{{ $lang == 'ar'
-            ? 'تصفح جميع العقارات المتاحة مع فلترة حسب المناطق وأنواع العقارات.'
-            : 'Browse all available properties with filters by areas and types.'
-          }}">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>{{ $lang === 'ar' ? 'جميع العقارات | المطيري للعقارات' : 'All Properties | Almotairy Real Estate' }}</title>
+    <meta name="description" content="{{ $lang === 'ar' ? 'تصفح العقارات المتاحة لدى المطيري للعقارات.' : 'Browse available properties from Almotairy Real Estate.' }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/all-properties.css') }}">
 </head>
-<body>
-
+<body class="all-properties-page">
 @include('front.layouts.header')
-
-{{-- الهيرو --}}
-<section class="page-hero properties-hero">
-    <div class="page-hero-overlay"></div>
-    <div class="container">
-        <div class="page-hero-content">
-            <h1>{{ $lang == 'ar' ? 'جميع العقارات المتاحة' : 'All available properties' }}</h1>
-            <p class="breadcrumb">
-                <a href="{{ route('front.home') }}">
-                    {{ $lang == 'ar' ? 'الرئيسية' : 'Home' }}
-                </a>
-                /
-                <span>{{ $lang == 'ar' ? 'جميع العقارات' : 'All properties' }}</span>
-            </p>
-            <p class="hero-text">
-                {{ $lang == 'ar'
-                    ? 'اختر من مجموعة متنوعة من العقارات في أفضل المناطق، مع إمكانية فلترة بسيطة حسب المنطقة ونوع العقار.'
-                    : 'Choose from a wide range of properties in prime areas, with easy filters by area and property type.'
-                }}
-            </p>
+<main>
+    <section class="listing-hero" @if($heroImage) style="--listing-hero-image: url('{{ asset('storage/'.$heroImage->image_1) }}')" @endif>
+        <div class="listing-container listing-hero__content">
+            <nav class="listing-breadcrumb" aria-label="{{ $lang === 'ar' ? 'مسار الصفحة' : 'Breadcrumb' }}"><a href="{{ route('front.home') }}">{{ $lang === 'ar' ? 'الرئيسية' : 'Home' }}</a><span aria-hidden="true">/</span><span aria-current="page">{{ $lang === 'ar' ? 'العقارات' : 'Properties' }}</span></nav>
+            <div class="listing-hero__layout"><div class="listing-hero__copy">
+            <span class="listing-eyebrow">{{ $lang === 'ar' ? 'المطيري للعقارات' : 'ALMOTAIRY REAL ESTATE' }}</span>
+            <h1>{{ $lang === 'ar' ? 'اعثر على عقارك المناسب' : 'Find Your Ideal Property' }}</h1>
+            <p>{{ $lang === 'ar' ? 'اكتشف العقارات المتاحة واختر ما يناسب احتياجاتك.' : 'Explore available properties and find the right fit for you.' }}</p>
+            <a class="listing-hero__browse" href="#listing-heading">{{ $lang === 'ar' ? 'تصفح العقارات' : 'Browse properties' }} <span aria-hidden="true">{{ $lang === 'ar' ? '←' : '→' }}</span></a>
+            </div><div class="listing-hero__summary"><span class="listing-hero__summary-icon"><i class="fa-regular fa-building" aria-hidden="true"></i></span><strong>{{ $properties->count() }}</strong><span>{{ $lang === 'ar' ? 'عقار متاح للاستكشاف' : 'properties to explore' }}</span></div></div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="properties-main section-padding">
-    <div class="container-full">
-        <div class="properties-layout">
-
-            {{-- الفلتر الجانبي --}}
-            <aside class="properties-sidebar" id="propertiesSidebar">
-                <div class="sidebar-header">
-                    <h3>{{ $lang == 'ar' ? 'التصنيفات' : 'Categories' }}</h3>
-                    <button class="sidebar-close" id="closeSidebar">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+    <section class="listing-content" aria-labelledby="listing-heading">
+        <div class="listing-container">
+            <form class="listing-search" id="propertySearch">
+                <div class="listing-search__intro"><span class="listing-search__intro-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></span><div><strong>{{ $lang === 'ar' ? 'ابدأ البحث' : 'Find your property' }}</strong><small>{{ $lang === 'ar' ? 'اختر ما يناسبك' : 'Explore your options' }}</small></div></div>
+                <div class="listing-search__field">
+                    <label for="locationSearch">{{ $lang === 'ar' ? 'الموقع' : 'Location' }}</label>
+                    <div class="listing-search__input"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><input id="locationSearch" type="search" placeholder="{{ $lang === 'ar' ? 'ابحث عن موقع' : 'Search location' }}"></div>
                 </div>
-
-                <div class="filter-section">
-                    <h4>{{ $lang == 'ar' ? 'المناطق' : 'Areas' }}</h4>
-                    <ul class="filter-list">
-                        {{-- الكل --}}
-                        <li>
-                            <button class="filter-btn active" data-category="all">
-                                <i class="fa-solid fa-border-all"></i>
-                                <span>{{ $lang == 'ar' ? 'جميع العقارات' : 'All properties' }}</span>
-                                <span class="count">{{ $properties->count() }}</span>
-                            </button>
-                        </li>
-
-                        {{-- التصنيفات من الداتابيس --}}
+                <div class="listing-search__field">
+                    <label for="categorySearch">{{ $lang === 'ar' ? 'التصنيف' : 'Category' }}</label>
+                    <select id="categorySearch">
+                        <option value="all">{{ $lang === 'ar' ? 'جميع التصنيفات' : 'All categories' }}</option>
                         @foreach($categories as $category)
-                            @php
-                                $catName = $lang == 'ar' ? $category->name_ar : $category->name_en;
-                                $catSlug = 'cat-'.$category->id;
-                                $catCount = $properties->where('category_id', $category->id)->count();
-                            @endphp
-                            <li>
-                                <button class="filter-btn" data-category="{{ $catSlug }}">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span>{{ $catName }}</span>
-                                    <span class="count">{{ $catCount }}</span>
-                                </button>
-                            </li>
+                            <option value="cat-{{ $category->id }}">{{ $lang === 'ar' ? $category->name_ar : $category->name_en }}</option>
                         @endforeach
-                    </ul>
+                    </select>
                 </div>
-            </aside>
+                <button class="listing-search__submit" type="submit"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> {{ $lang === 'ar' ? 'بحث عن عقار' : 'Search properties' }}</button>
+            </form>
 
-            {{-- منطقة العقارات --}}
-            <div class="properties-content">
-                <button class="mobile-filter-btn" id="openSidebar">
-                    <i class="fa-solid fa-sliders"></i>
-                    <span>{{ $lang == 'ar' ? 'التصنيفات' : 'Filters' }}</span>
-                </button>
-
-                <div class="properties-results-header">
-                    <h3>
-                        {{ $lang == 'ar' ? 'عرض' : 'Showing' }}
-                        <span id="resultCount">{{ $properties->count() }}</span>
-                        {{ $lang == 'ar' ? 'عقار' : 'properties' }}
-                    </h3>
-                </div>
-
-                <div class="properties-grid">
-                    @forelse($properties as $property)
-                        @php
-                            $title    = $lang == 'ar' ? $property->name_ar  : $property->name_en;
-                            $location = $lang == 'ar' ? $property->location_ar : $property->location_en;
-                            $area     = $lang == 'ar' ? $property->area_ar : $property->area_en;
-                            $features = $lang == 'ar'
-                                ? ($property->features_ar ?? [])
-                                : ($property->features_en ?? []);
-                            $catClass = $property->category ? 'cat-'.$property->category_id : 'cat-none';
-                            $image    = $property->image_1
-                                ? asset('storage/'.$property->image_1)
-                                : 'https://images.unsplash.com/photo-1600596542815-e32c630bd1ba?w=800';
-                            $price    = $lang == 'ar'
-                                ? ($property->payment_system_ar ?? '')
-                                : ($property->payment_system_en ?? '');
-                            $whatsapp = $property->whatsapp ? 'https://wa.me/'.$property->whatsapp : null;
-                        @endphp
-
-                        <div class="property-card" data-category="{{ $catClass }}" data-type="apartment">
-                            <div class="card-image">
-                                <span class="badge sale">
-                                    {{ $lang == 'ar' ? 'عرض' : 'Offer' }}
-                                </span>
-                                <img src="{{ $image }}" alt="{{ $title }}">
-                                @if($price)
-                                    <div class="price">{{ $price }}</div>
-                                @endif
-                            </div>
-                            <div class="card-details">
-                                @if($location)
-                                    <div class="location">
-                                        <i class="fa-solid fa-location-dot"></i> {{ $location }}
-                                    </div>
-                                @endif
-                                <h3>{{ $title }}</h3>
-                                <ul class="facilities">
-                                    @if($area)
-                                        <li>
-                                            <i class="fa-solid fa-ruler-combined"></i> {{ $area }}
-                                        </li>
-                                    @endif
-                                    @foreach(array_slice($features, 0, 2) as $f)
-                                        <li>
-                                            <i class="fa-solid fa-check"></i> {{ $f }}
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                <div class="card-footer">
-                                    <a href="{{ route('front.property.details', $property->id) }}"
-                                       class="btn-card">
-                                        {{ $lang == 'ar' ? 'تفاصيل أكثر' : 'More details' }}
-                                    </a>
-                                    @if($whatsapp)
-                                        <a href="{{ $whatsapp }}" class="btn-whatsapp" target="_blank">
-                                            <i class="fa-brands fa-whatsapp"></i>
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        {{-- لو مفيش أي عقارات --}}
-                    @endforelse
-                </div>
-
-                <div class="no-results" id="noResults" style="display:none;">
-                    <i class="fa-solid fa-search"></i>
-                    <h3>{{ $lang == 'ar' ? 'لا توجد عقارات تطابق اختيارك' : 'No properties match your filter' }}</h3>
-                    <p>
-                        {{ $lang == 'ar'
-                            ? 'جرب تغيير التصنيف أو تواصل معنا مباشرة.'
-                            : 'Try changing the filter or contact us directly.'
-                        }}
-                    </p>
-                    <a href="{{ route('front.contact') }}" class="btn btn-primary">
-                        {{ $lang == 'ar' ? 'تواصل معنا' : 'Contact us' }}
-                    </a>
-                </div>
+            <div class="listing-heading">
+                <div><span class="listing-eyebrow listing-eyebrow--dark">{{ $lang === 'ar' ? 'عقاراتنا' : 'OUR PROPERTIES' }}</span><h2 id="listing-heading">{{ $lang === 'ar' ? 'العقارات المتاحة' : 'Explore Available Properties' }}</h2><p>{{ $lang === 'ar' ? 'تصفح العقارات واختر التصنيف المناسب لك.' : 'Browse our properties and choose the category that suits you.' }}</p></div>
+                <p class="listing-count" aria-live="polite">{{ $lang === 'ar' ? 'عرض' : 'Showing' }} <strong id="resultCount">{{ $properties->count() }}</strong> {{ $lang === 'ar' ? 'عقار' : 'properties' }}</p>
             </div>
+            <div class="listing-filter-bar"><div class="listing-filters" role="group" aria-label="{{ $lang === 'ar' ? 'تصفية حسب التصنيف' : 'Filter by category' }}">
+                <button type="button" class="listing-filter active" data-category="all" aria-pressed="true">{{ $lang === 'ar' ? 'الكل' : 'All' }} <span>{{ $properties->count() }}</span></button>
+                @foreach($categories as $category)
+                    <button type="button" class="listing-filter" data-category="cat-{{ $category->id }}" aria-pressed="false">{{ $lang === 'ar' ? $category->name_ar : $category->name_en }} <span>{{ $properties->where('category_id', $category->id)->count() }}</span></button>
+                @endforeach
+            </div><div class="listing-display-controls"><button class="listing-reset" id="resetFilters" type="button" hidden><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> {{ $lang === 'ar' ? 'مسح الفلاتر' : 'Clear filters' }}</button><div class="listing-sort"><label for="propertySort">{{ $lang === 'ar' ? 'الترتيب' : 'Sort' }}</label><select id="propertySort" aria-controls="propertyGrid"><option value="newest">{{ $lang === 'ar' ? 'الأحدث أولًا' : 'Newest first' }}</option><option value="oldest">{{ $lang === 'ar' ? 'الأقدم أولًا' : 'Oldest first' }}</option></select></div><div class="listing-view-switch" role="group" aria-label="{{ $lang === 'ar' ? 'طريقة عرض العقارات' : 'Property display' }}"><button type="button" class="listing-view-switch__button is-active" data-listing-view="grid" aria-controls="propertyGrid" aria-pressed="true" aria-label="{{ $lang === 'ar' ? 'عرض شبكي' : 'Grid view' }}"><i class="fa-solid fa-border-all" aria-hidden="true"></i></button><button type="button" class="listing-view-switch__button" data-listing-view="list" aria-controls="propertyGrid" aria-pressed="false" aria-label="{{ $lang === 'ar' ? 'عرض قائمة' : 'List view' }}"><i class="fa-solid fa-list" aria-hidden="true"></i></button></div></div></div>
+            <div class="listing-grid" id="propertyGrid">
+                @foreach($properties as $property)
+                    @php
+                        $title = $lang === 'ar' ? $property->name_ar : $property->name_en;
+                        $location = $lang === 'ar' ? $property->location_ar : $property->location_en;
+                        $area = $lang === 'ar' ? $property->area_ar : $property->area_en;
+                        $payment = $lang === 'ar' ? $property->payment_system_ar : $property->payment_system_en;
+                        $features = array_values(array_filter($lang === 'ar' ? ($property->features_ar ?? []) : ($property->features_en ?? []), fn ($feature) => is_string($feature) && trim($feature) !== ''));
+                        $categoryName = $property->category ? ($lang === 'ar' ? $property->category->name_ar : $property->category->name_en) : null;
+                        $description = $lang === 'ar' ? $property->description_ar : $property->description_en;
+                        $cardImages = array_values(array_filter([$property->image_1, $property->image_2, $property->image_3, $property->image_4]));
+                    @endphp
+                    <article class="listing-card" data-category="{{ $property->category_id ? 'cat-'.$property->category_id : 'cat-none' }}" data-location="{{ $location }}">
+                        <div class="listing-card__gallery">
+                        <a class="listing-card__image" href="{{ route('front.property.details', $property->id) }}" aria-label="{{ $title }}">
+                            @forelse($cardImages as $cardImage)<img src="{{ asset('storage/'.$cardImage) }}" alt="{{ $title }}" loading="lazy" @if(!$loop->first) hidden @endif>@empty<span class="listing-card__no-image" aria-hidden="true"><i class="fa-regular fa-image"></i></span>@endforelse
+                            @if($categoryName)<span class="listing-card__badge">{{ $categoryName }}</span>@endif
+                        </a>
+                        @if(count($cardImages) > 1)<div class="listing-card__gallery-controls" hidden><button type="button" data-gallery-step="-1" aria-label="{{ $lang === 'ar' ? 'الصورة السابقة' : 'Previous image' }}"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button><span class="listing-card__gallery-count" aria-live="polite" aria-atomic="true">1 / {{ count($cardImages) }}</span><button type="button" data-gallery-step="1" aria-label="{{ $lang === 'ar' ? 'الصورة التالية' : 'Next image' }}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div>@endif
+                        @if(count($cardImages) > 1)<div class="listing-card__gallery-dots" role="group" aria-label="{{ $lang === 'ar' ? 'اختر صورة العقار' : 'Choose property image' }}" hidden>@foreach($cardImages as $cardImage)<button type="button" data-gallery-index="{{ $loop->index }}" aria-label="{{ $lang === 'ar' ? 'صورة' : 'Image' }} {{ $loop->iteration }}" aria-pressed="{{ $loop->first ? 'true' : 'false' }}"></button>@endforeach</div>@endif
+                        </div>
+                        <div class="listing-card__body">
+                            <div class="listing-card__heading"><h3><a href="{{ route('front.property.details', $property->id) }}">{{ $title }}</a></h3>
+                            @if($location)<p class="listing-card__location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ $location }}</p>@endif</div>
+                            @if($description && trim(strip_tags($description)))<p class="listing-card__description">{{ \Illuminate\Support\Str::limit(trim(strip_tags($description)), 105) }}</p>@endif
+                            @if($payment)<p class="listing-card__payment"><span>{{ $lang === 'ar' ? 'نظام الدفع' : 'Payment' }}</span> {{ $payment }}</p>@endif
+                            @if($area || count($features))<ul class="listing-card__features">@if($area)<li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ $area }}</li>@endif @foreach(array_slice($features, 0, 2) as $feature)<li><i class="fa-solid fa-check" aria-hidden="true"></i> {{ $feature }}</li>@endforeach</ul>@endif
+                            <div class="listing-card__footer"><a class="listing-card__details" href="{{ route('front.property.details', $property->id) }}">{{ $lang === 'ar' ? 'تفاصيل العقار' : 'View details' }} <span aria-hidden="true">{{ $lang === 'ar' ? '←' : '→' }}</span></a>@if($property->phone)<a class="listing-card__call" href="tel:{{ $property->phone }}" aria-label="{{ $lang === 'ar' ? '???? ?????' : 'Call about' }} {{ $title }}"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>{{ $lang === 'ar' ? '?????' : 'Call' }}</span></a>@endif @if($property->whatsapp)<a class="listing-card__whatsapp" href="https://wa.me/{{ $property->whatsapp }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp: {{ $title }}"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>@endif</div>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+            <div class="listing-empty" id="noResults" {{ $properties->isNotEmpty() ? 'hidden' : '' }}><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>{{ $lang === 'ar' ? 'لا توجد عقارات تطابق اختيارك' : 'No properties match your search' }}</h3><p>{{ $lang === 'ar' ? 'جرّب تغيير البحث أو التصنيف.' : 'Try changing your search or category.' }}</p><button class="listing-empty__reset" type="button" id="resetEmpty">{{ $lang === 'ar' ? 'عرض كل العقارات' : 'View all properties' }}</button></div>
 
+            @if($properties->isNotEmpty())
+                @php
+                    $latestProperty = $properties->first();
+                    $latestTitle = $lang === 'ar' ? $latestProperty->name_ar : $latestProperty->name_en;
+                    $latestLocation = $lang === 'ar' ? $latestProperty->location_ar : $latestProperty->location_en;
+                    $latestDescription = $lang === 'ar' ? $latestProperty->description_ar : $latestProperty->description_en;
+                    $latestArea = $lang === 'ar' ? $latestProperty->area_ar : $latestProperty->area_en;
+                    $latestCategory = $latestProperty->category ? ($lang === 'ar' ? $latestProperty->category->name_ar : $latestProperty->category->name_en) : null;
+                    $latestImages = array_values(array_filter([$latestProperty->image_1, $latestProperty->image_2, $latestProperty->image_3, $latestProperty->image_4]));
+                @endphp
+                <section class="listing-highlight {{ count($latestImages) ? '' : 'listing-highlight--no-image' }}" aria-labelledby="listing-highlight-title">
+                    <div class="listing-highlight__copy">
+                        <span class="listing-highlight__eyebrow">{{ $lang === 'ar' ? 'أحدث العقارات' : 'LATEST PROPERTY' }}</span>
+                        <h2 id="listing-highlight-title">{{ $latestTitle }}</h2>
+                        @if($latestLocation)<p class="listing-highlight__location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ $latestLocation }}</p>@endif
+                        @if($latestDescription)<p class="listing-highlight__description">{{ \Illuminate\Support\Str::limit(strip_tags($latestDescription), 160) }}</p>@endif
+                        <a class="listing-highlight__link" href="{{ route('front.property.details', $latestProperty->id) }}">{{ $lang === 'ar' ? 'اكتشف العقار' : 'Explore property' }} <span aria-hidden="true">{{ $lang === 'ar' ? '←' : '→' }}</span></a>
+                        @if($latestCategory || $latestArea)<div class="listing-highlight__facts">@if($latestCategory)<span><i class="fa-regular fa-building" aria-hidden="true"></i> {{ $latestCategory }}</span>@endif @if($latestArea)<span><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> {{ $latestArea }}</span>@endif</div>@endif
+                    </div>
+                    @if(count($latestImages))
+                        <div class="listing-highlight__gallery {{ count($latestImages) > 1 ? 'has-thumbnails' : '' }}">
+                            <a class="listing-highlight__main-image" href="{{ route('front.property.details', $latestProperty->id) }}"><img src="{{ asset('storage/'.$latestImages[0]) }}" alt="{{ $latestTitle }}" loading="lazy"></a>
+                            @if(count($latestImages) > 1)<div class="listing-highlight__thumbnails">@foreach(array_slice($latestImages, 1, 2) as $image)<a href="{{ route('front.property.details', $latestProperty->id) }}" aria-label="{{ $latestTitle }}"><img src="{{ asset('storage/'.$image) }}" alt="" loading="lazy"></a>@endforeach</div>@endif
+                        </div>
+                    @endif
+                </section>
+            @endif
+            @php
+                $locationField = $lang === 'ar' ? 'location_ar' : 'location_en';
+                $locatedProperties = $properties->filter(fn ($item) => is_string($item->$locationField) && trim($item->$locationField) !== '');
+                $availableLocations = $locatedProperties->map(fn ($item) => trim($item->$locationField))->unique()->values();
+                $initialLocation = $availableLocations->first();
+            @endphp
+            @if($availableLocations->isNotEmpty())
+                <section class="location-properties" aria-labelledby="location-properties-title">
+                    <div class="location-properties__heading">
+                        <span class="listing-eyebrow listing-eyebrow--dark">{{ $lang === 'ar' ? 'اكتشف المناطق' : 'EXPLORE LOCATIONS' }}</span>
+                        <h2 id="location-properties-title">{{ $lang === 'ar' ? 'عقارات حسب الموقع' : 'Properties by location' }}</h2>
+                        <p>{{ $lang === 'ar' ? 'اختر موقعًا لتصفح العقارات المتاحة فيه.' : 'Choose a location to explore available properties.' }}</p>
+                    </div>
+                    <div class="location-properties__toolbar">
+                        <label for="propertyLocation">{{ $lang === 'ar' ? 'الموقع' : 'Location' }}</label>
+                        <select id="propertyLocation">@foreach($availableLocations as $availableLocation)<option value="{{ $availableLocation }}">{{ $availableLocation }}</option>@endforeach</select>
+                    </div>
+                    <div class="location-properties__grid">
+                        @foreach($locatedProperties as $locatedProperty)
+                            @php
+                                $locatedTitle = $lang === 'ar' ? $locatedProperty->name_ar : $locatedProperty->name_en;
+                                $locatedLocation = trim($locatedProperty->$locationField);
+                                $locatedPayment = $lang === 'ar' ? $locatedProperty->payment_system_ar : $locatedProperty->payment_system_en;
+                                $locatedArea = $lang === 'ar' ? $locatedProperty->area_ar : $locatedProperty->area_en;
+                            @endphp
+                            <article class="location-card" data-location="{{ $locatedLocation }}" @if($locatedLocation !== $initialLocation) hidden @endif>
+                                <a class="location-card__image" href="{{ route('front.property.details', $locatedProperty->id) }}" aria-label="{{ $locatedTitle }}">
+                                    @if($locatedProperty->image_1)<img src="{{ asset('storage/'.$locatedProperty->image_1) }}" alt="{{ $locatedTitle }}" loading="lazy">@else<span class="listing-card__no-image" aria-hidden="true"><i class="fa-regular fa-image"></i></span>@endif
+                                </a>
+                                <div class="location-card__body">
+                                    @if($locatedPayment)<p class="location-card__payment">{{ $locatedPayment }}</p>@endif
+                                    <h3><a href="{{ route('front.property.details', $locatedProperty->id) }}">{{ $locatedTitle }}</a></h3>
+                                    <p class="location-card__location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ $locatedLocation }}</p>
+                                    @if($locatedArea)<p class="location-card__area"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> {{ $locatedArea }}</p>@endif
+                                    <a class="location-card__link" href="{{ route('front.property.details', $locatedProperty->id) }}">{{ $lang === 'ar' ? 'تفاصيل العقار' : 'View details' }} <span aria-hidden="true">{{ $lang === 'ar' ? '←' : '→' }}</span></a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+                </section>
+            @endif
         </div>
+    </section>
+</main>
+<section class="listing-contact" aria-labelledby="listing-contact-title">
+    <div class="listing-container listing-contact__inner">
+        <div class="listing-contact__copy">
+            <span class="listing-contact__eyebrow">{{ $lang === 'ar' ? 'نحن هنا لمساعدتك' : 'GET IN TOUCH' }}</span>
+            <h2 id="listing-contact-title">{{ $lang === 'ar' ? 'لنساعدك في العثور على عقارك' : 'Let’s Find Your Property' }}</h2>
+            <p>{{ $lang === 'ar' ? 'تواصل معنا للاستفسار عن العقارات المتاحة.' : 'Get in touch to ask about available properties.' }}</p>
+            <a class="listing-contact__button" href="{{ route('front.contact') }}">{{ $lang === 'ar' ? 'تواصل معنا' : 'Contact us' }} <span aria-hidden="true">{{ $lang === 'ar' ? '←' : '→' }}</span></a>
+        </div>
+        @if($listingContact && ($listingContact->phone || $listingContact->email || ($lang === 'ar' ? $listingContact->address_ar : $listingContact->address_en)))
+            <div class="listing-contact__details">
+                @if($listingContact->phone)<div class="listing-contact__item"><span class="listing-contact__icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></span><span><small>{{ $lang === 'ar' ? 'اتصل بنا' : 'Call us' }}</small><a dir="ltr" href="tel:{{ $listingContact->phone }}">{{ $listingContact->phone }}</a></span></div>@endif
+                @if($listingContact->email)<div class="listing-contact__item"><span class="listing-contact__icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span><span><small>{{ $lang === 'ar' ? 'البريد الإلكتروني' : 'Email us' }}</small><a href="mailto:{{ $listingContact->email }}">{{ $listingContact->email }}</a></span></div>@endif
+                @if($lang === 'ar' ? $listingContact->address_ar : $listingContact->address_en)<div class="listing-contact__item"><span class="listing-contact__icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span><span><small>{{ $lang === 'ar' ? 'عنوان المكتب' : 'Visit our office' }}</small><span>{{ $lang === 'ar' ? $listingContact->address_ar : $listingContact->address_en }}</span></span></div>@endif
+            </div>
+        @endif
+        @if($heroImage)<div class="listing-contact__image"><img src="{{ asset('storage/'.$heroImage->image_1) }}" alt="" loading="lazy"></div>@endif
     </div>
 </section>
-
 @include('front.layouts.footer')
-
 <script src="{{ asset('front/js/script.js') }}"></script>
 <script src="{{ asset('front/js/all-properties.js') }}"></script>
-
-<script>
-// فلترة العقارات حسب التصنيف (نفس فكرة الهوم بيج لكن على مستوى الصفحة)
-document.addEventListener('DOMContentLoaded', function () {
-    const filterBtns  = document.querySelectorAll('.filter-btn');
-    const cards       = document.querySelectorAll('.property-card');
-    const resultCount = document.getElementById('resultCount');
-    const noResults   = document.getElementById('noResults');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const category = btn.getAttribute('data-category');
-
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            let visible = 0;
-
-            cards.forEach(card => {
-                const cardCat = card.getAttribute('data-category');
-                if (category === 'all' || cardCat === category) {
-                    card.style.display = 'block';
-                    visible++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            resultCount.textContent = visible;
-
-            if (visible === 0) {
-                noResults.style.display = 'block';
-            } else {
-                noResults.style.display = 'none';
-            }
-        });
-    });
-});
-</script>
-
 </body>
 </html>

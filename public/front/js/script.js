@@ -5,17 +5,37 @@ const menuToggle = document.getElementById('mobile-menu');
 const navList   = document.querySelector('.nav-list');
 
 if (menuToggle && navList) {
+  const setMenuOpen = (open) => {
+    navList.classList.toggle('active', open);
+    menuToggle.classList.toggle('open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? menuToggle.dataset.closeLabel : menuToggle.dataset.openLabel);
+  };
+
   menuToggle.addEventListener('click', () => {
-    navList.classList.toggle('active');
-    menuToggle.classList.toggle('open');
+    setMenuOpen(!navList.classList.contains('active'));
   });
 
   // إغلاق المينيو لما يضغط على لينك
   navList.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      navList.classList.remove('active');
-      menuToggle.classList.remove('open');
+      setMenuOpen(false);
     });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!navList.contains(event.target) && !menuToggle.contains(event.target)) setMenuOpen(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navList.classList.contains('active')) {
+      setMenuOpen(false);
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) setMenuOpen(false);
   });
 }
 
@@ -78,23 +98,6 @@ window.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.style.display = 'none';
     }
-  });
-});
-
-// =======================
-// FAQ Accordion
-// =======================
-const faqItems = document.querySelectorAll('.faq-item');
-
-faqItems.forEach(item => {
-  const question = item.querySelector('.faq-question');
-  question.addEventListener('click', () => {
-    // لو حابب تفتح واحد وتقفل الباقي:
-    faqItems.forEach(it => {
-      if (it !== item) it.classList.remove('active');
-    });
-
-    item.classList.toggle('active');
   });
 });
 

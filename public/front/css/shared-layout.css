@@ -1,0 +1,28 @@
+/* Shared navigation and footer across all public pages. */
+body #header.header { position: fixed; inset: 0 0 auto; z-index: 1000; background: #1e2a44; border: 0; box-shadow: 0 4px 18px rgba(10,34,53,.16); }
+body #header .navbar { height: 80px; }
+body #header .logo img { height: auto; max-height: 70px; width: auto; }
+body #header .menu-toggle .bar { background: #fff; }
+@media (min-width: 769px) {
+    body #header .navbar .nav-list a { color: #fff; font-size: .9rem; }
+    body #header .navbar .nav-list a:hover, body #header .navbar .nav-list a.active { color: #bce5ee; }
+    body #header .navbar .nav-list .btn-contact { background: transparent; color: #fff !important; padding: 0; font-weight: 500; }
+    body #header .navbar .nav-list .btn-contact:hover, body #header .navbar .nav-list .btn-contact.active { background: transparent; color: #bce5ee !important; }
+    body #header .navbar .nav-list .lang-switch a { background: transparent; border: 1px solid rgba(255,255,255,.55); border-radius: 3px; color: #fff; padding: 6px 14px; }
+    body #header .navbar .nav-list .lang-switch a:hover { background: rgba(255,255,255,.1); }
+}
+@media (max-width: 768px) {
+    body #header .navbar { height: 70px; }
+    body #header .logo img { max-height: 62px; }
+    body #header .navbar .nav-list { top: calc(100% + 10px); background: #fff; border: 1px solid #e3ebf0; }
+    body #header .navbar .nav-list li { margin: 0; }
+    body #header .navbar .nav-list li + li { margin-top: 4px; }
+    body #header .navbar .nav-list .mobile-nav-heading { margin: 0 0 12px; }
+}
+body .footer.footer { background: #1e2a44; color: rgba(255,255,255,.78); }
+body .footer.footer .footer-col h3 { color: #fff; }
+body .footer.footer .footer-logo span { color: #afc8df; }
+body .footer.footer .footer-col a { color: rgba(255,255,255,.78); }
+body .footer.footer .footer-col a:hover { color: #afc8df; }
+body .footer.footer .footer-bottom { border-color: rgba(255,255,255,.14); color: rgba(255,255,255,.78); }
+body .footer.footer .newsletter-form button { background: #5bc0be; color: #1e2a44; }

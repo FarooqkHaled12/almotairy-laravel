@@ -1,24 +1,34 @@
-@php $lang = session('locale','ar'); @endphp
-<!DOCTYPE html>
-<html lang="{{ $lang }}" dir="{{ $lang == 'ar' ? 'rtl' : 'ltr' }}">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ $lang == 'ar' ? 'خالد للعقارات - الرئيسية' : 'Khalid Real Estate - Home' }}</title>
-    <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
+@php
+    $lang = session('locale', config('app.locale', 'ar'));
+@endphp
 
-@include('front.layouts.header')
+@extends('front.layouts.app')
 
-@include('front.homepage.hero')
-@include('front.homepage.about')
-@include('front.homepage.properties')
-@include('front.homepage.services')
-@include('front.homepage.faq')
-@include('front.homepage.contact')
+@section('title', $lang === 'ar' ? 'المطيري للعقارات - الرئيسية' : 'Al-Motairy Real Estate - Home')
 
-@include('front.layouts.footer')
+@push('styles')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('front/css/home-hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-properties.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-developments.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-brand.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-about.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-services.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-explore.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-partner.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-faq.css') }}">
+@endpush
 
-</body>
-</html>
+@section('content')
+    @include('front.homepage.hero')
+    @include('front.homepage.about')
+    @include('front.homepage.properties')
+    @include('front.homepage.developments')
+    @include('front.homepage.services')
+    @include('front.homepage.explore')
+    @include('front.homepage.partner')
+    @include('front.homepage.faq')
+    @include('front.homepage.contact')
+@endsection

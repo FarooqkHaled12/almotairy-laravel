@@ -1,0 +1,26 @@
+/* Homepage introduction; the image and feature cards use the existing AboutSection data. */
+.home-about { background: #e6f0f7; color: #1e2a44; }
+.home-about-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(32px, 7vw, 90px); }
+.home-about-copy { min-width: 0; }
+.home-about .section-subtitle { margin-bottom: 15px; color: #1e2a44; font-size: .8rem; letter-spacing: .13em; }
+.home-about .section-title { display: block; margin: 0 0 18px; color: #1e2a44; font-size: clamp(1.85rem, 3vw, 2.75rem); line-height: 1.18; }
+.home-about-description { color: #68788b; line-height: 1.75; }
+.home-about-description p + p { margin-top: 12px; }
+.home-about-features { display: grid; gap: 14px; margin-top: 26px; }
+.home-about-features li { display: flex; align-items: center; gap: 16px; margin: 0; padding: 18px 20px; border-radius: 18px; background: #fff; box-shadow: 0 10px 26px rgba(30, 42, 68, .07); line-height: 1.5; }
+.home-about-feature-icon { display: grid; place-items: center; flex: 0 0 38px; height: 38px; border: 1.5px solid #1e2a44; border-radius: 12px; color: #1e2a44; font-size: 1.2rem; }
+.home-about-signature { margin-top: 22px; color: #68788b; font-weight: 600; }
+.home-about-visual { position: relative; padding: 30px 30px 30px 0; }
+[dir="rtl"] .home-about-visual { padding: 30px 0 30px 30px; }
+.home-about-visual::before { content: ''; position: absolute; inset: 0 0 0 18%; border-radius: 24px; background: #afc8df; opacity: .45; }
+[dir="rtl"] .home-about-visual::before { inset: 0 18% 0 0; }
+.home-about-image { position: relative; overflow: hidden; width: 100%; max-width: 500px; aspect-ratio: 4 / 5; border-radius: 24px; background: #afc8df; box-shadow: 0 18px 35px rgba(30, 42, 68, .12); }
+.home-about-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* The mobile layout is inferred from the supplied desktop image. */
+@media (max-width: 768px) {
+    .home-about { padding: 56px 0; }
+    .home-about-layout { grid-template-columns: 1fr; gap: 28px; }
+    .home-about-visual { padding: 20px 20px 20px 0; }
+    [dir="rtl"] .home-about-visual { padding: 20px 0 20px 20px; }
+    .home-about-image { max-width: none; aspect-ratio: 5 / 4; }
+}
