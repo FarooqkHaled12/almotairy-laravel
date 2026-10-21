@@ -20,9 +20,7 @@ Route::get('/', function () {
 })->name('front.home');
 
 // ✅ صفحة من نحن
-Route::get('/about-us', function () {
-    return view('front.about-us');
-})->name('front.about');
+Route::get('/about-us', [\App\Http\Controllers\Front\AboutController::class, 'index'])->name('front.about');
 
 // ✅ صفحة الخدمات
 Route::get('/services', function () {
@@ -30,9 +28,7 @@ Route::get('/services', function () {
 })->name('front.services');
 
 // ✅ صفحة تواصل معنا (لو حبيت صفحة مستقلة غير سكشن الهوم)
-Route::get('/contact', function () {
-    return view('front.contact');
-})->name('front.contact');
+Route::get('/contact', [\App\Http\Controllers\Front\ContactController::class, 'index'])->name('front.contact');
 
 // ✅ جميع العقارات
 Route::get('/all-properties', function () {

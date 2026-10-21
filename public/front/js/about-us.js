@@ -1,40 +1,20 @@
 // ====================
-// Counter Animation للأرقام
+// سلايدر صور قسم "قصتنا"
 // ====================
-const counters = document.querySelectorAll('.achievement-number');
-let animated = false;
+document.querySelectorAll('[data-ab-slider]').forEach(slider => {
+  const slides = slider.querySelectorAll('.ab-slider-track img');
+  if (slides.length < 2) {
+    slider.querySelector('.ab-slider-nav')?.remove();
+    return;
+  }
 
-const animateCounters = () => {
-  counters.forEach(counter => {
-    const target = +counter.getAttribute('data-target');
-    const increment = target / 100;
-    let current = 0;
+  let current = 0;
+  const show = index => {
+    slides[current].classList.remove('is-active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+  };
 
-    const updateCounter = () => {
-      if (current < target) {
-        current += increment;
-        counter.textContent = Math.ceil(current);
-        setTimeout(updateCounter, 20);
-      } else {
-        counter.textContent = target;
-      }
-    };
-
-    updateCounter();
-  });
-};
-
-// تشغيل الأنيميشن لما المستخدم يوصل للـ section
-const achievementsSection = document.querySelector('.achievements');
-
-if (achievementsSection) {
-  window.addEventListener('scroll', () => {
-    const sectionTop = achievementsSection.getBoundingClientRect().top;
-    const triggerPoint = window.innerHeight / 1.3;
-
-    if (sectionTop < triggerPoint && !animated) {
-      animateCounters();
-      animated = true;
-    }
-  });
-}
+  slider.querySelector('[data-ab-prev]').addEventListener('click', () => show(current - 1));
+  slider.querySelector('[data-ab-next]').addEventListener('click', () => show(current + 1));
+});
