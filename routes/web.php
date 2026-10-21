@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ContactInfoTwoController;
 use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\PropertyCategoryController;
 use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\InquiryController;
 
 // ✅ ربط مسارات الموقع العام (الفرونت)
 require __DIR__ . '/front.php';
@@ -41,6 +42,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+        Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');
+        Route::patch('/inquiries/{inquiry}/status', [InquiryController::class, 'updateStatus'])->name('inquiries.status');
 
         // كلمة المرور
         Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
@@ -118,6 +122,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
         Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
         Route::post('/properties/store', [PropertyController::class, 'store'])->name('properties.store');
+        Route::get('/properties/{property}/units', [PropertyController::class, 'units'])->name('properties.units');
+        Route::get('/properties/{property}/units/create', [PropertyController::class, 'createUnit'])->name('properties.units.create');
+        Route::post('/properties/{property}/units', [PropertyController::class, 'storeUnit'])->name('properties.units.store');
         Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('properties.edit');
         Route::post('/properties/{property}/update', [PropertyController::class, 'update'])->name('properties.update');
         Route::delete('/properties/{property}/delete', [PropertyController::class, 'destroy'])->name('properties.delete');

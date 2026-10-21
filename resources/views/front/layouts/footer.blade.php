@@ -109,3 +109,5 @@
         @endif
     </div>
 @endif
+
+@include('front.partials.lead-capture')

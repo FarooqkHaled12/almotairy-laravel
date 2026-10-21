@@ -26,6 +26,8 @@
             <div class="admin-home__stats">
                 <a class="admin-home__stat" href="{{ route('admin.properties.index') }}"><span>إجمالي العقارات</span><strong>{{ number_format($propertyCount) }}</strong><small>عرض العقارات <span aria-hidden="true">←</span></small></a>
                 <a class="admin-home__stat" href="{{ route('admin.categories.index') }}"><span>إجمالي التصنيفات</span><strong>{{ number_format($categories->count()) }}</strong><small>عرض التصنيفات <span aria-hidden="true">←</span></small></a>
+                <a class="admin-home__stat admin-home__stat--inquiries" href="{{ route('admin.inquiries.index', ['status' => 'new']) }}"><span>طلبات جديدة</span><strong>{{ number_format($newInquiryCount) }}</strong><small>ابدأ بمتابعتها <span aria-hidden="true">←</span></small></a>
+                <a class="admin-home__stat admin-home__stat--follow-up" href="{{ route('admin.inquiries.index', ['status' => 'follow_up']) }}"><span>متابعات مطلوبة</span><strong>{{ number_format($followUpInquiryCount) }}</strong><small>راجع العملاء <span aria-hidden="true">←</span></small></a>
                 <div class="admin-home__distribution">
                     <h3>العقارات حسب التصنيف</h3>
                     <div class="admin-home__distribution-list">
@@ -35,6 +37,82 @@
                             <p>لا توجد تصنيفات مسجلة حتى الآن.</p>
                         @endforelse
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-home__section admin-home__operations" aria-label="متابعة العمل">
+            <div class="admin-home__operations-panel">
+                <div class="admin-home__operations-heading">
+                    <div>
+                        <span class="admin-home__eyebrow admin-home__eyebrow--dark">متابعة العمل</span>
+                        <h2>آخر العقارات المضافة</h2>
+                    </div>
+                    <a href="{{ route('admin.properties.index') }}">كل العقارات <span aria-hidden="true">←</span></a>
+                </div>
+                <div class="admin-home__recent-list">
+                    @forelse($recentProperties as $property)
+                        <a class="admin-home__recent-row" href="{{ route('admin.properties.edit', $property->id) }}">
+                            <span class="admin-home__recent-thumb" aria-hidden="true">
+                                @if($property->image_1)
+                                    <img src="{{ asset('storage/' . $property->image_1) }}" alt="">
+                                @else
+                                    <span>⌂</span>
+                                @endif
+                            </span>
+                            <span class="admin-home__recent-copy">
+                                <strong>{{ $property->name_ar ?: $property->name_en }}</strong>
+                                <small>{{ $property->area_ar ?: $property->area_en ?: 'المنطقة غير محددة' }}</small>
+                            </span>
+                            <span class="admin-home__recent-date">{{ optional($property->created_at)->format('Y/m/d') }}</span>
+                            <span class="admin-home__recent-arrow" aria-hidden="true">←</span>
+                        </a>
+                    @empty
+                        <p class="admin-home__empty-state">لا توجد عقارات مضافة حتى الآن.</p>
+                    @endforelse
+                </div>
+            </div>
+
+            <div class="admin-home__operations-panel admin-home__checks">
+                <div class="admin-home__operations-heading">
+                    <div>
+                        <span class="admin-home__eyebrow admin-home__eyebrow--dark">جودة المحتوى</span>
+                        <h2>أشياء تحتاج مراجعة</h2>
+                    </div>
+                </div>
+                <a class="admin-home__check-row" href="{{ route('admin.properties.index') }}">
+                    <span class="admin-home__check-icon admin-home__check-icon--photo" aria-hidden="true">▧</span>
+                    <span><strong>عقارات بدون صورة رئيسية</strong><small>أضف صورة لتكون بطاقة العقار أوضح للزوار.</small></span>
+                    <b>{{ number_format($propertiesMissingPhotos) }}</b>
+                </a>
+                <a class="admin-home__check-row" href="{{ route('admin.properties.index') }}">
+                    <span class="admin-home__check-icon admin-home__check-icon--language" aria-hidden="true">EN</span>
+                    <span><strong>بيانات إنجليزية غير مكتملة</strong><small>راجع الاسم والمنطقة والوصف باللغة الإنجليزية.</small></span>
+                    <b>{{ number_format($propertiesMissingEnglish) }}</b>
+                </a>
+                <a class="admin-home__check-row" href="{{ route('admin.categories.index') }}">
+                    <span class="admin-home__check-icon admin-home__check-icon--category" aria-hidden="true">▦</span>
+                    <span><strong>تصنيفات بلا عقارات</strong><small>راجع التصنيفات التي لا تحتوي على عقارات.</small></span>
+                    <b>{{ number_format($emptyCategories->count()) }}</b>
+                </a>
+                <div class="admin-home__review-list">
+                    <h3>عقارات تحتاج مراجعة</h3>
+                    @forelse($propertiesNeedingReview as $property)
+                        <a class="admin-home__review-row" href="{{ route('admin.properties.edit', $property->id) }}">
+                            <span class="admin-home__review-name">{{ $property->name_ar ?: $property->name_en }}</span>
+                            <span class="admin-home__review-tags">
+                                @if(!$property->image_1)
+                                    <small>صورة ناقصة</small>
+                                @endif
+                                @if(!$property->name_en || !$property->area_en || !$property->description_en)
+                                    <small>بيانات إنجليزية</small>
+                                @endif
+                            </span>
+                            <span class="admin-home__recent-arrow" aria-hidden="true">←</span>
+                        </a>
+                    @empty
+                        <p class="admin-home__empty-state">كل العقارات مكتملة حسب الفحوصات الحالية.</p>
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -73,6 +151,7 @@
                     <a href="{{ route('admin.services.edit') }}"><span class="admin-home__link-icon" aria-hidden="true">✧</span><span><strong>الخدمات</strong><small>إدارة الخدمات المعروضة</small></span><span class="admin-home__link-arrow" aria-hidden="true">←</span></a>
                     <a href="{{ route('admin.about.edit') }}"><span class="admin-home__link-icon" aria-hidden="true">◉</span><span><strong>قسم من أنا</strong><small>تحديث معلومات التعريف</small></span><span class="admin-home__link-arrow" aria-hidden="true">←</span></a>
                     <a href="{{ route('admin.contact.edit') }}"><span class="admin-home__link-icon" aria-hidden="true">✉</span><span><strong>بيانات التواصل</strong><small>إدارة معلومات التواصل</small></span><span class="admin-home__link-arrow" aria-hidden="true">←</span></a>
+                    <a href="{{ route('admin.inquiries.index') }}"><span class="admin-home__link-icon" aria-hidden="true">◷</span><span><strong>طلبات العملاء</strong><small>متابعة الاستفسارات الواردة</small></span><span class="admin-home__link-arrow" aria-hidden="true">←</span></a>
                 </div>
             </section>
             <section class="admin-home__guide" aria-labelledby="dashboard-guide">

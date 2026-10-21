@@ -3,6 +3,9 @@ body #header.header { position: fixed; inset: 0 0 auto; z-index: 1000; backgroun
 body #header .navbar { height: 80px; }
 body #header .logo img { height: auto; max-height: 70px; width: auto; }
 body #header .menu-toggle .bar { background: #fff; }
+/* The property listing starts with a full-width photo hero, like the homepage. */
+body.all-properties-page #header.header { background: transparent; box-shadow: none; }
+body.all-properties-page #header.header.header-scrolled { background: rgba(20,42,61,.96); box-shadow: 0 4px 18px rgba(10,34,53,.16); }
 @media (min-width: 769px) {
     body #header .navbar .nav-list a { color: #fff; font-size: .9rem; }
     body #header .navbar .nav-list a:hover, body #header .navbar .nav-list a.active { color: #bce5ee; }
@@ -10,6 +13,7 @@ body #header .menu-toggle .bar { background: #fff; }
     body #header .navbar .nav-list .btn-contact:hover, body #header .navbar .nav-list .btn-contact.active { background: transparent; color: #bce5ee !important; }
     body #header .navbar .nav-list .lang-switch a { background: transparent; border: 1px solid rgba(255,255,255,.55); border-radius: 3px; color: #fff; padding: 6px 14px; }
     body #header .navbar .nav-list .lang-switch a:hover { background: rgba(255,255,255,.1); }
+    body.all-properties-page #header .navbar .nav-list a.active { color: #fff; }
 }
 @media (max-width: 768px) {
     body #header .navbar { height: 70px; }

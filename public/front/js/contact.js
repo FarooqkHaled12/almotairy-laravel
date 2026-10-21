@@ -23,3 +23,6 @@ if (inquirySelect) {
 
   inquirySelect.addEventListener('change', () => markInquiry(inquirySelect.value));
 }
+
+// بعد الإرسال نرجع لنفس الصفحة، فننزل لرسالة النجاح أو الخطأ داخل النموذج
+document.querySelector('.ct-alert')?.scrollIntoView({ block: 'center' });

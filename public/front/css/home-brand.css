@@ -32,8 +32,6 @@ button, input, select, textarea { font-family: inherit; }
 
 .featured-properties .section-title, .featured-view-all { color: #1e2a44; }
 .featured-properties .filter-btn.active, .featured-properties .filter-btn:hover { background: #1e2a44; border-color: #1e2a44; }
-.developments { background: #afc8df; color: #1e2a44; }
-.development-feature, .development-card { background: #1e2a44; }
 
 .services { background: #fff; }
 .service-box { border-color: #dbe5eb; border-radius: 8px; background: #fff; }
@@ -71,9 +69,6 @@ button, input, select, textarea { font-family: inherit; }
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 11-8 11s-8-6-8-11a8 8 0 1 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .featured-properties .location i.fa-location-dot::before, .developments .fa-location-dot::before { content: none; }
-.developments { position: relative; overflow: hidden; }
-.developments::before { content: ''; position: absolute; inset-inline-end: 0; top: 0; width: min(34%, 380px); height: 170px; background: rgba(30, 42, 68, .045); clip-path: polygon(0 100%, 18% 70%, 18% 30%, 34% 8%, 34% 100%, 46% 100%, 46% 23%, 65% 42%, 65% 100%, 76% 100%, 76% 55%, 91% 70%, 91% 100%); pointer-events: none; }
-.developments > .container { position: relative; }
 .faq { background: #f7f8fa; }
 .faq .faq-item { border: 1px solid #dbe6ec; box-shadow: none; }
 .faq .faq-question h3 { color: #1e2a44; }

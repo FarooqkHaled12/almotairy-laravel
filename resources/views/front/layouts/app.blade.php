@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
 
     @stack('styles')
+    <link rel="stylesheet" href="{{ asset('front/css/shared-layout.css') }}?v={{ file_exists(public_path('front/css/shared-layout.css')) ? filemtime(public_path('front/css/shared-layout.css')) : '1' }}">
 </head>
-<body>
+<body class="@yield('body-class')">
 
 @include('front.layouts.header')
 
@@ -27,7 +28,7 @@
 @include('front.layouts.footer')
 
 {{-- Global Scripts --}}
-<script src="{{ asset('front/js/script.js') }}"></script>
+<script src="{{ asset('front/js/script.js') }}?v={{ file_exists(public_path('front/js/script.js')) ? filemtime(public_path('front/js/script.js')) : '1' }}"></script>
 
 @stack('scripts')
 

@@ -1,6 +1,6 @@
 @php
     $lang = session('locale', 'ar');
-    $exploreProperty = \App\Models\Property::whereNotNull('image_1')->where('image_1', '!=', '')->latest()->first();
+    $exploreProperty = \App\Models\Property::whereNull('building_id')->whereNotNull('image_1')->where('image_1', '!=', '')->latest()->first();
 @endphp
 
 @if($exploreProperty)

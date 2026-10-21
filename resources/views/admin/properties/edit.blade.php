@@ -9,6 +9,17 @@
       class="bg-white p-8 rounded-lg shadow-md border border-gray-300 space-y-8">
 @csrf
 
+@if($property->is_building && !$building)
+<a href="{{ route('admin.properties.units', $property) }}" class="inline-flex rounded-lg bg-teal-600 px-4 py-3 font-bold text-white hover:bg-teal-700">إدارة شقق العمارة</a>
+@endif
+
+@if($building)
+<div class="rounded-lg border border-teal-200 bg-teal-50 p-4 text-teal-900">
+    تعديل شقة تابعة للعمارة: <a class="font-bold underline" href="{{ route('admin.properties.units', $building) }}">{{ $building->name_ar }}</a>
+</div>
+<input type="hidden" name="category_id" value="{{ $property->category_id }}">
+<input type="hidden" name="is_building" value="0">
+@else
 <!-- التصنيف -->
 <div>
     <label class="font-bold text-gray-700 mb-2 block">التصنيف</label>
@@ -20,11 +31,16 @@
         @endforeach
     </select>
 </div>
+<label class="flex items-center gap-3 rounded-lg border border-indigo-200 bg-indigo-50 p-4 font-semibold text-indigo-900">
+    <input type="checkbox" name="is_building" value="1" class="h-5 w-5 rounded border-gray-300 text-indigo-600" {{ $property->is_building ? 'checked' : '' }}>
+    هذا العقار عمارة وبها شقق يمكن إضافتها وإدارتها من لوحة التحكم
+</label>
+@endif
 
 <!-- نصوص -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div><label>اسم الشقة (عربي)</label><input name="name_ar" value="{{ $property->name_ar }}" required class="input"></div>
-    <div><label>اسم الشقة (English)</label><input name="name_en" value="{{ $property->name_en }}" required class="input"></div>
+    <div><label>{{ $building ? 'اسم الشقة (عربي)' : ($property->is_building ? 'اسم العمارة (عربي)' : 'اسم العقار (عربي)') }}</label><input name="name_ar" value="{{ $property->name_ar }}" required class="input"></div>
+    <div><label>{{ $building ? 'اسم الشقة (English)' : ($property->is_building ? 'Building name (English)' : 'Property name (English)') }}</label><input name="name_en" value="{{ $property->name_en }}" required class="input"></div>
     <div><label>المنطقة (عربي)</label><input name="area_ar" value="{{ $property->area_ar }}" class="input"></div>
     <div><label>المنطقة (English)</label><input name="area_en" value="{{ $property->area_en }}" class="input"></div>
 </div>
@@ -96,16 +112,8 @@
 </form>
 </div>
 
-<!-- TinyMCE -->
-<script src="https://cdn.tiny.cloud/1/ascnx1pwxl194b6bas6zme3qxot3i6c2s6ugly7shcctp2u0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+@include('admin.partials.tinymce')
 <script>
-tinymce.init({
-selector:'#desc_ar,#desc_en',
-plugins:'link image lists media table wordcount fullscreen',
-toolbar:'undo redo | blocks | bold italic underline | align | bullist numlist | link image media | table fullscreen',
-height:300,
-branding:false
-});
 function addFeature(c,n){const x=document.getElementById(c);const i=document.createElement('input');i.type='text';i.name=n;i.className='input mb-2';x.appendChild(i);}
 function previewImage(e,id){const r=new FileReader();r.onload=()=>{const i=document.getElementById(id);i.src=r.result;i.classList.remove('hidden');};r.readAsDataURL(e.target.files[0]);}
 </script>

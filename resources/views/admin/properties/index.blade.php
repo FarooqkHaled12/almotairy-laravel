@@ -26,8 +26,14 @@
                     <h3 class="text-gray-900 font-bold">{{ $property->name_ar }}</h3>
                     <p class="text-gray-600 text-sm">{{ $property->area_ar }}</p>
                     <p class="text-gray-500 text-xs mt-1">{{ $property->phone }}</p>
+                    @if($property->is_building)
+                        <span class="mt-2 inline-flex rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-700">عمارة · {{ $property->units_count }} شقة</span>
+                    @endif
                 </div>
                 <div class="flex gap-3">
+                    @if($property->is_building)
+                        <a href="{{ route('admin.properties.units', $property) }}" class="rounded-lg bg-teal-600 px-3 py-2 text-sm font-bold text-white hover:bg-teal-700">إدارة الشقق</a>
+                    @endif
                     <a href="{{ route('admin.properties.edit', $property->id) }}" class="text-blue-600 font-bold hover:underline">تعديل</a>
                     <form action="{{ route('admin.properties.delete', $property->id) }}" method="POST" onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
                         @csrf

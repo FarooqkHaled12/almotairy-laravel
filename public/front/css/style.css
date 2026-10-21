@@ -173,6 +173,42 @@ body {
 .site-social-float__link--whatsapp { background: #168c4b; }
 @media (max-width: 650px) { .site-social-float { inset-inline-end: 14px; bottom: 14px; gap: 8px; } .site-social-float__link { width: 44px; height: 44px; font-size: 1.2rem; } }
 
+/* Site-wide lead capture: one clear next step on every public page. */
+.lead-fab { position: fixed; inset-inline-start: 22px; bottom: 24px; z-index: 899; display: inline-flex; align-items: center; gap: 10px; min-height: 54px; padding: 0 20px; border: 0; border-radius: 999px; background: #1e2a44; color: #fff; box-shadow: 0 8px 26px rgba(19,43,63,.28); font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; transition: transform .2s, background .2s, box-shadow .2s; }
+.lead-fab:hover { background: #263d5a; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(19,43,63,.34); }
+.lead-fab i { color: #72d1cc; font-size: 1.15rem; }
+.lead-fab:focus-visible, .lead-dialog button:focus-visible, .lead-dialog input:focus-visible, .lead-dialog select:focus-visible, .lead-dialog textarea:focus-visible { outline: 3px solid #5bc0be; outline-offset: 3px; }
+.lead-dialog[hidden] { display: none !important; }
+.lead-dialog { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; }
+.lead-dialog__backdrop { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: rgba(10,20,34,.66); backdrop-filter: blur(4px); cursor: default; }
+.lead-dialog__panel { position: relative; z-index: 1; width: min(100%, 510px); max-height: min(92vh, 820px); overflow-y: auto; padding: 34px; border: 1px solid rgba(255,255,255,.65); border-radius: 22px; background: #fff; color: #1e2a44; box-shadow: 0 24px 80px rgba(0,0,0,.28); animation: lead-dialog-in .2s ease-out; }
+.lead-dialog__close { position: absolute; inset-block-start: 16px; inset-inline-end: 16px; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #dfe7ed; border-radius: 50%; background: #fff; color: #40536a; font-size: 1rem; cursor: pointer; }
+.lead-dialog__eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; color: #368f91; font-size: .78rem; font-weight: 700; }
+.lead-dialog__panel h2 { max-width: 400px; margin: 0 0 8px; color: #1e2a44; font-size: clamp(1.35rem, 4vw, 1.8rem); line-height: 1.35; }
+.lead-dialog__panel > p { margin: 0 0 20px; color: #68788b; font-size: .92rem; line-height: 1.75; }
+.lead-dialog__form { display: grid; gap: 13px; }
+.lead-dialog__form label { display: grid; gap: 6px; color: #35475b; font-size: .8rem; font-weight: 650; }
+.lead-dialog__form input, .lead-dialog__form select, .lead-dialog__form textarea { width: 100%; min-height: 45px; padding: 10px 12px; border: 1px solid #d8e1e8; border-radius: 10px; background: #fbfcfd; color: #1e2a44; font: inherit; font-size: .9rem; }
+.lead-dialog__form textarea { min-height: 76px; resize: vertical; }
+.lead-dialog__form input::placeholder, .lead-dialog__form textarea::placeholder { color: #94a0ad; }
+.lead-dialog__submit { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 49px; margin-top: 3px; border: 0; border-radius: 11px; background: #55bdbb; color: #102b42; font: inherit; font-weight: 750; cursor: pointer; transition: background .2s, transform .2s; }
+.lead-dialog__submit:hover { background: #6accca; transform: translateY(-1px); }
+.lead-dialog__form small { color: #7c8996; font-size: .72rem; text-align: center; }
+.lead-dialog__preferences { overflow: hidden; border: 1px solid #e1e9ef; border-radius: 11px; background: #f8fafb; }
+.lead-dialog__preferences summary { padding: 12px 14px; color: #315b68; font-size: .82rem; font-weight: 750; cursor: pointer; }
+.lead-dialog__preferences summary::marker { color: #4ba8a8; }
+.lead-dialog__preference-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 11px; padding: 0 12px 13px; }
+.lead-dialog__preference-grid label { min-width: 0; font-size: .74rem; }
+.lead-dialog__preference-grid input, .lead-dialog__preference-grid select { min-height: 41px; font-size: .82rem; }
+.lead-dialog__notice { margin: 0 0 14px; padding: 11px 13px; border-radius: 10px; font-size: .85rem; line-height: 1.6; }
+.lead-dialog__notice--success { background: #e8f7ef; color: #17643a; }
+.lead-dialog__notice--error { background: #fff0f0; color: #8b2424; }
+.lead-dialog-open { overflow: hidden; }
+@keyframes lead-dialog-in { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 650px) { .lead-fab { inset-inline: 14px; bottom: 14px; justify-content: center; min-height: 50px; box-shadow: 0 5px 22px rgba(19,43,63,.38); } .lead-dialog { align-items: end; padding: 10px; } .lead-dialog__panel { max-height: min(92vh, 760px); padding: 28px 20px 22px; border-radius: 20px; } }
+@media (max-width: 420px) { .lead-dialog__preference-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .lead-fab, .lead-dialog__submit { transition: none; } .lead-dialog__panel { animation: none; } }
+
 .nav-list li {
     margin-inline-start: 25px;
 }

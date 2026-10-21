@@ -86,18 +86,8 @@
     </form>
 </div>
 
-<!-- محرر TinyMCE -->
-<script src="https://cdn.tiny.cloud/1/ascnx1pwxl194b6bas6zme3qxot3i6c2s6ugly7shcctp2u0/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+@include('admin.partials.tinymce')
 <script>
-    tinymce.init({
-        selector: '#desc_ar, #desc_en',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-        toolbar: 'undo redo | blocks | bold italic underline | align | bullist numlist | link image media | code',
-        height: 300,
-        language: 'ar',
-        branding: false
-    });
-
     function previewImage(e) {
         const reader = new FileReader();
         reader.onload = () => {

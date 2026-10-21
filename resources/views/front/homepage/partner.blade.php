@@ -1,7 +1,7 @@
 @php
     $lang = session('locale', 'ar');
     $partnerServices = \App\Models\Service::orderBy('id')->take(3)->get();
-    $partnerProperties = \App\Models\Property::whereNotNull('image_1')->where('image_1', '!=', '')->latest()->take(2)->get();
+    $partnerProperties = \App\Models\Property::whereNull('building_id')->whereNotNull('image_1')->where('image_1', '!=', '')->latest()->take(2)->get();
 @endphp
 
 @if($partnerServices->isNotEmpty() || $partnerProperties->isNotEmpty())
