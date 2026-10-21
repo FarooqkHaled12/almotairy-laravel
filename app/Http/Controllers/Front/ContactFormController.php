@@ -14,8 +14,9 @@ class ContactFormController extends Controller
     {
         $data = $request->validate([
             'name'     => 'required|string|max:255',
+            'email'    => 'nullable|email|max:255',
             'phone'    => 'required|string|max:50',
-            'interest' => 'nullable|in:buy,rent,sell,invest',
+            'interest' => 'nullable|in:buy,rent,sell,invest,general',
             'message'  => 'nullable|string|max:5000',
             'property_id' => 'nullable|integer|exists:properties,id',
             'preferred_visit_at' => 'nullable|date|after:now',
@@ -47,6 +48,7 @@ class ContactFormController extends Controller
         try {
             Mail::raw(
                 "Name: {$data['name']}\n".
+                "Email: ".($data['email'] ?? '-')."\n".
                 "Phone: {$data['phone']}\n".
                 "Interest: ".($data['interest'] ?? '-')."\n".
                 "Property ID: ".($data['property_id'] ?? '-')."\n\n".
@@ -68,10 +70,6 @@ class ContactFormController extends Controller
             ]);
         }
 
-        $successMessage = session('locale') === 'en'
-            ? 'Your request has been received. Our team will contact you soon.'
-            : 'تم استلام طلبك، سيتم التواصل معك قريباً إن شاء الله.';
-
-        return back()->with('success', $successMessage);
+        return back()->with('success', __('Thank you! We received your request and will contact you soon.'));
     }
 }

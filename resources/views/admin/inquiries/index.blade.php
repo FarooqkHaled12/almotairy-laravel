@@ -16,6 +16,7 @@
             'rent' => 'إيجار',
             'sell' => 'عرض عقار للبيع',
             'invest' => 'استثمار عقاري',
+            'general' => 'استفسار عام',
         ];
     @endphp
 
@@ -84,6 +85,9 @@
                         </div>
                         <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-500">
                             <a dir="ltr" href="tel:{{ $inquiry->phone }}" class="font-semibold text-slate-700 hover:text-teal-700">{{ $inquiry->phone }}</a>
+                            @if($inquiry->email)
+                                <a dir="ltr" href="mailto:{{ $inquiry->email }}" class="font-semibold text-slate-700 hover:text-teal-700">{{ $inquiry->email }}</a>
+                            @endif
                             <span>{{ $inquiry->created_at?->format('Y/m/d - H:i') }}</span>
                             @if($inquiry->preferred_visit_at)
                                 <span class="rounded-lg bg-amber-50 px-2.5 py-1 font-bold text-amber-800">معاينة مفضلة: {{ $inquiry->preferred_visit_at->format('Y/m/d - H:i') }}</span>

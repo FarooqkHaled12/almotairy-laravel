@@ -13,7 +13,8 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = session('locale', config('app.locale'));
+        // نفس اللغة الافتراضية المستخدمة في ملفات الـ Blade (العربية) حتى تتطابق __() مع باقي الصفحة
+        $locale = session('locale', 'ar');
         app()->setLocale($locale);
 
         return $next($request);

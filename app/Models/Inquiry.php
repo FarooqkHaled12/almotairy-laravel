@@ -10,6 +10,7 @@ class Inquiry extends Model
     protected $fillable = [
         'name',
         'phone',
+        'email',
         'interest',
         'message',
         'locale',
