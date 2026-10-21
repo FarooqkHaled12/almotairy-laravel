@@ -68,13 +68,26 @@
 
             {{-- نموذج التواصل --}}
             <div class="contact-form-box">
+                @if(session('success'))
+                    <div role="status" style="margin-bottom: 18px; padding: 12px 16px; border-radius: 8px; background: #e8f7ef; color: #17643a;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if($errors->any())
+                    <div role="alert" style="margin-bottom: 18px; padding: 12px 16px; border-radius: 8px; background: #fff0f0; color: #8b2424;">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
                 <form method="POST" action="{{ route('front.contact.submit') }}">
                     @csrf
+                    @if(request()->query('property'))
+                        <input type="hidden" name="property_id" value="{{ request()->query('property') }}">
+                    @endif
                     <div class="form-group">
                         <label for="name">
                             {{ $lang == 'ar' ? 'الاسم بالكامل' : 'Full name' }}
                         </label>
-                        <input type="text" name="name" id="name" class="form-control"
+                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}"
                                placeholder="{{ $lang == 'ar' ? 'أدخل اسمك' : 'Enter your name' }}" required>
                     </div>
 
@@ -82,7 +95,7 @@
                         <label for="phone">
                             {{ $lang == 'ar' ? 'رقم الهاتف' : 'Phone number' }}
                         </label>
-                        <input type="tel" name="phone" id="phone" class="form-control"
+                        <input type="tel" name="phone" id="phone" class="form-control" value="{{ old('phone') }}"
                                placeholder="{{ $lang == 'ar' ? '01xxxxxxxxx' : '01xxxxxxxxx' }}" required>
                     </div>
 
@@ -92,15 +105,15 @@
                         </label>
                         <select name="interest" id="interest" class="form-control">
                             @if($lang == 'ar')
-                                <option value="buy">شراء عقار</option>
-                                <option value="rent">إيجار</option>
-                                <option value="sell">عرض عقار للبيع</option>
-                                <option value="invest">استثمار عقاري</option>
+                                <option value="buy" @selected(old('interest') === 'buy')>شراء عقار</option>
+                                <option value="rent" @selected(old('interest') === 'rent')>إيجار</option>
+                                <option value="sell" @selected(old('interest') === 'sell')>عرض عقار للبيع</option>
+                                <option value="invest" @selected(old('interest') === 'invest')>استثمار عقاري</option>
                             @else
-                                <option value="buy">Buying a property</option>
-                                <option value="rent">Rent</option>
-                                <option value="sell">List a property</option>
-                                <option value="invest">Real estate investment</option>
+                                <option value="buy" @selected(old('interest') === 'buy')>Buying a property</option>
+                                <option value="rent" @selected(old('interest') === 'rent')>Rent</option>
+                                <option value="sell" @selected(old('interest') === 'sell')>List a property</option>
+                                <option value="invest" @selected(old('interest') === 'invest')>Real estate investment</option>
                             @endif
                         </select>
                     </div>
@@ -110,7 +123,7 @@
                             {{ $lang == 'ar' ? 'الرسالة' : 'Message' }}
                         </label>
                         <textarea name="message" id="message" rows="4" class="form-control"
-                                  placeholder="{{ $lang == 'ar' ? 'تفاصيل طلبك...' : 'Describe your request...' }}"></textarea>
+                                  placeholder="{{ $lang == 'ar' ? 'تفاصيل طلبك...' : 'Describe your request...' }}">{{ old('message') }}</textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary full-width">

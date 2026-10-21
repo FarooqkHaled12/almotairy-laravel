@@ -1,14 +1,20 @@
 @extends('admin.layouts.app')
 
-@section('title', 'إضافة عقار جديد')
-@section('page-title', 'إضافة عقار جديد')
+@section('title', $building ? 'إضافة شقة للعمارة' : 'إضافة عقار جديد')
+@section('page-title', $building ? 'إضافة شقة للعمارة' : 'إضافة عقار جديد')
 
 @section('content')
 <div class="max-w-6xl mx-auto">
-    <form action="{{ route('admin.properties.store') }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ $building ? route('admin.properties.units.store', $building) : route('admin.properties.store') }}" method="POST" enctype="multipart/form-data"
           class="bg-white p-8 rounded-lg shadow-md border border-gray-300 space-y-8">
         @csrf
 
+        @if($building)
+            <div class="rounded-lg border border-teal-200 bg-teal-50 p-4 text-teal-900">
+                إضافة شقة داخل العمارة: <strong>{{ $building->name_ar }}</strong>
+            </div>
+            <input type="hidden" name="category_id" value="{{ $building->category_id }}">
+        @else
         <!-- التصنيف -->
         <div>
             <label class="block text-sm font-bold text-gray-700 mb-2">التصنيف</label>
@@ -19,15 +25,20 @@
                 @endforeach
             </select>
         </div>
+        <label class="flex items-center gap-3 rounded-lg border border-indigo-200 bg-indigo-50 p-4 font-semibold text-indigo-900">
+            <input type="checkbox" name="is_building" value="1" class="h-5 w-5 rounded border-gray-300 text-indigo-600">
+            هذا العقار عمارة وبها شقق يمكن إضافتها وإدارتها من لوحة التحكم
+        </label>
+        @endif
 
         <!-- الاسم والمنطقة -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label class="font-bold text-gray-700 mb-2 block">اسم الشقة (عربي)</label>
+                <label class="font-bold text-gray-700 mb-2 block">{{ $building ? 'اسم الشقة (عربي)' : 'اسم العقار أو العمارة (عربي)' }}</label>
                 <input name="name_ar" required class="w-full border border-gray-400 rounded-lg p-3 bg-gray-50">
             </div>
             <div>
-                <label class="font-bold text-gray-700 mb-2 block">اسم الشقة (English)</label>
+                <label class="font-bold text-gray-700 mb-2 block">{{ $building ? 'اسم الشقة (English)' : 'اسم العقار أو العمارة (English)' }}</label>
                 <input name="name_en" required class="w-full border border-gray-400 rounded-lg p-3 bg-gray-50">
             </div>
             <div>
@@ -137,17 +148,8 @@
     </form>
 </div>
 
-<!-- TinyMCE -->
-<script src="https://cdn.tiny.cloud/1/ascnx1pwxl194b6bas6zme3qxot3i6c2s6ugly7shcctp2u0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+@include('admin.partials.tinymce')
 <script>
-tinymce.init({
-    selector: '#desc_ar, #desc_en',
-    plugins: 'link image lists media table wordcount fullscreen',
-    toolbar: 'undo redo | blocks | bold italic underline | align | bullist numlist | link image media | table fullscreen',
-    height: 300,
-    branding: false
-});
-
 function addFeature(cont, name){
     const c=document.getElementById(cont);
     const i=document.createElement('input');

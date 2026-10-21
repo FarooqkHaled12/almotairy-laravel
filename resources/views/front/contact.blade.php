@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/shared-layout.css') }}?v={{ file_exists(public_path('front/css/shared-layout.css')) ? filemtime(public_path('front/css/shared-layout.css')) : '1' }}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -15,7 +16,7 @@
 @include('front.layouts.header')
 
 @include('front.contact.cards')
-{{-- هنا لاحقاً تضيف سكشن الفورم والخريطة بنفس الأسلوب --}}
+@include('front.homepage.contact')
 @include('front.contact.map')
 @include('front.contact.faq')
 

@@ -20,6 +20,7 @@
             ['الاستشارات', 'admin.consultations.edit', 'admin.consultations.*', 'M20 11a8 8 0 0 1-12 7l-4 1 1-4a8 8 0 1 1 15-4ZM8 11h8'],
         ]],
         ['title' => 'التواصل', 'links' => [
+            ['طلبات العملاء', 'admin.inquiries.index', 'admin.inquiries.*', 'M3 5h18v14H3zM3 7l9 6 9-6M7 3v4M17 3v4'],
             ['بيانات التواصل', 'admin.contact.edit', 'admin.contact.*', 'M4 5h16v14H4zM4 7l8 6 8-6'],
             ['الاتصال 2', 'admin.contact2.edit', 'admin.contact2.*', 'M5 4h14v16H5zM8 8h8M8 12h8M8 16h5'],
             ['الخريطة', 'admin.map.edit', 'admin.map.*', 'M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0ZM12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z'],

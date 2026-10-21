@@ -49,6 +49,7 @@ const updateHeaderStyle = () => {
   const hero = document.body.classList.contains('home-page') ? document.querySelector('.hero') : null;
   const pastHero = hero ? hero.getBoundingClientRect().bottom <= header.offsetHeight : window.scrollY > 50;
   header.classList.toggle('header-scrolled', pastHero);
+  document.body.classList.toggle('home-hero-visible', Boolean(hero && !pastHero));
 };
 window.addEventListener('scroll', updateHeaderStyle, { passive: true });
 window.addEventListener('resize', updateHeaderStyle);

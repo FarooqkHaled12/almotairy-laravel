@@ -39,6 +39,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/property-details.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/shared-layout.css') }}?v={{ file_exists(public_path('front/css/shared-layout.css')) ? filemtime(public_path('front/css/shared-layout.css')) : '1' }}">
 </head>
 <body>
 
@@ -136,10 +137,10 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('front.contact').'?property='.$property->id }}"
+                    <button type="button" data-lead-open data-lead-property-id="{{ $property->id }}" data-lead-location="{{ $location }}" data-lead-category-id="{{ $property->category_id }}"
                        class="btn btn-primary full-width" id="bookVisitBtn">
                         {{ $lang == 'ar' ? 'حجز معاينة للعقار' : 'Book a property visit' }}
-                    </a>
+                    </button>
 
                     <p class="note">
                         {{ $lang == 'ar'

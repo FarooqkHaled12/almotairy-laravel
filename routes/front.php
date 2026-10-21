@@ -36,18 +36,29 @@ Route::get('/contact', function () {
 
 // ✅ جميع العقارات
 Route::get('/all-properties', function () {
-    $properties = Property::latest()->get();
+    $properties = Property::whereNull('building_id')->latest()->get();
     return view('front.all-properties', compact('properties'));
 })->name('front.properties');
 
+// صفحة العمارة وشققها. هذا المسار لا يعتمد على قيمة is_building حتى تظل
+// كروت العمارات القديمة متصلة بصفحة الوحدات الخاصة بها.
+Route::get('/building/{id}', function ($id) {
+    $property = Property::with('units')->findOrFail($id);
+    return view('front.building-details', compact('property'));
+})->name('front.building.details');
+
 // ✅ تفاصيل العقار الواحد
 Route::get('/property-details/{id}', function ($id) {
-    $property = Property::findOrFail($id);
+    $property = Property::with('units')->findOrFail($id);
+    if ($property->is_building) {
+        return view('front.building-details', compact('property'));
+    }
     return view('front.property-details', compact('property'));
 })->name('front.property.details');
 
 // ✅ إرسال نموذج التواصل (الفرونت)
 Route::post('/contact-submit', [\App\Http\Controllers\Front\ContactFormController::class, 'submit'])
+    ->middleware('throttle:5,1')
     ->name('front.contact.submit');
 
 // ✅ محوّل اللغة (Session-Based)

@@ -11,6 +11,7 @@ class Property extends Model
 
 protected $fillable = [
     'category_id',
+    'is_building', 'building_id',
     'name_ar', 'name_en',
     'area_ar', 'area_en',
     'description_ar', 'description_en',
@@ -26,10 +27,21 @@ protected $fillable = [
     protected $casts = [
         'features_ar' => 'array',
         'features_en' => 'array',
+        'is_building' => 'boolean',
     ];
 
     public function category()
     {
         return $this->belongsTo(PropertyCategory::class, 'category_id');
+    }
+
+    public function building()
+    {
+        return $this->belongsTo(self::class, 'building_id');
+    }
+
+    public function units()
+    {
+        return $this->hasMany(self::class, 'building_id');
     }
 }

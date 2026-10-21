@@ -8,7 +8,11 @@
     $categories = PropertyCategory::all();
 
     // آخر العقارات
-    $properties = Property::with('category')->latest()->take(12)->get();
+    $buildings = Property::with('category')->withCount('units')
+        ->whereNull('building_id')->where('is_building', true)->latest()->take(6)->get();
+    $properties = $buildings->isNotEmpty()
+        ? $buildings
+        : Property::with('category')->withCount('units')->whereNull('building_id')->latest()->take(6)->get();
 @endphp
 
 <section class="properties featured-properties section-padding" id="properties">
@@ -18,15 +22,15 @@
         <div class="featured-heading">
         <div class="section-header">
             <h4 class="section-subtitle">
-                {{ $lang == 'ar' ? 'الوحدات المتاحة' : 'Available Units' }}
+                {{ $lang == 'ar' ? 'مبانينا' : 'Our Buildings' }}
             </h4>
             <h2 class="section-title">
-                {{ $lang == 'ar' ? 'أحدث العروض المميزة' : 'Latest Featured Offers' }}
+                {{ $lang == 'ar' ? 'استكشف مبانينا' : 'Explore Our Buildings' }}
             </h2>
 
         </div>
         <a href="{{ route('front.properties') }}" class="featured-view-all">
-            {{ $lang == 'ar' ? 'عرض كل العقارات' : 'View all properties' }}
+            {{ $lang == 'ar' ? 'عرض كل المباني' : 'View All Buildings' }}
             <span aria-hidden="true">{{ $lang == 'ar' ? '←' : '→' }}</span>
         </a>
         </div>
@@ -61,6 +65,9 @@
                     $features   = array_values(array_filter($lang == 'ar' ? ($property->features_ar ?? []) : ($property->features_en ?? []), fn ($feature) => is_string($feature) && trim($feature) !== ''));
                     $catClass   = $property->category ? 'cat-'.$property->category_id : 'cat-none';
                     $categoryName = $property->category ? ($lang == 'ar' ? $property->category->name_ar : $property->category->name_en) : null;
+                    $categoryLabel = $property->is_building && $property->units_count > 0
+                        ? ($lang == 'ar' ? 'وحدات متاحة' : 'Available Units')
+                        : $categoryName;
                     $image      = $property->image_1 ? asset('storage/'.$property->image_1) : null;
                     $whatsapp   = $property->whatsapp ? 'https://wa.me/'.$property->whatsapp : '#';
                 @endphp
@@ -68,13 +75,13 @@
                 <div class="property-card" data-category="{{ $catClass }}">
                     <div class="card-image">
                         @if($image)
-                            <a class="featured-image-link" href="{{ route('front.property.details', $property->id) }}" aria-label="{{ $lang == 'ar' ? 'عرض تفاصيل العقار' : 'View property' }}: {{ $title }}"><img src="{{ $image }}" alt="{{ $title }}" loading="lazy"></a>
+                            <a class="featured-image-link" href="{{ route('front.building.details', $property->id) }}" aria-label="{{ $lang == 'ar' ? 'عرض شقق العمارة' : 'View building apartments' }}: {{ $title }}"><img src="{{ $image }}" alt="{{ $title }}" loading="lazy"></a>
                         @endif
-                        @if($categoryName)<span class="featured-category">{{ $categoryName }}</span>@endif
+                        @if($categoryLabel)<span class="featured-category">{{ $categoryLabel }}</span>@endif
                     </div>
                     <div class="card-details">
                         <div class="featured-card-heading">
-                            <h3><a href="{{ route('front.property.details', $property->id) }}">{{ $title }}</a></h3>
+                            <h3><a href="{{ route('front.building.details', $property->id) }}">{{ $title }}</a></h3>
                         @if($property->payment_system_ar || $property->payment_system_en)
                             <div class="price">
                                 {{ $lang == 'ar' ? $property->payment_system_ar : $property->payment_system_en }}
@@ -87,7 +94,6 @@
                                 {{ $location }}
                             </div>
                         @endif
-
                         @if($area || !empty($features))
                         <ul class="facilities">
                             @if($area)
@@ -105,8 +111,8 @@
                         @endif
 
                         <div class="card-footer">
-                            <a href="{{ route('front.property.details', $property->id) }}" class="btn-card">
-                                {{ $lang == 'ar' ? 'تفاصيل أكثر' : 'More details' }} <span aria-hidden="true">{{ $lang == 'ar' ? '←' : '→' }}</span>
+                            <a href="{{ route('front.building.details', $property->id) }}" class="btn-card">
+                                {{ $lang == 'ar' ? 'عرض شقق العمارة' : 'View apartments' }} <span aria-hidden="true">{{ $lang == 'ar' ? '←' : '→' }}</span>
                             </a>
                             @if($property->whatsapp)
                                 <a href="{{ $whatsapp }}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp" aria-label="{{ $lang == 'ar' ? 'واتساب' : 'WhatsApp' }}: {{ $title }}">

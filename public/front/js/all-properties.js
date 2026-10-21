@@ -2,26 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('propertySearch');
   const locationInput = document.getElementById('locationSearch');
   const categorySelect = document.getElementById('categorySearch');
+  const areaMinInput = document.getElementById('areaMin');
+  const areaMaxInput = document.getElementById('areaMax');
   const buttons = document.querySelectorAll('.listing-filter');
   const cards = document.querySelectorAll('.listing-card');
   const count = document.getElementById('resultCount');
   const empty = document.getElementById('noResults');
   const reset = document.getElementById('resetFilters');
   const resetEmpty = document.getElementById('resetEmpty');
-  let location = '';
+  const matchBanner = document.getElementById('listingMatchBanner');
+  const matchMessage = document.getElementById('listingMatchMessage');
+  let location = new URLSearchParams(window.location.search).get('q')?.trim().toLocaleLowerCase() || '';
+  if (locationInput && location) locationInput.value = new URLSearchParams(window.location.search).get('q').trim();
 
   function applyFilters() {
     const category = categorySelect.value;
+    const minArea = areaMinInput.value === '' ? null : Number(areaMinInput.value);
+    const maxArea = areaMaxInput.value === '' ? null : Number(areaMaxInput.value);
+    const hasCriteria = category !== 'all' || Boolean(location) || minArea !== null || maxArea !== null;
     let visible = 0;
     cards.forEach(card => {
+      const area = card.dataset.area === '' ? null : Number(card.dataset.area);
       const matches = (category === 'all' || card.dataset.category === category) &&
-        (card.dataset.location || '').toLocaleLowerCase().includes(location);
+        (card.dataset.location || '').toLocaleLowerCase().includes(location) &&
+        (minArea === null || (area !== null && area >= minArea)) &&
+        (maxArea === null || (area !== null && area <= maxArea));
       card.hidden = !matches;
       if (matches) visible++;
     });
     count.textContent = visible;
     empty.hidden = visible !== 0;
-    reset.hidden = category === 'all' && !location;
+    reset.hidden = category === 'all' && !location && minArea === null && maxArea === null;
+    matchBanner.hidden = !hasCriteria;
+    if (hasCriteria) {
+      matchMessage.textContent = visible
+        ? matchBanner.dataset.matchText.replace(':count', visible)
+        : matchBanner.dataset.noMatchText;
+    }
     buttons.forEach(button => {
       const active = button.dataset.category === category;
       button.classList.toggle('active', active);
@@ -35,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFilters();
   });
   categorySelect.addEventListener('change', applyFilters);
+  areaMinInput.addEventListener('input', applyFilters);
+  areaMaxInput.addEventListener('input', applyFilters);
   locationInput.addEventListener('input', () => {
     location = locationInput.value.trim().toLocaleLowerCase();
     applyFilters();
@@ -43,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
     locationInput.value = '';
     location = '';
     categorySelect.value = 'all';
+    areaMinInput.value = '';
+    areaMaxInput.value = '';
     applyFilters();
   }
   reset.addEventListener('click', clearFilters);
@@ -51,6 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
     categorySelect.value = button.dataset.category;
     applyFilters();
   }));
+
+  applyFilters();
 
   const grid = document.getElementById('propertyGrid');
   const sort = document.getElementById('propertySort');

@@ -10,6 +10,7 @@
 
     {{-- نفس ملف تنسيق صفحة about-us في النسخة القديمة --}}
     <link rel="stylesheet" href="{{ asset('front/css/about-us.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/shared-layout.css') }}?v={{ file_exists(public_path('front/css/shared-layout.css')) ? filemtime(public_path('front/css/shared-layout.css')) : '1' }}">
 
     {{-- أي مكتبة أيقونات كنت مستخدمها --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">

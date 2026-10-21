@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
 
     @stack('styles')
+    <link rel="stylesheet" href="{{ asset('front/css/shared-layout.css') }}?v={{ file_exists(public_path('front/css/shared-layout.css')) ? filemtime(public_path('front/css/shared-layout.css')) : '1' }}">
 </head>
 <body class="@yield('body-class')">
 
