@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="{{ asset('front/css/home-hero.css') }}?v={{ file_exists(public_path('front/css/home-hero.css')) ? filemtime(public_path('front/css/home-hero.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-properties.css') }}?v={{ file_exists(public_path('front/css/home-properties.css')) ? filemtime(public_path('front/css/home-properties.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-apartments.css') }}?v={{ file_exists(public_path('front/css/home-apartments.css')) ? filemtime(public_path('front/css/home-apartments.css')) : '1' }}">
-    <link rel="stylesheet" href="{{ asset('front/css/home-developments.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/home-brand.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-developments.css') }}?v={{ file_exists(public_path('front/css/home-developments.css')) ? filemtime(public_path('front/css/home-developments.css')) : '1' }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-brand.css') }}?v={{ file_exists(public_path('front/css/home-brand.css')) ? filemtime(public_path('front/css/home-brand.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-about.css') }}?v={{ file_exists(public_path('front/css/home-about.css')) ? filemtime(public_path('front/css/home-about.css')) : '1' }}">
-    <link rel="stylesheet" href="{{ asset('front/css/home-services.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/home-explore.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/home-partner.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/home-faq.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-services.css') }}?v={{ file_exists(public_path('front/css/home-services.css')) ? filemtime(public_path('front/css/home-services.css')) : '1' }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-explore.css') }}?v={{ file_exists(public_path('front/css/home-explore.css')) ? filemtime(public_path('front/css/home-explore.css')) : '1' }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-partner.css') }}?v={{ file_exists(public_path('front/css/home-partner.css')) ? filemtime(public_path('front/css/home-partner.css')) : '1' }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-faq.css') }}?v={{ file_exists(public_path('front/css/home-faq.css')) ? filemtime(public_path('front/css/home-faq.css')) : '1' }}">
 @endpush
 
 @section('body-class', 'home-page')
