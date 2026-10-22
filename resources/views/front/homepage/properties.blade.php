@@ -8,11 +8,12 @@
     $categories = PropertyCategory::all();
 
     // آخر العقارات
-    $buildings = Property::with('category')->withCount('units')
-        ->whereNull('building_id')->where('is_building', true)->latest()->take(6)->get();
-    $properties = $buildings->isNotEmpty()
-        ? $buildings
-        : Property::with('category')->withCount('units')->whereNull('building_id')->latest()->take(6)->get();
+    $properties = Property::with('category')
+        ->withCount('units')
+        ->whereNull('building_id')
+        ->latest()
+        ->take(6)
+        ->get();
 @endphp
 
 <section class="properties featured-properties section-padding" id="properties">
