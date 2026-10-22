@@ -3,7 +3,8 @@
     $leadPropertyId = old('property_id') ?: (isset($property) ? $property->id : request()->query('property'));
     $leadCategories = \App\Models\PropertyCategory::orderBy('id')->get();
     $leadHasPreferences = old('preferred_location') || old('preferred_category_id') || old('budget_min') || old('budget_max') || old('area_min') || old('area_max');
-    $leadHasFeedback = session()->has('success') || $errors->any();
+    // صفحة التواصل تعرض نتيجة الإرسال داخل نموذجها، فلا نفتح النافذة المنبثقة بنفس الرسالة مرتين
+    $leadHasFeedback = !request()->routeIs('front.contact') && (session()->has('success') || $errors->any());
 @endphp
 
 <button class="lead-fab" type="button" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">

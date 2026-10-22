@@ -1,0 +1,43 @@
+/* Shared base for the editorial inner pages (About, Contact). Header and footer come from shared-layout.css. */
+html[lang="ar"] body { font-family: 'Tajawal', Tahoma, sans-serif; }
+html[lang="en"] body { font-family: 'Montserrat', 'Segoe UI', sans-serif; }
+
+.ab-page {
+    --ab-navy: #0f2a3d;
+    --ab-navy-soft: #163449;
+    --ab-gold: #d6b67a;
+    --ab-gold-dark: #b8955a;
+    --ab-teal: #5bc0be;
+    --ab-ink: #1e2a44;
+    --ab-muted: #68788b;
+    --ab-line: #e3e8ec;
+    --ab-cream: #f8f7f3;
+    --ab-serif: 'Playfair Display', Georgia, serif;
+    color: var(--ab-ink);
+    padding-top: 80px;
+}
+html[lang="ar"] .ab-page { --ab-serif: 'Tajawal', Tahoma, sans-serif; }
+
+.ab-page img { display: block; max-width: 100%; }
+[dir="rtl"] .ab-arrow { transform: scaleX(-1); }
+
+/* Shared pieces */
+.ab-section { padding: clamp(56px, 7vw, 90px) 0; }
+.ab-eyebrow { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--ab-ink); font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.ab-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--ab-teal); }
+.ab-eyebrow--gold::before { background: var(--ab-gold); }
+html[lang="ar"] .ab-eyebrow { font-size: .9rem; letter-spacing: 0; }
+.ab-title { margin: 0 0 22px; color: var(--ab-ink); font-size: clamp(1.9rem, 3.4vw, 2.9rem); font-weight: 400; line-height: 1.2; max-width: 14ch; }
+html[lang="ar"] .ab-title { font-weight: 500; line-height: 1.4; max-width: 18ch; }
+.ab-title--serif { font-family: var(--ab-serif); }
+.ab-title--light { color: #fff; }
+.ab-text { max-width: 560px; margin-bottom: 28px; color: var(--ab-muted); font-size: 1rem; line-height: 1.8; }
+
+.ab-btn { display: inline-flex; align-items: center; gap: 12px; padding: 13px 24px; border: 1px solid transparent; border-radius: 2px; font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; transition: background .25s ease, color .25s ease, border-color .25s ease; }
+html[lang="ar"] .ab-btn { font-size: .92rem; letter-spacing: 0; }
+.ab-btn--gold { background: var(--ab-gold); color: var(--ab-navy); }
+.ab-btn--gold:hover { background: #e3c890; }
+.ab-btn--outline { border-color: var(--ab-teal); color: var(--ab-ink); }
+.ab-btn--outline:hover { background: var(--ab-teal); color: #fff; }
+.ab-btn:focus-visible, .ab-link:focus-visible, .ab-slider-btn:focus-visible { outline: 2px solid var(--ab-teal); outline-offset: 3px; }
+@media (max-width: 768px) { .ab-page { padding-top: 70px; } }
