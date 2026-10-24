@@ -51,8 +51,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('front/css/page-base.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/about-us.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/page-base.css') }}?v={{ file_exists(public_path('front/css/page-base.css')) ? filemtime(public_path('front/css/page-base.css')) : '1' }}">
+    <link rel="stylesheet" href="{{ asset('front/css/about-us.css') }}?v={{ file_exists(public_path('front/css/about-us.css')) ? filemtime(public_path('front/css/about-us.css')) : '1' }}">
 @endpush
 
 @section('content')
@@ -212,5 +212,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('front/js/about-us.js') }}"></script>
+    <script src="{{ asset('front/js/about-us.js') }}?v={{ file_exists(public_path('front/js/about-us.js')) ? filemtime(public_path('front/js/about-us.js')) : '1' }}"></script>
 @endpush
