@@ -48,8 +48,8 @@
             @endif
 
             <div class="building-highlights" aria-label="{{ $isArabic ? 'مميزات العمارة' : 'Building highlights' }}">
-                <div class="building-highlight"><i class="fa-regular fa-building" aria-hidden="true"></i><span><strong>{{ $unitsCount }}</strong><small>{{ $isArabic ? 'إجمالي الوحدات' : 'Total Units' }}</small></span></div>
-                <div class="building-highlight"><i class="fa-regular fa-house" aria-hidden="true"></i><span><strong>{{ $unitsCount }}</strong><small>{{ $isArabic ? 'وحدات متاحة' : 'Available Units' }}</small></span></div>
+                <div class="building-highlight"><i class="fa-solid fa-building" aria-hidden="true"></i><span><strong>{{ $unitsCount }}</strong><small>{{ $isArabic ? 'إجمالي الوحدات' : 'Total Units' }}</small></span></div>
+                <div class="building-highlight"><i class="fa-solid fa-house" aria-hidden="true"></i><span><strong>{{ $unitsCount }}</strong><small>{{ $isArabic ? 'وحدات متاحة' : 'Available Units' }}</small></span></div>
                 <div class="building-highlight"><i class="fa-solid fa-sliders" aria-hidden="true"></i><span><strong>{{ $isArabic ? 'جاهز' : 'Ready' }}</strong><small>{{ $isArabic ? 'للسكن' : 'To Move' }}</small></span></div>
                 <div class="building-highlight"><i class="fa-solid fa-square-parking" aria-hidden="true"></i><span><strong>{{ $isArabic ? 'موقف' : 'Parking' }}</strong><small>{{ $isArabic ? 'متاح' : 'Available' }}</small></span></div>
             </div>
@@ -81,9 +81,9 @@
 
 <nav class="building-section-nav" aria-label="{{ $isArabic ? 'أقسام صفحة العمارة' : 'Building page sections' }}">
     <div class="building-shell">
-        <a href="#building-overview" class="is-active"><i class="fa-regular fa-house" aria-hidden="true"></i>{{ $isArabic ? 'نظرة عامة' : 'Overview' }}</a>
-        <a href="#building-units"><i class="fa-regular fa-building" aria-hidden="true"></i>{{ $isArabic ? 'الشقق المتاحة' : 'Available Apartments' }}</a>
-        <a href="#building-gallery"><i class="fa-regular fa-images" aria-hidden="true"></i>{{ $isArabic ? 'الصور' : 'Gallery' }}</a>
+        <a href="#building-overview" class="is-active"><i class="fa-solid fa-house" aria-hidden="true"></i>{{ $isArabic ? 'نظرة عامة' : 'Overview' }}</a>
+        <a href="#building-units"><i class="fa-solid fa-building" aria-hidden="true"></i>{{ $isArabic ? 'الشقق المتاحة' : 'Available Apartments' }}</a>
+        <a href="#building-gallery"><i class="fa-solid fa-images" aria-hidden="true"></i>{{ $isArabic ? 'الصور' : 'Gallery' }}</a>
         <a href="#building-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>{{ $isArabic ? 'الموقع' : 'Location' }}</a>
     </div>
 </nav>
@@ -103,7 +103,7 @@
         </div>
         <img class="building-overview__image" src="{{ $imageUrl($galleryImages[1] ?? $galleryImages[0] ?? null) }}" alt="{{ $title }}" loading="lazy">
         <aside class="building-feature-card">
-            <h3><i class="fa-regular fa-building" aria-hidden="true"></i>{{ $isArabic ? 'مميزات العمارة' : 'Building Features' }}</h3>
+            <h3><i class="fa-solid fa-building" aria-hidden="true"></i>{{ $isArabic ? 'مميزات العمارة' : 'Building Features' }}</h3>
             <ul>@foreach($overviewFeatures as $feature)<li><i class="fa-solid fa-check" aria-hidden="true"></i>{{ $feature }}</li>@endforeach</ul>
         </aside>
     </div>
@@ -136,7 +136,7 @@
                             <h3><a href="{{ route('front.property.details', $unit) }}">{{ $unitTitle }}</a></h3>
                             @if($unitLocation)<p class="building-unit-card__location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ $unitLocation }}</p>@endif
                             <div class="building-unit-card__details">
-                                @if($unitArea)<span><i class="fa-regular fa-square" aria-hidden="true"></i>{{ $unitArea }}</span>@endif
+                                @if($unitArea)<span><i class="fa-solid fa-expand" aria-hidden="true"></i>{{ $unitArea }}</span>@endif
                                 @foreach($unitFeatures as $feature)<span><i class="fa-solid fa-check" aria-hidden="true"></i>{{ $feature }}</span>@endforeach
                             </div>
                             @if($unitPayment)<p class="building-unit-card__payment">{{ $unitPayment }}</p>@endif
@@ -149,7 +149,7 @@
                 @endforeach
             </div>
         @else
-            <div class="building-units-empty"><i class="fa-regular fa-building" aria-hidden="true"></i><h3>{{ $isArabic ? 'الشقق ستتوفر قريباً' : 'Apartments are coming soon' }}</h3><p>{{ $isArabic ? 'تواصل معنا لمعرفة الوحدات المتاحة في هذه العمارة.' : 'Contact us to learn about upcoming apartments in this building.' }}</p><button type="button" data-lead-open data-lead-property-id="{{ $property->id }}" data-lead-location="{{ $location }}" data-lead-category-id="{{ $property->category_id }}">{{ $isArabic ? 'تواصل معنا' : 'Contact us' }}</button></div>
+            <div class="building-units-empty"><i class="fa-solid fa-building" aria-hidden="true"></i><h3>{{ $isArabic ? 'الشقق ستتوفر قريباً' : 'Apartments are coming soon' }}</h3><p>{{ $isArabic ? 'تواصل معنا لمعرفة الوحدات المتاحة في هذه العمارة.' : 'Contact us to learn about upcoming apartments in this building.' }}</p><button type="button" data-lead-open data-lead-property-id="{{ $property->id }}" data-lead-location="{{ $location }}" data-lead-category-id="{{ $property->category_id }}">{{ $isArabic ? 'تواصل معنا' : 'Contact us' }}</button></div>
         @endif
     </div>
 </section>

@@ -3,7 +3,7 @@ body.building-details-page { --building-ink: #102b3a; --building-navy: #062d3d; 
 body.building-details-page #header.header { position: absolute; z-index: 20; background: transparent; box-shadow: none; }
 body.building-details-page #header .navbar { width: min(100% - 72px, 1500px); height: 100px; margin-inline: auto; padding: 0; direction: ltr; }
 body.building-details-page #header .logo { flex: 0 0 78px; width: 78px; }
-body.building-details-page #header .logo img { display: block; width: 70px; height: 78px; max-height: none; object-fit: contain; }
+body.building-details-page #header .logo img { display: block; width: 70px; height: 78px; max-height: none; object-fit: contain; filter: brightness(0) invert(1); }
 body.building-details-page #header .nav-list { display: flex; flex: 1; align-items: center; margin: 0; direction: ltr; }
 body.building-details-page #header .nav-list li { margin: 0; }
 body.building-details-page #header .nav-list > li:nth-child(2) { margin-left: 92px; }
