@@ -7,7 +7,7 @@
 <header class="header header--unified" id="header">
     <nav class="navbar container" aria-label="{{ $lang === 'ar' ? 'القائمة الرئيسية' : 'Main navigation' }}">
         <a href="{{ route('front.home') }}" class="logo" aria-label="{{ $lang === 'ar' ? 'المطيري للعقارات - الرئيسية' : 'Almotairy Real Estate - Home' }}">
-            <img src="{{ asset('front/img/logo1.png') }}" alt="{{ $lang === 'ar' ? 'شعار المطيري للعقارات' : 'Al-Motairy Real Estate Logo' }}">
+            <img src="{{ asset('front/img/home-logo.svg') }}" alt="{{ $lang === 'ar' ? 'شعار المطيري للعقارات' : 'Al-Motairy Real Estate Logo' }}">
         </a>
 
         <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="nav-list" aria-expanded="false" aria-label="{{ $lang === 'ar' ? 'فتح القائمة' : 'Open menu' }}" data-open-label="{{ $lang === 'ar' ? 'فتح القائمة' : 'Open menu' }}" data-close-label="{{ $lang === 'ar' ? 'إغلاق القائمة' : 'Close menu' }}">
@@ -21,7 +21,7 @@
             </li>
             @if ($lang === 'ar')
                 <li><a href="{{ route('front.home') }}" class="{{ request()->routeIs('front.home') ? 'active' : '' }}">الرئيسية</a></li>
-                <li><a href="{{ route('front.properties') }}" class="{{ request()->routeIs('front.properties', 'front.property.details', 'front.building.details') ? 'active' : '' }}>المباني</a></li>
+                <li><a href="{{ route('front.properties') }}" class="{{ request()->routeIs('front.properties', 'front.property.details', 'front.building.details') ? 'active' : '' }}">المباني</a></li>
                 <li><a href="{{ route('front.about') }}" class="{{ request()->routeIs('front.about') ? 'active' : '' }}">من نحن</a></li>
                 <li><a href="{{ route('front.contact') }}" class="{{ request()->routeIs('front.contact') ? 'active' : '' }}">تواصل معنا</a></li>
             @else
