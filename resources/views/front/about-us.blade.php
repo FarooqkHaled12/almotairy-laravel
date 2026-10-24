@@ -46,6 +46,7 @@
 @endphp
 
 @section('title', __('About Us') . ' - ' . __('Al-Motairy Real Estate'))
+@section('body-class', 'about-page')
 
 @push('styles')
     <link rel="preconnect" href="https://fonts.googleapis.com">

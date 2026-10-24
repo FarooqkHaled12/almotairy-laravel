@@ -1,10 +1,11 @@
 @php
     $lang = session('locale', 'ar');
+    $heroHeader = request()->routeIs('front.home', 'front.about', 'front.properties', 'front.building.details');
     $headerContact = \App\Models\ContactInfo::query()->first();
     $headerWhatsapp = preg_replace('/[^0-9]/', '', $headerContact?->whatsapp ?? '');
 @endphp
 
-<header class="header header--unified" id="header">
+<header class="header header--unified{{ $heroHeader ? ' header--over-hero' : '' }}" id="header">
     <nav class="navbar container" aria-label="{{ $lang === 'ar' ? 'القائمة الرئيسية' : 'Main navigation' }}">
         <a href="{{ route('front.home') }}" class="logo" aria-label="{{ $lang === 'ar' ? 'المطيري للعقارات - الرئيسية' : 'Almotairy Real Estate - Home' }}">
             <img src="{{ asset('front/img/home-logo.svg') }}" alt="{{ $lang === 'ar' ? 'شعار المطيري للعقارات' : 'Al-Motairy Real Estate Logo' }}">
