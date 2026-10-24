@@ -49,6 +49,19 @@ class BuildingUnitsTest extends TestCase
             ->assertOk()
             ->assertSee('شقة الدور الثاني');
 
+        $this->get(route('front.property.details', $building))
+            ->assertRedirect(route('front.building.details', $building));
+
+        $legacyBuilding = Property::create([
+            'category_id' => $category->id,
+            'is_building' => false,
+            'name_ar' => 'عمارة قديمة',
+            'name_en' => 'Legacy Building',
+        ]);
+
+        $this->get(route('front.property.details', $legacyBuilding))
+            ->assertRedirect(route('front.building.details', $legacyBuilding));
+
         $this->get(route('front.properties'))
             ->assertOk()
             ->assertSee('عمارة النخيل')

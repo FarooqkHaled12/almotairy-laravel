@@ -46,8 +46,19 @@ Route::get('/building/{id}', function ($id) {
 // ✅ تفاصيل العقار الواحد
 Route::get('/property-details/{id}', function ($id) {
     $property = Property::with('units')->findOrFail($id);
-    if ($property->is_building) {
-        return view('front.building-details', compact('property'));
+    // Some earlier building entries predate the is_building field. Keep those
+    // listings on the building page while standalone apartments retain their
+    // own detail page.
+    $legacyBuildingName = mb_strtolower($property->name_ar.' '.$property->name_en);
+    $isLegacyBuilding = str_contains($legacyBuildingName, 'عمارة')
+        || str_contains($legacyBuildingName, 'ابراج')
+        || str_contains($legacyBuildingName, 'أبراج')
+        || str_contains($legacyBuildingName, 'برج')
+        || str_contains($legacyBuildingName, 'building')
+        || str_contains($legacyBuildingName, 'residence');
+
+    if ($property->is_building || $property->units->isNotEmpty() || $isLegacyBuilding) {
+        return redirect()->route('front.building.details', $property->id);
     }
     return view('front.property-details', compact('property'));
 })->name('front.property.details');
