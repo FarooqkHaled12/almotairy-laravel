@@ -42,7 +42,7 @@ body #header.header--unified .nav-list > li:nth-child(4),
 body #header.header--unified .nav-list > li:nth-child(5) { margin-left: 38px; }
 
 /* Navigation item: Flow Vertical, Height Hug (14px), Gap 16px */
-body #header.header--unified .nav-list > li > a {
+body #header.header--unified .nav-list > li:not(.mobile-nav-heading):not(.home-nav-search):not(.home-nav-whatsapp):not(.lang-switch) > a {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -54,9 +54,9 @@ body #header.header--unified .nav-list > li > a {
     color: #102b3a;
     text-decoration: none;
 }
-body #header.header--unified .nav-list > li > a:hover,
-body #header.header--unified .nav-list > li > a.active { color: #a76d1b; }
-body #header.header--unified .nav-list > li > a.active::after {
+body #header.header--unified .nav-list > li:not(.mobile-nav-heading):not(.home-nav-search):not(.home-nav-whatsapp):not(.lang-switch) > a:hover,
+body #header.header--unified .nav-list > li:not(.mobile-nav-heading):not(.home-nav-search):not(.home-nav-whatsapp):not(.lang-switch) > a.active { color: #a76d1b; }
+body #header.header--unified .nav-list > li:not(.mobile-nav-heading):not(.home-nav-search):not(.home-nav-whatsapp):not(.lang-switch) > a.active::after {
     position: absolute;
     top: calc(100% + 16px);
     right: 0;
