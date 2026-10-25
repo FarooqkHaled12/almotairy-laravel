@@ -14,6 +14,9 @@
         <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="nav-list" aria-expanded="false" aria-label="{{ $lang === 'ar' ? 'فتح القائمة' : 'Open menu' }}" data-open-label="{{ $lang === 'ar' ? 'فتح القائمة' : 'Open menu' }}" data-close-label="{{ $lang === 'ar' ? 'إغلاق القائمة' : 'Close menu' }}">
             <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
+        @if ($headerWhatsapp)
+            <a class="mobile-whatsapp" href="https://wa.me/{{ $headerWhatsapp }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $lang === 'ar' ? 'تواصل عبر واتساب' : 'Contact on WhatsApp' }}"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        @endif
 
         <ul class="nav-list" id="nav-list">
             <li class="mobile-nav-heading" aria-hidden="true">

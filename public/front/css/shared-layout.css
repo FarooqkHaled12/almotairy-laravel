@@ -249,3 +249,38 @@ body .footer.footer .newsletter-form button { background: #5bc0be; color: #1e2a4
     body #header.header--unified .navbar { width: calc(100% - 24px); }
     body #header.header--unified .nav-list { width: calc(100vw - 24px); max-height: calc(100dvh - 84px); }
 }
+
+/* Final mobile navigation contract. This sits last so legacy desktop/mobile
+   rules cannot hide the menu actions or the advisor contact button. */
+.mobile-whatsapp { display: none; }
+@media (max-width: 768px) {
+    body #header.header.header--unified { position: fixed; inset: 0 0 auto; height: 68px; background: rgba(255,255,255,.97); box-shadow: 0 5px 22px rgba(9,38,74,.12); backdrop-filter: blur(18px); }
+    body #header.header--unified .navbar { display: flex; width: calc(100% - 24px); height: 68px; min-height: 68px; align-items: center; justify-content: space-between; padding: 0; direction: rtl; }
+    body #header.header--unified .logo { display: flex; flex: 0 0 54px; width: 54px; height: 58px; align-items: center; order: 1; }
+    body #header.header--unified .logo img { width: 54px; height: 58px; max-height: 58px; filter: none; }
+    body #header.header--unified .menu-toggle { display: inline-flex !important; position: relative; z-index: 1002; flex: 0 0 42px; width: 42px; height: 42px; min-width: 42px; min-height: 42px; align-items: center; justify-content: center; padding: 0; border: 1px solid #dfe7ee; border-radius: 12px; background: #f5f8fa; order: 3; }
+    body #header.header--unified .menu-toggle .bar { width: 20px; height: 2px; margin: 0; border-radius: 99px; background: #09264a; transition: transform .2s ease, opacity .2s ease; }
+    body #header.header--unified .menu-toggle.open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body #header.header--unified .menu-toggle.open .bar:nth-child(2) { opacity: 0; }
+    body #header.header--unified .menu-toggle.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    body #header.header--unified .mobile-whatsapp { display: grid; position: relative; z-index: 1002; flex: 0 0 42px; width: 42px; height: 42px; place-items: center; border-radius: 12px; background: #edc780; color: #102b3a; font-size: 1.18rem; text-decoration: none; order: 2; }
+    body #header.header--unified .nav-list { position: fixed; z-index: 1001; top: 76px; right: 12px; left: 12px; display: none; width: auto; height: auto; max-height: calc(100dvh - 90px); align-items: stretch; gap: 5px; overflow-y: auto; margin: 0; padding: 14px; border: 1px solid #e2e9ef; border-radius: 20px; background: rgba(255,255,255,.985); box-shadow: 0 22px 55px rgba(9,38,74,.22); }
+    body #header.header--unified .nav-list.active { display: flex; }
+    body #header.header--unified .nav-list .mobile-nav-heading { display: block; margin: 0 2px 6px; padding: 4px 12px 12px; border-bottom: 1px solid #edf1f4; }
+    body #header.header--unified .nav-list .mobile-nav-heading span { display: block; color: #09264a; font-size: 1rem; font-weight: 750; }
+    body #header.header--unified .nav-list .mobile-nav-heading small { display: block; margin-top: 3px; color: #7b8da2; font-size: .72rem; }
+    body #header.header--unified .nav-list > li:nth-child(n) { width: 100%; margin: 0; }
+    body #header.header--unified .nav-list > li:not(.mobile-nav-heading):not(.home-nav-search):not(.home-nav-whatsapp):not(.lang-switch) > a { display: flex; min-height: 47px; align-items: center; padding: 0 14px; border-radius: 11px; color: #09264a; font-size: .98rem; font-weight: 700; text-decoration: none; }
+    body #header.header--unified .nav-list > li:not(.mobile-nav-heading):not(.home-nav-search):not(.home-nav-whatsapp):not(.lang-switch) > a.active { background: #eef5fa; color: #a76d1b; }
+    body #header.header--unified .nav-list > li:not(.mobile-nav-heading):not(.home-nav-search):not(.home-nav-whatsapp):not(.lang-switch) > a::after { display: none; }
+    body #header.header--unified .nav-list .home-nav-search { display: block; width: 100%; min-width: 0; height: auto; margin: 8px 0 0 !important; padding-top: 12px; border-top: 1px solid #e9eef2; }
+    body #header.header--unified .nav-list .home-nav-search form { width: 100%; height: 46px; border: 1px solid #dfe7ee; border-radius: 12px; background: #f7f9fb; box-shadow: none; }
+    body #header.header--unified .nav-list .home-nav-search input { height: 44px; font-size: .82rem; }
+    body #header.header--unified .nav-list .home-nav-search button { height: 44px; }
+    body #header.header--unified .nav-list .home-nav-whatsapp { display: block; width: 100%; min-width: 0; height: auto; margin: 8px 0 0 !important; }
+    body #header.header--unified .nav-list .home-nav-whatsapp > a { display: flex; width: 100%; min-height: 48px; align-items: center; justify-content: center; border-radius: 12px; font-size: .86rem; }
+    body #header.header--unified .nav-list .lang-switch { display: block; width: 100%; margin: 8px 0 0 !important; padding-top: 10px; border-top: 1px solid #e9eef2; }
+    body #header.header--unified .nav-list .lang-switch a { display: flex; width: 100%; min-height: 43px; align-items: center; justify-content: center; border: 1px solid #dfe7ee; border-radius: 11px; color: #09264a; }
+    body.home-page.home-hero-visible .lead-fab, body #header.header--unified ~ #main-content .lead-fab { opacity: 1; pointer-events: auto; }
+    body .lead-fab { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); left: 12px; justify-content: center; min-height: 48px; padding: 0 16px; font-size: .82rem; }
+}
