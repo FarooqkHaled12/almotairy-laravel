@@ -8,7 +8,8 @@
 <section class="home-faq" id="faq">
     <div class="container home-faq__inner">
         <div class="home-faq__heading">
-            <h2>{{ $lang == 'ar' ? 'الأسئلة الأكثر شيوعاً' : 'Most common questions' }}</h2>
+            <h2>{{ $lang == 'ar' ? 'نربطك بعقارك المميز' : 'Connecting You to Premium Properties' }}</h2>
+            <p>{{ $lang == 'ar' ? 'اكتشف إجابات واضحة تساعدك على اتخاذ قرارك العقاري بثقة.' : 'Discover answers that help you make your next real-estate decision with confidence.' }}</p>
         </div>
 
         <div class="home-faq__layout">

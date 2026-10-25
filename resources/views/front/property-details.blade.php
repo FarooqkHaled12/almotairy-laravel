@@ -195,39 +195,5 @@
 <script src="{{ asset('front/js/script.js') }}"></script>
 <script src="{{ asset('front/js/property-details.js') }}"></script>
 
-<script>
-// جاليري بسيط للصور
-document.addEventListener('DOMContentLoaded', function () {
-    const mainImage = document.getElementById('mainImage');
-    const thumbs    = document.querySelectorAll('.gallery-thumbs .thumb');
-    const prevBtn   = document.getElementById('prevImage');
-    const nextBtn   = document.getElementById('nextImage');
-
-    if (!mainImage || !thumbs.length) return;
-
-    let current = 0;
-
-    function setImage(index) {
-        current = index;
-        mainImage.src = thumbs[current].src;
-        thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
-    }
-
-    thumbs.forEach((thumb, index) => {
-        thumb.addEventListener('click', () => setImage(index));
-    });
-
-    prevBtn?.addEventListener('click', () => {
-        current = (current - 1 + thumbs.length) % thumbs.length;
-        setImage(current);
-    });
-
-    nextBtn?.addEventListener('click', () => {
-        current = (current + 1) % thumbs.length;
-        setImage(current);
-    });
-});
-</script>
-
 </body>
 </html>

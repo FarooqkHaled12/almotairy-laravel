@@ -35,16 +35,5 @@ if (nextBtn) {
     nextBtn.addEventListener('click', () => setActiveImage(currentIndex + 1));
 }
 
-// تأكيد بسيط عند حجز معاينة
-const bookVisitBtn = document.getElementById('bookVisitBtn');
-if (bookVisitBtn) {
-    bookVisitBtn.addEventListener('click', () => {
-        const confirmVisit = confirm('هل ترغب في حجز معاينة لهذه الشقة والتواصل مع فريق المبيعات؟');
-        if (confirmVisit) {
-            window.location.href = 'contact.html?property=haram-panorama';
-        }
-    });
-}
-
 // أول صورة مفعلة
 setActiveImage(0);

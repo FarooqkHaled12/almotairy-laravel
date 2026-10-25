@@ -2,6 +2,7 @@
     $developments = \App\Models\Property::withCount('units')
         ->whereNull('building_id')
         ->orderByDesc('created_at')
+        ->take(12)
         ->get();
     $lang = session('locale', 'ar');
     $isRtl = $lang === 'ar';
@@ -52,7 +53,7 @@
                             <div class="development-card__media">
                                 <a class="development-card__image-link" href="{{ $detailsRoute }}" aria-label="{{ $title }}">
                                     @if($image)
-                                        <img src="{{ asset('storage/'.$image) }}" alt="{{ $title }}" loading="lazy">
+                                        <img src="{{ asset('storage/'.$image) }}" alt="{{ $title }}" loading="{{ $loop->index < 3 ? 'eager' : 'lazy' }}" decoding="async" @if($loop->index < 3) fetchpriority="high" @endif>
                                     @else
                                         <div class="development-card__placeholder">
                                             <i class="fa-regular fa-building" aria-hidden="true"></i>

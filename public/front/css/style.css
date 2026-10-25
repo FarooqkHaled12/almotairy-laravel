@@ -174,7 +174,7 @@ body {
 @media (max-width: 650px) { .site-social-float { inset-inline-end: 14px; bottom: 14px; gap: 8px; } .site-social-float__link { width: 44px; height: 44px; font-size: 1.2rem; } }
 
 /* Site-wide lead capture: one clear next step on every public page. */
-.lead-fab { position: fixed; inset-inline-start: 22px; bottom: 24px; z-index: 899; display: inline-flex; align-items: center; gap: 10px; min-height: 54px; padding: 0 20px; border: 0; border-radius: 999px; background: #1e2a44; color: #fff; box-shadow: 0 8px 26px rgba(19,43,63,.28); font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; transition: transform .2s, background .2s, box-shadow .2s; }
+.lead-fab { position: fixed; inset-inline-start: 22px; bottom: max(24px, env(safe-area-inset-bottom)); z-index: 899; display: inline-flex; align-items: center; gap: 10px; max-width: calc(100vw - 28px); box-sizing: border-box; min-height: 54px; padding: 0 20px; border: 0; border-radius: 999px; background: #1e2a44; color: #fff; box-shadow: 0 8px 26px rgba(19,43,63,.28); font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; transition: transform .2s, background .2s, box-shadow .2s; }
 .lead-fab:hover { background: #263d5a; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(19,43,63,.34); }
 .lead-fab i { color: #72d1cc; font-size: 1.15rem; }
 .lead-fab:focus-visible, .lead-dialog button:focus-visible, .lead-dialog input:focus-visible, .lead-dialog select:focus-visible, .lead-dialog textarea:focus-visible { outline: 3px solid #5bc0be; outline-offset: 3px; }
