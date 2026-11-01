@@ -65,16 +65,20 @@
                 @if($lang == 'ar')
                     <h3>النشرة البريدية</h3>
                     <p>اشترك ليصلك أحدث العروض العقارية فور نزولها.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="بريدك الإلكتروني">
-                        <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
+                    <form class="newsletter-form" method="POST" action="{{ route('front.contact.submit') }}">
+                        @csrf
+                        <input type="hidden" name="form_type" value="newsletter">
+                        <input type="email" name="email" placeholder="بريدك الإلكتروني" autocomplete="email" required>
+                        <button type="submit" aria-label="الاشتراك في النشرة البريدية"><i class="fa-solid fa-paper-plane"></i></button>
                     </form>
                 @else
                     <h3>Newsletter</h3>
                     <p>Subscribe to receive the latest real estate offers as soon as they are available.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Your email address">
-                        <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
+                    <form class="newsletter-form" method="POST" action="{{ route('front.contact.submit') }}">
+                        @csrf
+                        <input type="hidden" name="form_type" value="newsletter">
+                        <input type="email" name="email" placeholder="Your email address" autocomplete="email" required>
+                        <button type="submit" aria-label="Subscribe to the newsletter"><i class="fa-solid fa-paper-plane"></i></button>
                     </form>
                 @endif
             </div>
@@ -83,10 +87,10 @@
         <div class="footer-bottom">
             @if($lang == 'ar')
                 <p>جميع الحقوق محفوظة &copy; {{ date('Y') }} - المهندس محمود المطيري.</p>
-                <p>تم التصميم بحب <i class="fa-solid fa-heart text-red-600"></i></p>
+                <p>التصميم والتطوير بواسطة <a href="https://www.linkedin.com/in/farooq-khaled-50811626b/" target="_blank" rel="noopener noreferrer">Farooq Khaled</a></p>
             @else
                 <p>All rights reserved &copy; {{ date('Y') }} - Eng. Mahmoud Al‑Mutairi.</p>
-                <p>Designed with love <i class="fa-solid fa-heart text-red-600"></i></p>
+                <p>Designed and developed by <a href="https://www.linkedin.com/in/farooq-khaled-50811626b/" target="_blank" rel="noopener noreferrer">Farooq Khaled</a></p>
             @endif
         </div>
     </div>
