@@ -21,7 +21,7 @@ class ContactController extends Controller
 
         $contact = [
             'phone'    => $info?->phone_1 ?: '+20 100 000 0000',
-            'email'    => $info?->email_1 ?: 'info@khaled-realestate.com',
+            'email'    => $info?->email_1 ?: 'info@almotairy.org',
             'whatsapp' => preg_replace('/\D+/', '', $info?->whatsapp ?: '201000000000'),
             'address'  => $address,
             'hours'    => $info?->working_hours ?: __('Saturday – Thursday, 9:00 AM – 6:00 PM'),

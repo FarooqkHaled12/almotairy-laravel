@@ -11,7 +11,7 @@
                         نوفر لك أفضل الفرص في الهرم والتجمع الخامس.
                     </p>
                 @else
-                    <h3 class="footer-logo">Khalid<span>.Real Estate</span></h3>
+                    <h3 class="footer-logo">AlMotairy<span>.Real Estate</span></h3>
                     <p>
                         We strive to provide an exceptional real estate experience based on trust and transparency,
                         offering the best opportunities in El‑Haram and Fifth Settlement.

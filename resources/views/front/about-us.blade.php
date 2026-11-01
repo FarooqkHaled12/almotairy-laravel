@@ -64,16 +64,16 @@
         <div class="container ab-hero-inner">
             <div class="ab-hero-copy">
                 <span class="ab-eyebrow ab-eyebrow--gold">{{ __('About the Founder') }}</span>
-                <h1 class="ab-hero-title">{{ __('Khaled AlMotairy') }}</h1>
+                <h1 class="ab-hero-title">{{ __('Mahmoud Al-Motairy') }}</h1>
                 <p class="ab-hero-tagline">{{ __('A Vision Beyond Real Estate') }}</p>
-                <p class="ab-hero-text">{{ __('With years of experience and a deep understanding of the real estate market, Khaled AlMotairy founded the company with a clear vision: to create real value, build long-term relationships, and help people find the right opportunities.') }}</p>
+                <p class="ab-hero-text">{{ __('With years of experience and a deep understanding of the real estate market, Mahmoud Al-Motairy founded the company with a clear vision: to create real value, build long-term relationships, and help people find the right opportunities.') }}</p>
                 <a href="#ab-story" class="ab-btn ab-btn--gold">{{ __('Discover His Story') }} <i class="fa-solid fa-arrow-right ab-arrow" aria-hidden="true"></i></a>
             </div>
 
             <blockquote class="ab-hero-quote">
                 <p>{{ __('“Real estate is not just buildings, it’s people, trust and a better future.”') }}</p>
-                <footer>— {{ __('Khaled AlMotairy') }}</footer>
-                <span class="ab-signature" aria-hidden="true">{{ __('Khaled AlMotairy') }}</span>
+                <footer>— {{ __('Mahmoud Al-Motairy') }}</footer>
+                <span class="ab-signature" aria-hidden="true">{{ __('Mahmoud Al-Motairy') }}</span>
             </blockquote>
         </div>
     </section>
@@ -156,7 +156,7 @@
             <div class="ab-split-copy">
                 <span class="ab-eyebrow ab-eyebrow--gold">{{ __('Our Vision') }}</span>
                 <h2 class="ab-title ab-title--serif">{{ __('Shaping Better Real Estate Opportunities') }}</h2>
-                <p class="ab-text">{{ __('Khaled AlMotairy’s vision is to be a trusted real estate partner, helping individuals and investors find the right opportunities and create lasting value across Egypt’s most promising locations.') }}</p>
+                <p class="ab-text">{{ __('Mahmoud Al-Motairy’s vision is to be a trusted real estate partner, helping individuals and investors find the right opportunities and create lasting value across Egypt’s most promising locations.') }}</p>
                 <a href="#ab-expertise" class="ab-btn ab-btn--gold">{{ __('Explore Our Approach') }} <i class="fa-solid fa-arrow-right ab-arrow" aria-hidden="true"></i></a>
             </div>
             <div class="ab-split-media ab-split-media--wide">
@@ -170,7 +170,7 @@
         <div class="container">
             <blockquote>
                 <p>{{ __('“My goal has always been to build more than properties, I want to build opportunities and better lives.”') }}</p>
-                <footer>— {{ __('Khaled AlMotairy') }}</footer>
+                <footer>— {{ __('Mahmoud Al-Motairy') }}</footer>
             </blockquote>
         </div>
     </section>
