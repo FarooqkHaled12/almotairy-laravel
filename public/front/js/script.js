@@ -136,16 +136,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   if (!targets.length) return;
   targets.forEach((el, index) => {
     el.setAttribute('data-motion-reveal', el.querySelector('img') ? 'media' : 'content');
+    const image = el.querySelector('img');
+    if (image) image.setAttribute('data-motion-image', 'true');
     el.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
   });
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-    targets.forEach(el => el.classList.add('is-visible'));
+    targets.forEach(el => { el.classList.add('is-visible'); el.querySelector('img')?.classList.add('is-visible'); });
     return;
   }
   const observer = new IntersectionObserver((entries, io) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-visible');
+      entry.target.querySelector('img')?.classList.add('is-visible');
       io.unobserve(entry.target);
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
