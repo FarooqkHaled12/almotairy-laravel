@@ -26,9 +26,9 @@
 
 @section('content')
     @include('front.homepage.hero')
+    @include('front.homepage.developments')
     @include('front.homepage.properties')
     @include('front.homepage.apartments')
-    @include('front.homepage.developments')
     @include('front.homepage.services')
     @include('front.homepage.explore')
     @include('front.homepage.about')

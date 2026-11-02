@@ -12,10 +12,12 @@ class ContactFormController extends Controller
 {
     public function submit(Request $request)
     {
+        $isNewsletterSubscription = $request->input('form_type') === 'newsletter';
+
         $data = $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'nullable|email|max:255',
-            'phone'    => 'required|string|max:50',
+            'name'     => ($isNewsletterSubscription ? 'nullable' : 'required').'|string|max:255',
+            'email'    => ($isNewsletterSubscription ? 'required' : 'nullable').'|email|max:255',
+            'phone'    => ($isNewsletterSubscription ? 'nullable' : 'required').'|string|max:50',
             'interest' => 'nullable|in:buy,rent,sell,invest,general',
             'message'  => 'nullable|string|max:5000',
             'property_id' => 'nullable|integer|exists:properties,id',
@@ -40,16 +42,28 @@ class ContactFormController extends Controller
             }
         }
 
+        $name = $isNewsletterSubscription
+            ? (session('locale') === 'en' ? 'Newsletter subscription' : 'اشتراك في النشرة البريدية')
+            : $data['name'];
+        $phone = $isNewsletterSubscription ? '' : $data['phone'];
+        $message = $isNewsletterSubscription
+            ? (session('locale') === 'en' ? 'Newsletter subscription' : 'اشتراك في النشرة البريدية')
+            : ($data['message'] ?? null);
+
         $inquiry = Inquiry::create([
             ...$data,
+            'name' => $name,
+            'phone' => $phone,
+            'interest' => $isNewsletterSubscription ? 'general' : ($data['interest'] ?? null),
+            'message' => $message,
             'locale' => in_array(session('locale'), ['ar', 'en'], true) ? session('locale') : 'ar',
         ]);
 
         try {
             Mail::raw(
-                "Name: {$data['name']}\n".
+                "Name: {$name}\n".
                 "Email: ".($data['email'] ?? '-')."\n".
-                "Phone: {$data['phone']}\n".
+                "Phone: ".($phone ?: '-')."\n".
                 "Interest: ".($data['interest'] ?? '-')."\n".
                 "Property ID: ".($data['property_id'] ?? '-')."\n\n".
                 "Preferred visit: ".($data['preferred_visit_at'] ?? '-')."\n\n".

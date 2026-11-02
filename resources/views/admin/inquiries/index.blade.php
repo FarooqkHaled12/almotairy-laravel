@@ -84,7 +84,9 @@
                             @endif
                         </div>
                         <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-500">
-                            <a dir="ltr" href="tel:{{ $inquiry->phone }}" class="font-semibold text-slate-700 hover:text-teal-700">{{ $inquiry->phone }}</a>
+                            @if($inquiry->phone)
+                                <a dir="ltr" href="tel:{{ $inquiry->phone }}" class="font-semibold text-slate-700 hover:text-teal-700">{{ $inquiry->phone }}</a>
+                            @endif
                             @if($inquiry->email)
                                 <a dir="ltr" href="mailto:{{ $inquiry->email }}" class="font-semibold text-slate-700 hover:text-teal-700">{{ $inquiry->email }}</a>
                             @endif
@@ -109,7 +111,9 @@
                             </div>
                         @endif
                         <div class="mt-3 flex gap-2">
-                            <a href="tel:{{ $inquiry->phone }}" class="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-50">اتصال</a>
+                            @if($inquiry->phone)
+                                <a href="tel:{{ $inquiry->phone }}" class="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-50">اتصال</a>
+                            @endif
                             @if($waPhone)
                                 <a href="https://wa.me/{{ $waPhone }}" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-800 hover:bg-emerald-100">واتساب</a>
                             @endif

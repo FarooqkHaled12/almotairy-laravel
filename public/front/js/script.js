@@ -131,10 +131,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // of elements and falls back to showing everything when reduced motion is on.
 (() => {
   const targets = document.querySelectorAll(
-    '.section-heading, .building-card, .development-card, .property-card, .listing-card, .about-section, .services-grid > *, .faq-item, .hero-card'
+    '.section-heading, .building-card, .development-card, .property-card, .listing-card, .about-section, .services-grid > *, .faq-item, .hero-card, .home-about-copy, .home-about-visual, .home-about-features li, .developments-heading, .development-card, .featured-properties .featured-heading, .featured-properties .property-card, .home-services-heading, .home-service, .contact-info, .contact-form-box'
   );
   if (!targets.length) return;
   targets.forEach((el, index) => {
+    const section = el.closest('#about, #developments, #properties, #services, #contact');
+    const sectionId = section?.id;
+    let direction = 'up';
+    if (sectionId === 'about') direction = el.classList.contains('home-about-visual') ? 'right' : 'left';
+    if (sectionId === 'contact') direction = el.classList.contains('contact-info') ? 'right' : 'left';
+    const cardIndex = section ? [...section.querySelectorAll('.development-card, .property-card, .home-service')].indexOf(el) : index;
+    if (sectionId === 'developments' && el.classList.contains('development-card')) direction = cardIndex % 2 ? 'right' : 'left';
+    if (sectionId === 'properties' && el.classList.contains('property-card')) direction = cardIndex % 2 ? 'right' : 'left';
+    if (sectionId === 'services' && el.classList.contains('home-service')) direction = cardIndex % 2 ? 'right' : 'left';
+    el.setAttribute('data-motion-direction', direction);
     el.setAttribute('data-motion-reveal', el.querySelector('img') ? 'media' : 'content');
     const image = el.querySelector('img');
     if (image) image.setAttribute('data-motion-image', 'true');
