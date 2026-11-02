@@ -49,3 +49,19 @@
  .featured-properties .property-card { height:auto; min-height:349px; }
 }
 @media(prefers-reduced-motion:reduce){.featured-properties .property-card,.featured-properties .card-image img{transition:none;}}
+
+/* Phase 2: lighter property-card interaction, desktop pointer devices only. */
+@media (hover: hover) and (pointer: fine) {
+ .featured-properties .property-card { transition: transform .28s cubic-bezier(.22,.8,.3,1), box-shadow .28s ease; }
+ .featured-properties .property-card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(16,43,58,.13); }
+ .featured-properties .card-image::after { position:absolute; inset:0; background:linear-gradient(180deg,rgba(16,43,58,0),rgba(16,43,58,.16)); content:''; opacity:0; pointer-events:none; transition:opacity .3s ease; }
+ .featured-properties .property-card:hover .card-image::after { opacity:1; }
+ .featured-properties .card-image img { transform:scale(1); transition:transform .36s cubic-bezier(.22,.8,.3,1); }
+ .featured-properties .property-card:hover .card-image img { transform:scale(1.04); }
+ .featured-properties .card-details h3 { transition:transform .25s ease, color .25s ease; }
+ .featured-properties .property-card:hover .card-details h3 { transform:translateY(-4px); color:#8f641c; }
+ .featured-properties .btn-card span { display:inline-block; transition:transform .22s ease; }
+ .featured-properties .property-card:hover .btn-card span { transform:translateX(5px); }
+ [dir="rtl"] .featured-properties .property-card:hover .btn-card span { transform:translateX(-5px); }
+}
+@media (prefers-reduced-motion:reduce){.featured-properties .property-card,.featured-properties .property-card *,.featured-properties .card-image::after{animation:none!important;transition:none!important;transform:none!important;}}
