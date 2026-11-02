@@ -182,6 +182,30 @@ body #header .menu-toggle .bar { background: #fff; }
 [data-motion-reveal].is-visible { opacity: 1; transform: none; }
 [data-motion-reveal="media"] { transform: scale(.985); }
 [data-motion-reveal="media"].is-visible { transform: scale(1); }
+
+/* Premium motion layer: compositor-friendly transforms only. */
+@media (prefers-reduced-motion: no-preference) {
+    .hero--editorial .hero__copy > * { opacity: 0; animation: premium-rise .7s cubic-bezier(.22,.8,.3,1) forwards; }
+    .hero--editorial .hero__copy > *:nth-child(1) { animation-delay: .08s; }
+    .hero--editorial .hero__copy > *:nth-child(2) { animation-delay: .16s; }
+    .hero--editorial .hero__copy > *:nth-child(3) { animation-delay: .24s; }
+    .hero--editorial .hero__copy > *:nth-child(4) { animation-delay: .32s; }
+    .hero--editorial .hero__copy > *:nth-child(5) { animation-delay: .4s; }
+    .hero-featured { animation: premium-float 5s ease-in-out 1s infinite; }
+    .hero__photo { animation: premium-zoom 12s ease-out both; transform-origin: center; }
+    .development-card, .property-card, .listing-card { transition: transform .35s cubic-bezier(.22,.8,.3,1), box-shadow .35s ease; }
+    .development-card:hover, .property-card:hover, .listing-card:hover { transform: translateY(-7px); box-shadow: 0 18px 38px rgba(9,38,74,.14); }
+    .development-card__media img, .property-card img, .listing-card img { transition: transform .65s cubic-bezier(.22,.8,.3,1); }
+    .development-card:hover .development-card__media img, .property-card:hover img, .listing-card:hover img { transform: scale(1.045); }
+    .hero__cta, .home-about-cta, .btn-primary, .btn-whatsapp, .development-card__cta { position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+    .hero__cta:hover, .home-about-cta:hover, .btn-primary:hover, .btn-whatsapp:hover, .development-card__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(183,127,39,.22); }
+    .hero__cta::after, .home-about-cta::after, .btn-primary::after, .btn-whatsapp::after, .development-card__cta::after { content: ''; position: absolute; inset: 0 auto 0 -120%; width: 55%; background: linear-gradient(105deg, transparent, rgba(255,255,255,.28), transparent); transform: skewX(-18deg); transition: left .6s ease; pointer-events: none; }
+    .hero__cta:hover::after, .home-about-cta:hover::after, .btn-primary:hover::after, .btn-whatsapp:hover::after, .development-card__cta:hover::after { left: 130%; }
+}
+@keyframes premium-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes premium-zoom { from { opacity: .72; transform: scale(1.035); } to { opacity: 1; transform: scale(1); } }
+@keyframes premium-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
 @media (prefers-reduced-motion: reduce) {
     [data-motion-reveal] { opacity: 1; transform: none; transition: none; }
 }
