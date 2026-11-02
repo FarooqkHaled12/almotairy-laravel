@@ -193,10 +193,19 @@ body #header .menu-toggle .bar { background: #fff; }
     .hero--editorial .hero__copy > *:nth-child(5) { animation-delay: .4s; }
     .hero-featured { animation: premium-float 5s ease-in-out 1s infinite; }
     .hero__photo { animation: premium-zoom 12s ease-out both; transform-origin: center; }
+    .hero__wash { animation: premium-wash 8s ease-in-out infinite alternate; }
+    .hero__street { animation: premium-street 18s ease-in-out infinite alternate; }
+    .section-heading::after, .section-title::after { transform: scaleX(0); transform-origin: left center; transition: transform .7s cubic-bezier(.22,.8,.3,1) .15s; }
+    [data-motion-reveal].is-visible.section-heading::after, [data-motion-reveal].is-visible.section-title::after { transform: scaleX(1); }
     .development-card, .property-card, .listing-card { transition: transform .35s cubic-bezier(.22,.8,.3,1), box-shadow .35s ease; }
-    .development-card:hover, .property-card:hover, .listing-card:hover { transform: translateY(-7px); box-shadow: 0 18px 38px rgba(9,38,74,.14); }
+    .development-card, .property-card, .listing-card { position: relative; isolation: isolate; }
+    .development-card::after, .property-card::after, .listing-card::after { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: linear-gradient(135deg, rgba(255,255,255,.18), transparent 45%); opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+    .development-card:hover, .property-card:hover, .listing-card:hover { transform: translateY(-8px) rotateX(1deg); box-shadow: 0 20px 42px rgba(9,38,74,.17); }
+    .development-card:hover::after, .property-card:hover::after, .listing-card:hover::after { opacity: 1; }
     .development-card__media img, .property-card img, .listing-card img { transition: transform .65s cubic-bezier(.22,.8,.3,1); }
     .development-card:hover .development-card__media img, .property-card:hover img, .listing-card:hover img { transform: scale(1.045); }
+    .development-card__content, .property-card__content, .listing-card__body { transition: transform .35s ease; }
+    .development-card:hover .development-card__content, .property-card:hover .property-card__content, .listing-card:hover .listing-card__body { transform: translateY(-3px); }
     .hero__cta, .home-about-cta, .btn-primary, .btn-whatsapp, .development-card__cta { position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
     .hero__cta:hover, .home-about-cta:hover, .btn-primary:hover, .btn-whatsapp:hover, .development-card__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(183,127,39,.22); }
     .hero__cta::after, .home-about-cta::after, .btn-primary::after, .btn-whatsapp::after, .development-card__cta::after { content: ''; position: absolute; inset: 0 auto 0 -120%; width: 55%; background: linear-gradient(105deg, transparent, rgba(255,255,255,.28), transparent); transform: skewX(-18deg); transition: left .6s ease; pointer-events: none; }
@@ -205,6 +214,8 @@ body #header .menu-toggle .bar { background: #fff; }
 @keyframes premium-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 @keyframes premium-zoom { from { opacity: .72; transform: scale(1.035); } to { opacity: 1; transform: scale(1); } }
 @keyframes premium-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes premium-wash { from { opacity: .55; transform: translateX(-1.5%); } to { opacity: .8; transform: translateX(1.5%); } }
+@keyframes premium-street { from { transform: scale(1.02) translateX(-.5%); } to { transform: scale(1.05) translateX(.5%); } }
 
 @media (prefers-reduced-motion: reduce) {
     [data-motion-reveal] { opacity: 1; transform: none; transition: none; }
