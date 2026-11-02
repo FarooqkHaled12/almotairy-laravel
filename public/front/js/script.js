@@ -138,7 +138,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const section = el.closest('#about, #developments, #properties, #services, #contact');
     const sectionId = section?.id;
     let direction = 'up';
-    if (sectionId === 'about') direction = el.classList.contains('home-about-visual') ? 'right' : 'left';
+    if (sectionId === 'about') direction = el.classList.contains('home-about-visual') ? 'left' : 'right';
     if (sectionId === 'contact') direction = el.classList.contains('contact-info') ? 'right' : 'left';
     const cardIndex = section ? [...section.querySelectorAll('.development-card, .property-card, .home-service')].indexOf(el) : index;
     if (sectionId === 'developments' && el.classList.contains('development-card')) direction = cardIndex % 2 ? 'right' : 'left';
