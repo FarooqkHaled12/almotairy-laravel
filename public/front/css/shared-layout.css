@@ -176,6 +176,15 @@ body #header .menu-toggle .bar { background: #fff; }
     body #header .navbar .nav-list li + li { margin-top: 4px; }
     body #header .navbar .nav-list .mobile-nav-heading { margin: 0 0 12px; }
 }
+
+/* Lightweight entrance motion: transform/opacity only, no heavy effects. */
+[data-motion-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+[data-motion-reveal].is-visible { opacity: 1; transform: none; }
+[data-motion-reveal="media"] { transform: scale(.985); }
+[data-motion-reveal="media"].is-visible { transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+    [data-motion-reveal] { opacity: 1; transform: none; transition: none; }
+}
 body .footer.footer { background: #1e2a44; color: rgba(255,255,255,.78); }
 body .footer.footer .footer-col h3 { color: #fff; }
 body .footer.footer .footer-logo span { color: #afc8df; }

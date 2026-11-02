@@ -126,3 +126,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// Small, native reveal animation for key content. It observes only a handful
+// of elements and falls back to showing everything when reduced motion is on.
+(() => {
+  const targets = document.querySelectorAll(
+    '.section-heading, .building-card, .development-card, .property-card, .listing-card, .about-section, .services-grid > *, .faq-item, .hero-card'
+  );
+  if (!targets.length) return;
+  targets.forEach((el, index) => {
+    el.setAttribute('data-motion-reveal', el.querySelector('img') ? 'media' : 'content');
+    el.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
+  });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries, io) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  targets.forEach(el => observer.observe(el));
+})();
