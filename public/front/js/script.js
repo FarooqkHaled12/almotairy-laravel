@@ -8,6 +8,7 @@ if (menuToggle && navList) {
   const setMenuOpen = (open) => {
     navList.classList.toggle('active', open);
     menuToggle.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
     menuToggle.setAttribute('aria-label', open ? menuToggle.dataset.closeLabel : menuToggle.dataset.openLabel);
   };
@@ -127,40 +128,95 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Small, native reveal animation for key content. It observes only a handful
-// of elements and falls back to showing everything when reduced motion is on.
+// One reusable, one-shot homepage motion system. Elements remain visible until
+// this block has mapped them and the observer is ready, so JS failures never
+// leave content hidden.
 (() => {
-  const targets = document.querySelectorAll(
-    '.section-heading, .building-card, .development-card, .property-card, .listing-card, .about-section, .services-grid > *, .faq-item, .hero-card, .home-about-copy, .home-about-visual, .home-about-features li, .developments-heading, .development-card, .featured-properties .featured-heading, .featured-properties .property-card, .home-services-heading, .home-service, .contact-info, .contact-form-box'
-  );
-  if (!targets.length) return;
-  targets.forEach((el, index) => {
-    const section = el.closest('#about, #developments, #properties, #services, #contact');
-    const sectionId = section?.id;
-    let direction = 'up';
-    if (sectionId === 'about') direction = el.classList.contains('home-about-visual') ? 'left' : 'right';
-    if (sectionId === 'contact') direction = el.classList.contains('contact-info') ? 'right' : 'left';
-    const cardIndex = section ? [...section.querySelectorAll('.development-card, .property-card, .home-service')].indexOf(el) : index;
-    if (sectionId === 'developments' && el.classList.contains('development-card')) direction = cardIndex % 2 ? 'right' : 'left';
-    if (sectionId === 'properties' && el.classList.contains('property-card')) direction = cardIndex % 2 ? 'right' : 'left';
-    if (sectionId === 'services' && el.classList.contains('home-service')) direction = cardIndex % 2 ? 'right' : 'left';
-    el.setAttribute('data-motion-direction', direction);
-    el.setAttribute('data-motion-reveal', el.querySelector('img') ? 'media' : 'content');
-    const image = el.querySelector('img');
-    if (image) image.setAttribute('data-motion-image', 'true');
-    el.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
+  if (!document.body.classList.contains('home-page')) return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile = window.matchMedia('(max-width: 860px)').matches;
+  const mappings = [];
+  const add = (selector, direction, group = null, image = false, slider = false) => {
+    document.querySelectorAll(selector).forEach((element, index) => {
+      if (mappings.some(item => item.element === element)) return;
+      const resolvedDirection = typeof direction === 'function' ? direction(index, element) : direction;
+      mappings.push({ element, direction: resolvedDirection, index, group, image, slider });
+    });
+  };
+
+  add('.developments-heading, .featured-properties .featured-heading, .home-services-heading', 'up');
+  add('.development-slide', index => index % 2 ? 'left' : 'right', 'developments', false, true);
+  add('.featured-properties .property-card', index => ['right', 'left', 'up'][index % 3], 'properties');
+  add('.home-about-copy', 'right');
+  add('.home-about-visual', 'left', null, true);
+  add('.home-about-features li', mobile ? 'up' : 'right', 'about-features');
+  add('.home-service', index => ['right', 'left', 'up'][index % 3], 'services');
+  add('.contact-info', 'right');
+  add('.contact-form-box', 'left');
+  add('.home-apartments-heading, .home-explore-copy, .home-partner-copy, .home-faq__heading', 'up');
+
+  if (!mappings.length) return;
+
+  mappings.forEach(item => {
+    const { element, direction, group, index, image } = item;
+    element.setAttribute('data-motion-reveal', 'true');
+    element.setAttribute('data-motion-direction', direction);
+    if (group && !item.slider) {
+      const delayStep = mobile ? 80 : 100;
+      const delay = Math.min(index * delayStep, 300);
+      element.style.setProperty('--motion-delay', `${delay}ms`);
+    }
+    if (image) element.querySelector('img')?.setAttribute('data-motion-image', 'true');
   });
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-    targets.forEach(el => { el.classList.add('is-visible'); el.querySelector('img')?.classList.add('is-visible'); });
+
+  const reveal = element => {
+    element.classList.add('is-visible');
+    element.querySelector('[data-motion-image]')?.classList.add('is-visible');
+  };
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    mappings.forEach(item => reveal(item.element));
     return;
   }
+
   const observer = new IntersectionObserver((entries, io) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      entry.target.querySelector('img')?.classList.add('is-visible');
+      reveal(entry.target);
       io.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  targets.forEach(el => observer.observe(el));
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+  mappings.filter(item => !item.slider).forEach(item => observer.observe(item.element));
+
+  // Horizontal project cards need the slider itself as their observation
+  // viewport. This prevents off-screen cards from animating early and keeps
+  // card transforms isolated from the swipeable track.
+  const sliderTrack = document.querySelector('.developments-track');
+  const sliderItems = mappings.filter(item => item.slider);
+  let sliderObserver = null;
+  if (sliderTrack && sliderItems.length) {
+    sliderObserver = new IntersectionObserver((entries, io) => {
+      const visibleEntries = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => a.target.offsetLeft - b.target.offsetLeft);
+      visibleEntries.forEach((entry, index) => {
+        entry.target.style.setProperty('--motion-delay', `${Math.min(index * (mobile ? 80 : 100), 200)}ms`);
+        reveal(entry.target);
+        io.unobserve(entry.target);
+      });
+    }, { root: sliderTrack, rootMargin: '0px -4% 0px -4%', threshold: 0.18 });
+    sliderItems.forEach(item => sliderObserver.observe(item.element));
+  } else {
+    sliderItems.forEach(item => observer.observe(item.element));
+  }
+
+  document.documentElement.classList.add('motion-ready');
+
+  // Elements already visible at initialization should animate immediately.
+  requestAnimationFrame(() => mappings.filter(item => !item.slider).forEach(({ element }) => {
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight * .9 && rect.bottom > 0) reveal(element);
+  }));
 })();

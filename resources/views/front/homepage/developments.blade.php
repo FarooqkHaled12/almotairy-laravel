@@ -120,8 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const prevBtn = section.querySelector('.developments-control--previous');
     const nextBtn = section.querySelector('.developments-control--next');
-    const isRtl = document.documentElement.dir === 'rtl' || getComputedStyle(track).direction === 'rtl';
+    // The mobile track deliberately uses LTR scroll geometry even when card
+    // content is RTL. Base navigation on the track, not the document.
+    const isRtl = getComputedStyle(track).direction === 'rtl';
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const compactSlider = window.matchMedia('(max-width: 860px)');
+
+    const resetCompactPosition = () => {
+        if (!compactSlider.matches) return;
+        track.scrollTo({ left: 0, behavior: 'auto' });
+    };
 
     const getStep = () => {
         if (!cards[0]) return track.clientWidth * 0.8;
@@ -151,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     track.addEventListener('scroll', updateControls, { passive: true });
     window.addEventListener('resize', updateControls);
+    window.addEventListener('pageshow', resetCompactPosition);
 
     // Mouse drag support
     let isDown = false;
@@ -193,7 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, true);
 
-    updateControls();
+    requestAnimationFrame(() => {
+        resetCompactPosition();
+        updateControls();
+    });
 });
 </script>
 @endif

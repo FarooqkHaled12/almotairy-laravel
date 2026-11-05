@@ -58,7 +58,7 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
 .hero--editorial .hero__photo { position: absolute; z-index: -2; inset: 0; background: url('../img/home-hero-building.png') center right / cover no-repeat; }
 .hero--editorial .hero__street { display: none; }
 .hero--editorial .hero__wash { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #f9f8f5 0%, rgba(249,248,245,.99) 35%, rgba(249,248,245,.91) 43%, rgba(249,248,245,.56) 53%, rgba(249,248,245,.08) 67%, rgba(249,248,245,0) 100%); pointer-events: none; }
-.hero--editorial .hero__inner { position: relative; display: flex; width: min(calc(100% - 136px), 1224px); max-width: 1224px; min-height: inherit; height: 100%; align-items: center; justify-content: flex-start; padding: 158px 0 68px; direction: ltr; }
+.hero--editorial .hero__inner { position: relative; display: flex; width: min(calc(100% - 136px), 1224px); max-width: 1224px; min-height: inherit; height: 100%; align-items: center; justify-content: flex-start; padding: 158px 0 68px; direction: ltr; box-sizing: border-box; }
 .hero__copy { width: 449px; max-width: 449px; flex: 0 0 449px; margin: 0; color: var(--hero-ink); text-align: left; text-shadow: none; }
 [dir="rtl"] .hero__copy { text-align: right; }
 .hero__eyebrow { display: flex; align-items: center; gap: 13px; margin: 0 0 17px; color: #b77c26; font-size: .72rem; font-weight: 500; letter-spacing: .015em; text-transform: uppercase; }
@@ -141,7 +141,7 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
     .hero--editorial .hero__photo { inset: 0; width: 100%; height: 100%; background-position: 64% center; }
     .hero--editorial .hero__street { display: none; }
     .hero--editorial .hero__wash { background: linear-gradient(180deg, rgba(249,248,245,.96) 0%, rgba(249,248,245,.93) 43%, rgba(249,248,245,.65) 62%, rgba(249,248,245,.06) 100%); }
-    .hero--editorial .hero__inner { width: calc(100% - 38px); min-height: 810px; align-items: flex-start; padding: 140px 0 160px; }
+    .hero--editorial .hero__inner { width: 100%; min-height: 810px; align-items: flex-start; padding: 140px 19px 160px; }
     .hero__copy { width: min(100%, 540px); max-width: 540px; flex: 0 1 auto; text-align: left; }
     .hero__copy h1 { font-size: clamp(3.25rem, 12vw, 5rem); }
     .hero__description { max-width: 440px; font-size: .98rem; }
@@ -155,7 +155,7 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
 }
 @media (max-width: 480px) {
     .hero--editorial { min-height: 850px; }
-    .hero--editorial .hero__inner { width: calc(100% - 32px); min-height: 850px; padding: 125px 0 180px; }
+    .hero--editorial .hero__inner { width: 100%; min-height: 850px; padding: 125px 16px 180px; }
     .hero__copy { width: 100%; max-width: none; min-width: 0; flex: 1 1 100%; }
     .hero__copy h1 { font-size: clamp(3rem, 14vw, 4rem); }
     .hero__description { width: 100%; max-width: 100%; overflow-wrap: anywhere; }
@@ -163,6 +163,15 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
     .hero__proof-item { min-width: 0; }
     .hero__proof-item small { white-space: normal; }
     .hero-featured { right: 0; width: min(100%, 350px); max-width: calc(100vw - 32px); min-height: 82px; }
+}
+@media (max-width: 768px) {
+    /* Keep flex placement left-to-right so the full-width copy starts inside
+       the viewport; text direction remains controlled by the copy itself. */
+    .hero--editorial .hero__inner { min-width: 0; direction: ltr; box-sizing: border-box; }
+    .hero__copy { width: 100%; min-width: 0; max-width: 100%; flex: 0 1 100%; }
+    .hero__copy h1, .hero__description { width: 100%; max-width: 100%; overflow-wrap:anywhere; }
+    .hero__copy h1 { font-size: clamp(2.4rem, 11vw, 3.35rem); }
+    .hero-title-line { display: block; width: 100%; max-width: 100%; white-space: normal; }
 }
 @media (prefers-reduced-motion: reduce) { .hero__cta, .hero-featured { transition: none; } }
 
@@ -189,4 +198,14 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
 @media (prefers-reduced-motion: reduce) {
     .hero--editorial .hero__photo, .hero--editorial .hero__copy > *, .hero-title-line, .hero-featured { opacity: 1; transform: none; animation: none !important; clip-path: none; }
     .hero__cta, .hero-featured { transition: none; }
+}
+
+/* Final phone safeguards must come after the cinematic animation rules. */
+@media (max-width: 768px) {
+    .hero--editorial .hero__inner { width: 100%; max-width: 100%; overflow: hidden; }
+    .hero--editorial .hero__copy { position: absolute; top: 125px; right: 16px; left: 16px; width: auto; max-width: none; min-width: 0; flex: none; margin: 0; box-sizing: border-box; direction: inherit; }
+    [dir="rtl"] .hero--editorial .hero__copy { direction: ltr; text-align: left; }
+    .hero--editorial .hero__copy h1 { width: 100%; max-width: 100%; font-size: clamp(2.35rem, 10.5vw, 3.2rem); line-height: 1.18; white-space: normal; overflow-wrap: anywhere; }
+    .hero--editorial .hero-title-line { display: block !important; width: 100%; max-width: 100%; white-space: normal; overflow: visible; }
+    .hero--editorial .hero__description { width: 100%; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 }

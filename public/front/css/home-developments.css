@@ -385,9 +385,18 @@
         justify-content: space-between;
     }
     .developments-track {
-        grid-auto-columns: calc((100% - 16px) / 1.7);
-        gap: 16px;
+        direction: ltr;
+        grid-auto-columns: calc(100% - 24px);
+        gap: 14px;
+        padding-inline: 12px;
+        scroll-padding-inline: 12px;
     }
+    [dir="rtl"] .development-card { direction: rtl; text-align: right; }
+    .development-slide { scroll-snap-align: center; }
+    .development-card__title,
+    .development-card__title a,
+    .development-card__desc { max-width: 100%; overflow-wrap: anywhere; word-break: normal; }
+    .development-card__title a { display: block; }
     .development-card__media {
         height: 240px;
     }
@@ -401,10 +410,17 @@
         width: min(100% - 32px, 1340px);
     }
     .developments-track {
-        grid-auto-columns: 86%;
+        /* Keep one complete project card in view on phones. The track itself
+           uses LTR scroll geometry so RTL browsers do not open at the far
+           edge with a clipped neighbouring card. Card content remains RTL. */
+        direction: ltr;
+        grid-auto-columns: calc(100% - 24px);
         gap: 14px;
-        padding-inline: 4px;
+        padding-inline: 12px;
+        scroll-padding-inline: 12px;
     }
+    [dir="rtl"] .development-card { direction: rtl; text-align: right; }
+    .development-slide { scroll-snap-align: center; }
     .development-card__media {
         height: 220px;
     }
