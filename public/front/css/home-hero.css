@@ -239,3 +239,11 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
 @media (min-width: 769px) and (prefers-reduced-motion: reduce) {
     [dir="rtl"] body.home-page .hero--editorial .hero__photo { transform: scaleX(-1) !important; }
 }
+
+/* Final cascade guard: the Cinematic Hero shorthand appears earlier in this
+   file, so the Arabic mirror animation is declared last intentionally. */
+@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+    [dir="rtl"] body.home-page .hero--editorial .hero__photo {
+        animation: hero-photo-settle-rtl 1.05s cubic-bezier(.22,.8,.3,1) both;
+    }
+}
