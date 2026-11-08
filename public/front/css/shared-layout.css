@@ -353,6 +353,12 @@ body .footer.footer .newsletter-form button { background: #5bc0be; color: #1e2a4
 
 /* Keep mobile controls anchored to the visual viewport in RTL layouts. */
 @media (max-width: 768px) {
+    /* Keep the document's horizontal scroll origin stable in RTL mobile
+       browsers while preserving RTL flow inside each page region. */
+    [dir="rtl"] body { direction: ltr; }
+    [dir="rtl"] body > header,
+    [dir="rtl"] body > main,
+    [dir="rtl"] body > footer { direction: rtl; }
     body #header.header--unified .menu-toggle {
         position: fixed;
         top: 13px;
