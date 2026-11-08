@@ -4,6 +4,16 @@
 const menuToggle = document.getElementById('mobile-menu');
 const navList   = document.querySelector('.nav-list');
 
+// In RTL mobile browsers with a classic scrollbar, the layout viewport can be
+// wider than the visible client area. Expose that gutter so fixed controls do
+// not sit underneath the scrollbar or clip at the edge.
+const syncViewportGutter = () => {
+  const gutter = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+  document.documentElement.style.setProperty('--viewport-gutter', `${gutter}px`);
+};
+syncViewportGutter();
+window.addEventListener('resize', syncViewportGutter, { passive: true });
+
 if (menuToggle && navList) {
   const setMenuOpen = (open) => {
     navList.classList.toggle('active', open);

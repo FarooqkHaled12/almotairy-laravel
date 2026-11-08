@@ -359,6 +359,7 @@ body .footer.footer .newsletter-form button { background: #5bc0be; color: #1e2a4
     [dir="rtl"] body > header,
     [dir="rtl"] body > main,
     [dir="rtl"] body > footer { direction: rtl; }
+    [dir="rtl"] body #header.header--unified { width: calc(100vw - var(--viewport-gutter, 0px)); }
     body #header.header--unified .menu-toggle {
         position: fixed;
         top: 13px;
