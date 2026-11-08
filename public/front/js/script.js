@@ -12,6 +12,8 @@ const syncViewportGutter = () => {
   document.documentElement.style.setProperty('--viewport-gutter', `${gutter}px`);
 };
 syncViewportGutter();
+window.addEventListener('load', syncViewportGutter, { once: true, passive: true });
+requestAnimationFrame(syncViewportGutter);
 window.addEventListener('resize', syncViewportGutter, { passive: true });
 
 if (menuToggle && navList) {
