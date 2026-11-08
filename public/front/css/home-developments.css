@@ -462,3 +462,29 @@
 @media (prefers-reduced-motion: reduce) {
     .development-card, .development-card *, .development-card::after { animation: none !important; transition: none !important; transform: none !important; }
 }
+
+/* Phone layout contract: the carousel viewport and each slide share the
+   section's content width.  The previous 100%-24px geometry plus inline
+   padding left a clipped neighbour visible on narrow RTL viewports and made
+   the page look horizontally offset.  The carousel still scrolls between
+   projects, but every project starts and ends on the viewport edges. */
+@media (max-width: 600px) {
+    .developments-shell {
+        width: calc(100% - 32px);
+        max-width: none;
+    }
+
+    .developments-track {
+        width: 100%;
+        grid-auto-columns: 100%;
+        gap: 16px;
+        padding-inline: 0;
+        scroll-padding-inline: 0;
+    }
+
+    .development-slide,
+    .development-card {
+        width: 100%;
+        min-width: 0;
+    }
+}
