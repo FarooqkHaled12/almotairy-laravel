@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('front/css/home-hero.css') }}?v={{ file_exists(public_path('front/css/home-hero.css')) ? filemtime(public_path('front/css/home-hero.css')) : '1' }}&r=rtl-hero-v1">
+    <link rel="stylesheet" href="{{ asset('front/css/home-hero.css') }}?v={{ file_exists(public_path('front/css/home-hero.css')) ? filemtime(public_path('front/css/home-hero.css')) : '1' }}&r=rtl-hero-v2">
     <link rel="stylesheet" href="{{ asset('front/css/home-properties.css') }}?v={{ file_exists(public_path('front/css/home-properties.css')) ? filemtime(public_path('front/css/home-properties.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-apartments.css') }}?v={{ file_exists(public_path('front/css/home-apartments.css')) ? filemtime(public_path('front/css/home-apartments.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-developments.css') }}?v={{ file_exists(public_path('front/css/home-developments.css')) ? filemtime(public_path('front/css/home-developments.css')) : '1' }}&r=phone-layout-v1">

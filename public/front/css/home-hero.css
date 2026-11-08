@@ -89,12 +89,19 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
 
 /* Arabic desktop composition: copy on the right, architecture on the left. */
 @media (min-width: 769px) {
-    [dir="rtl"] body.home-page .hero--editorial .hero__photo { background-position: left center; }
+    [dir="rtl"] body.home-page .hero--editorial .hero__photo {
+        background-position: center center;
+        animation-name: hero-photo-settle-rtl;
+    }
     [dir="rtl"] body.home-page .hero--editorial .hero__wash {
         background: linear-gradient(270deg, #f9f8f5 0%, rgba(249,248,245,.99) 35%, rgba(249,248,245,.91) 43%, rgba(249,248,245,.56) 53%, rgba(249,248,245,.08) 67%, rgba(249,248,245,0) 100%);
     }
     [dir="rtl"] body.home-page .hero--editorial .hero__inner { direction: rtl; justify-content: flex-start; }
     [dir="rtl"] body.home-page .hero-featured { right: auto; left: 38px; direction: rtl; text-align: right; }
+}
+@keyframes hero-photo-settle-rtl {
+    from { opacity: .9; transform: scaleX(-1) scale(1.04); }
+    to { opacity: 1; transform: scaleX(-1) scale(1); }
 }
 .home-page .hero + * { position: relative; }
 .home-page.home-hero-visible .site-social-float,
@@ -226,4 +233,9 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
     [dir="rtl"] .hero--editorial .hero__description { direction: rtl; text-align: right; }
     .hero--editorial .hero__description { width: 100%; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
     .hero--editorial .hero__cta { width: min(265px, 100%); max-width: 100%; }
+}
+
+/* Reduced motion still keeps the Arabic image mirrored on desktop. */
+@media (min-width: 769px) and (prefers-reduced-motion: reduce) {
+    [dir="rtl"] body.home-page .hero--editorial .hero__photo { transform: scaleX(-1) !important; }
 }
