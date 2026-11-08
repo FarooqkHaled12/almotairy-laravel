@@ -14,6 +14,11 @@ const syncViewportGutter = () => {
 syncViewportGutter();
 window.addEventListener('load', syncViewportGutter, { once: true, passive: true });
 requestAnimationFrame(syncViewportGutter);
+window.setTimeout(syncViewportGutter, 150);
+window.setTimeout(syncViewportGutter, 500);
+if ('ResizeObserver' in window) {
+  new ResizeObserver(syncViewportGutter).observe(document.documentElement);
+}
 window.addEventListener('resize', syncViewportGutter, { passive: true });
 
 if (menuToggle && navList) {
