@@ -219,8 +219,11 @@ html.motion-ready [data-motion-image].is-visible { opacity: 1; transform: scale(
 }
 @media (max-width: 860px) {
     html.motion-ready [data-motion-reveal] { --motion-duration: .65s; }
-    html.motion-ready [data-motion-reveal][data-motion-direction="left"]:not(.is-visible) { transform: translate3d(-45px,0,0); }
-    html.motion-ready [data-motion-reveal][data-motion-direction="right"]:not(.is-visible) { transform: translate3d(45px,0,0); }
+    /* Keep mobile reveal motion inside the section's inline axis. Horizontal
+       transforms on hidden cards enlarge scrollWidth in RTL layouts and can
+       make the next section appear shifted or leave a blank gutter. */
+    html.motion-ready [data-motion-reveal][data-motion-direction="left"]:not(.is-visible),
+    html.motion-ready [data-motion-reveal][data-motion-direction="right"]:not(.is-visible) { transform: translate3d(0,20px,0); }
     html.motion-ready [data-motion-reveal][data-motion-direction="up"]:not(.is-visible) { transform: translate3d(0,25px,0); --motion-duration: .55s; }
     body.home-page :is(a,button,.development-card,.property-card,.home-service):active { transform: scale(.98); transition-duration: .14s; }
 }
@@ -349,6 +352,44 @@ body .footer.footer .newsletter-form button { background: #5bc0be; color: #1e2a4
 @media (prefers-reduced-motion: reduce) {
     body #header.header--unified .nav-list, body #header.header--unified .nav-list > li { transition: none !important; transform: none !important; }
     body.menu-open { overflow: auto; }
+}
+
+/* Prevent fixed desktop widths from escaping the phone content box.  This is
+   scoped to the homepage sections and does not clip the document globally;
+   horizontal overflow remains available only inside intentional carousels. */
+@media (max-width: 768px) {
+    body.home-page #main-content,
+    body.home-page #main-content > section,
+    body.home-page #main-content .container,
+    body.home-page #main-content > section > .container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    body.home-page #main-content > section > .container {
+        margin-inline: auto;
+    }
+
+    body.home-page .featured-properties > .container,
+    body.home-page .home-apartments__container {
+        padding-inline: 18px;
+    }
+
+    body.home-page .home-about-layout,
+    body.home-page .home-about-layout--no-image,
+    body.home-page .home-about-copy,
+    body.home-page .home-about-visual,
+    body.home-page .home-about-features,
+    body.home-page .home-services-heading > div,
+    body.home-page .contact-wrapper,
+    body.home-page .contact-info,
+    body.home-page .contact-form-box {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 /* Keep mobile controls anchored to the visual viewport in RTL layouts. */

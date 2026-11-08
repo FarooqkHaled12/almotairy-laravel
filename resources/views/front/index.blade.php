@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/home-hero.css') }}?v={{ file_exists(public_path('front/css/home-hero.css')) ? filemtime(public_path('front/css/home-hero.css')) : '1' }}&r=mobile-3b65725-r4">
     <link rel="stylesheet" href="{{ asset('front/css/home-properties.css') }}?v={{ file_exists(public_path('front/css/home-properties.css')) ? filemtime(public_path('front/css/home-properties.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-apartments.css') }}?v={{ file_exists(public_path('front/css/home-apartments.css')) ? filemtime(public_path('front/css/home-apartments.css')) : '1' }}">
-    <link rel="stylesheet" href="{{ asset('front/css/home-developments.css') }}?v={{ file_exists(public_path('front/css/home-developments.css')) ? filemtime(public_path('front/css/home-developments.css')) : '1' }}">
+    <link rel="stylesheet" href="{{ asset('front/css/home-developments.css') }}?v={{ file_exists(public_path('front/css/home-developments.css')) ? filemtime(public_path('front/css/home-developments.css')) : '1' }}&r=phone-layout-v1">
     <link rel="stylesheet" href="{{ asset('front/css/home-brand.css') }}?v={{ file_exists(public_path('front/css/home-brand.css')) ? filemtime(public_path('front/css/home-brand.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-about.css') }}?v={{ file_exists(public_path('front/css/home-about.css')) ? filemtime(public_path('front/css/home-about.css')) : '1' }}">
     <link rel="stylesheet" href="{{ asset('front/css/home-services.css') }}?v={{ file_exists(public_path('front/css/home-services.css')) ? filemtime(public_path('front/css/home-services.css')) : '1' }}">
