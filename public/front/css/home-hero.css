@@ -209,9 +209,10 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
 @media (max-width: 768px) {
     .hero--editorial .hero__inner { width: 100%; max-width: 100%; overflow: hidden; }
     .hero--editorial .hero__copy { position: absolute; top: 125px; right: 16px; left: 16px; width: auto; max-width: none; min-width: 0; flex: none; margin: 0; box-sizing: border-box; direction: inherit; }
-    [dir="rtl"] .hero--editorial .hero__copy { direction: ltr; text-align: left; }
-    .hero--editorial .hero__copy h1 { width: 100%; max-width: 100%; font-size: clamp(2.35rem, 10.5vw, 3.2rem); line-height: 1.18; white-space: normal; overflow-wrap: anywhere; }
+    [dir="rtl"] .hero--editorial .hero__copy { direction: rtl; text-align: right; }
+    .hero--editorial .hero__copy h1 { width: 100%; max-width: 100%; font-size: clamp(2.2rem, 10vw, 3rem); line-height: 1.18; white-space: normal; overflow-wrap: anywhere; }
     .hero--editorial .hero-title-line { display: block !important; width: 100%; max-width: 100%; white-space: normal; overflow: visible; }
     [dir="rtl"] .hero--editorial .hero-title-line--brand { display: flex !important; align-items: center; }
+    [dir="rtl"] .hero--editorial .hero__description { direction: rtl; text-align: right; }
     .hero--editorial .hero__description { width: 100%; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 }
