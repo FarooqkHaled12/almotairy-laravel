@@ -21,7 +21,7 @@
     <div class="hero__inner container">
         <div class="hero__copy">
             <p class="hero__eyebrow"><span></span>{{ $rtl ? 'عقارات سكنية في القاهرة الجديدة والقاهرة الكبرى' : 'Real estate in New Cairo & Greater Cairo' }}</p>
-            <h1 id="homeHeroTitle"><span class="hero-title-line">{{ $rtl ? 'اعثر على' : 'Find Your' }}</span><br><span class="hero-title-line">{{ $rtl ? 'منزلك القادم' : 'Next Home' }}</span></h1>
+            <h1 id="homeHeroTitle"><span class="hero-title-line hero-title-line--brand">{{ $rtl ? 'المطيري' : 'Find Your' }}</span><br><span class="hero-title-line hero-title-line--promise">{{ $rtl ? 'حياتك على أرض ثابتة' : 'Next Home' }}</span></h1>
             <p class="hero__description">{{ $rtl ? 'مجموعة مختارة من المباني السكنية المميزة والوحدات المتاحة، بخطوات سهلة وتواصل مباشر ودعم كامل.' : 'A selection of premium residential buildings with available units. Simple process, direct communication, and full support.' }}</p>
 
             <a class="hero__cta" href="{{ $heroWhatsapp ? 'https://wa.me/' . $heroWhatsapp : route('front.contact') }}" @if($heroWhatsapp) target="_blank" rel="noopener noreferrer" @endif>
