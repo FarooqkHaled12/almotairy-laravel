@@ -86,6 +86,16 @@ body.home-page #header .menu-toggle .bar { background: #102b3a; }
 .hero-featured__copy strong { overflow: hidden; color: #102b3a; font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
 .hero-featured__copy > span { overflow: hidden; color: #788899; font-size: .65rem; text-overflow: ellipsis; white-space: nowrap; }
 .hero-featured > i { padding: 0 8px; color: #102b3a; }
+
+/* Arabic desktop composition: copy on the right, architecture on the left. */
+@media (min-width: 769px) {
+    [dir="rtl"] body.home-page .hero--editorial .hero__photo { background-position: left center; }
+    [dir="rtl"] body.home-page .hero--editorial .hero__wash {
+        background: linear-gradient(270deg, #f9f8f5 0%, rgba(249,248,245,.99) 35%, rgba(249,248,245,.91) 43%, rgba(249,248,245,.56) 53%, rgba(249,248,245,.08) 67%, rgba(249,248,245,0) 100%);
+    }
+    [dir="rtl"] body.home-page .hero--editorial .hero__inner { direction: rtl; justify-content: flex-start; }
+    [dir="rtl"] body.home-page .hero-featured { right: auto; left: 38px; direction: rtl; text-align: right; }
+}
 .home-page .hero + * { position: relative; }
 .home-page.home-hero-visible .site-social-float,
 .home-page.home-hero-visible .lead-fab { opacity: 0; pointer-events: none; }
